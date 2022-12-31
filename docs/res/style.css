@@ -232,6 +232,10 @@ main { grid-area: main; }
 footer { grid-area: foot; }
 header { grid-area: head; }
 
+.cards-list > * { 
+    grid-column: span 2;
+}
+
 body { 
     grid-template-areas: 
     "navb navb navb navb navb navb navb navb"
@@ -267,6 +271,10 @@ body {
         "head head head head head head head head" 
         "main main main main main main main main" 
         "foot foot foot foot foot foot foot foot";
+    }
+
+    .cards-list > * { 
+        grid-column: span 1;
     }
 }
 
@@ -644,8 +652,8 @@ ol ol ol {
       /* --disabled: var(--blueviolet-2); */
       --disabled-inner: var(--mocha-surface1);
 
-      -webkit-appearance: none;
-      -moz-appearance: none;
+      appearance: none;
+      
       height: 21px;
       display: inline-block;
       vertical-align: top;
@@ -1236,4 +1244,9 @@ footer ul {
     margin-top: -3px;
 
     fill: #4b4b4b; 
+}
+
+img { 
+    width: 100%;
+    border-radius: var(--border-subwindow-radius);
 }

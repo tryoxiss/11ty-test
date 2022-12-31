@@ -1,7 +1,7 @@
 ---
 title: Posts Index
 layout: "listout.njk"
-tags: NONE
+eleventyExcludeFromCollections: true
 --- 
 
 {% for posts in collections.posts %}

@@ -9,6 +9,10 @@ module.exports = function
 
     eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-dark.svg");
 
+     // For images
+    eleventyConfig.addPassthroughCopy({ "notes/img_post": "img_post" });
+
+
     return { 
         dir: { 
             input: "src", 

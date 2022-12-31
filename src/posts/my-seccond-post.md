@@ -4,10 +4,9 @@ title: Title Two
 
 my seccond post
 
-> [!info]
-> callout
+This is a paragraph with **strong** text. It also has ~~struck text~~. This is an update.
 
-This is a paragraph with **strong** text. It also has ~~struck text~~. 
+![An image...](https://georgetownvoice.com/wp-content/uploads/2020/09/promo_04.png)
 
 - ul
 - ul 
@@ -23,11 +22,15 @@ This is a paragraph with **strong** text. It also has ~~struck text~~.
         1. special
         2. to 
         3. me
-            4. and
-            5. my
-            6. girlfriend
+            1. and
+            2. my
+            3. girlfriend
 
 and here is a nice ||spoiler||. 
+
+:heart:
+
+<img src="https://picsum.photos/1920/1080">
 
 <input type="checkbox" class="switch"></input> <input type="checkbox" class="switch" disabled></input>
 
