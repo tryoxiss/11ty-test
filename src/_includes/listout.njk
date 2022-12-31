@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} ★ starcrosdd</title>
+
+    <link rel="stylesheet" href="/res/style.css">
+    <link rel="stylesheet" href="/res/prism.css">
+
+</head>
+<body class="match-braces">
+    <script src="/res/prism.js"></script>
+    
+    <header>
+        <h1>{{ title }}</h1>
+
+        {# <p class="subtitle"><a href="/">~</a> / <a href="/blog/">blog</a> / </p> #}
+    </header>
+    
+    <main class="cards-list">
+        {{ content | safe }}
+    </main>
+
+    {% include "footer.njk" %}
+</body>
+</html>

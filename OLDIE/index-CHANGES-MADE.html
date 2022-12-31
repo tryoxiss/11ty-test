@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+:root { 
+    --red-2:        #FFADAD; 
+    --orange-2:     #FFD6A5; 
+    --yellow-2:     #FDFFB6; 
+    --green-2:      #CAFFBF; 
+    --blue-2:       #9BF6FF; 
+    --blueviolet-2: #A0C4FF; 
+    --violet-2:     #BDB2FF;
+    --pink-2:       #FFC6FF; 
+    /* 8 col */
+    /* 5 variants */
+    /* 8 * 5 = 40 colors */
+
+    --violet-1: #ece8fd;
+
+    --mono-0: #fff; 
+    --mono-1: #e4e4e4; 
+    /*     --mono-1: #f7f7f7;  */
+    --mono-2: #e5e5e5; 
+    --mono-3: #afafaf; 
+    --mono-4: #4b4b4b; 
+    --mono-5: #202020; 
+    --mono-6: #0a0a0a; 
+
+    /* heros trans */
+
+    --red-t-2:        rgba(255, 173, 173, .8); 
+    --orange-t-2:     rgba(255, 214, 165, .8); 
+    --yellow-t-2:     rgba(253, 255, 182, .8); 
+    --green-t-2:      rgba(202, 255, 191, .8); 
+    --blue-t-2:       rgba(155, 246, 255, .8); 
+    --blueviolet-t-2: rgba(160, 196, 255, .8); 
+    --violet-t-2:     rgba(189, 178, 255, .8);
+    --pink-t-2:       rgba(255, 198, 255, .8); 
+
+    --red-t3-2:        rgba(255, 173, 173, .1); 
+    --orange-t3-2:     rgba(255, 214, 165, .1); 
+    --yellow-t3-2:     rgba(253, 255, 182, .1); 
+    --green-t3-2:      rgba(202, 255, 191, .1); 
+    --blue-t3-2:       rgba(155, 246, 255, .1); 
+    --blueviolet-t3-2: rgba(160, 196, 255, .1); 
+    --violet-t3-2:     rgba(189, 178, 255, .2);
+    --pink-t3-2:       rgba(255, 198, 255, .1); 
+}
+
+::selection { 
+    background-color: var(--violet-t3-2);
+}
+
+body { 
+    background-color: var(--mono-6);
+    color: var(--mono-3); 
+
+    /* font-size: 3vmin; */
+    font-size: 1.5rem;
+    margin: 1rem;
+    /* overflow: hidden; */
+
+    font-family: 'Nunito', 'Rubik', sans-serif;
+}
+
+nav ul { 
+    list-style: none; 
+    padding: 3.5rem; 
+    margin: 0; 
+}
+
+nav ul:hover * { 
+    color: var(--mono-4); 
+    transition: 500ms; 
+}
+
+nav ul * { 
+    transition: 500ms; 
+}
+
+nav ul:hover *:hover { 
+    transition: 100ms; 
+}
+
+footer p { display: flex;}
+
+header { 
+    margin-left: 2.4rem;
+
+    margin-top: 30vh;
+}
+
+h1 { margin: 0px; color: var(--mono-1); font-size: 2rem;}
+.pre-title { margin: 0px; color: var(--mono-3); }
+
+a { 
+    color: var(--mono-3); 
+    text-decoration: none;
+}
+
+ul { width: 10rem}
+
+nav a:hover { 
+    color: var(--mono-1); 
+}
+
+footer svg { 
+    color: var(--mono-4); 
+    fill: var(--mono-3); 
+
+    margin-left: 0.25rem;
+}
+
+footer svg:hover, footer a:hover { 
+    fill: var(--mono-2); 
+}
+
+/* .footer-codepen { 
+    fill: var(--mono-2); 
+}
+
+.footer-youtube { 
+    fill: var(--red-2); 
+} */
+
+/* FROM MAGIC TEXT BY HYPERPLECXED: https://codepen.io/Hyperplexed/pen/YzeOLYe */
+
+:root {  
+    --red-2:        #FFADAD; 
+    --orange-2:     #FFD6A5; 
+    --yellow-2:     #FDFFB6; 
+    --green-2:      #CAFFBF; 
+    --blue-2:       #9BF6FF; 
+    --blueviolet-2: #A0C4FF; 
+    --violet-2:     #BDB2FF;
+    --pink-2:       #FFC6FF; 
+
+    --purple: #A0C4FF; 
+    --violet: #BDB2FF;
+    --pink: #FFC6FF;  
+
+    /* --purple: rgb(123, 31, 162);
+    --violet: rgb(103, 58, 183);
+    --pink: rgb(244, 143, 177); */
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+  
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes scale {
+  from, to {
+    transform: scale(0);
+  }
+  
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+h1 > .magic {
+  display: inline-block;
+  position: relative;
+}
+
+h1 > .magic > .magic-star {
+  --size: clamp(20px, 1.5vw, 30px);
+  
+  animation: scale 700ms ease forwards;
+  display: block;
+  height: var(--size);
+  left: var(--star-left);
+  position: absolute;
+  top: var(--star-top);
+  width: var(--size);
+}
+
+h1 > .magic > .magic-star > svg {
+  animation: rotate 1000ms linear infinite;
+  display: block;
+  opacity: 0.7;
+}
+
+h1 > .magic > .magic-star > svg > path {
+  fill: var(--violet);
+}
+
+.magic-text {
+  animation: background-pan 3s linear infinite;
+  background: linear-gradient(
+    to right,
+    var(--purple),
+    var(--violet),
+    var(--pink),
+    var(--purple)
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+/* MY STYLES AGAIN  */
+
+footer { 
+    position: absolute;
+    /* height: 100vh;  */
+
+    margin-top: calc(70vh - 18rem);
+
+    color: var(--mono-4); 
+}
+
+footer a { color: var(--mono-3); }
+footer a:hover { text-decoration: underline;}
+
+footer p { 
+    font-size: 1rem;
+    margin-top: auto;
+}
+
+footer { 
+    height: 100vh; 
+}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home ★ tryoxiss.github.io</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap" rel="stylesheet"> 
+
+</head>
+<body>
+
+    <header>
+        <p class="pre-title">Hello,</p>
+        <h1>
+            I am
+            <span class="magic">
+              <span class="magic-star">
+                <svg viewBox="0 0 512 512">
+                <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                </svg>
+              </span>
+              <span class="magic-star">
+                <svg viewBox="0 0 512 512">
+                <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                </svg>
+              </span>
+              <span class="magic-star">
+                <svg viewBox="0 0 512 512">
+                <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                </svg>
+              </span>
+              <span class="magic-text"></span><noscript><span class="magic-text">artist</span></noscript>
+            </span>.
+          </h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/more">More</a></li>
+        </ul>
+    </nav>
+
+    <footer><p>Magical text effect by <a href="https://www.youtube.com/c/Hyperplexed" style="margin-left: 0.25rem;">Hyperplexed</a>
+        <a href="https://www.youtube.com/watch?v=yu0Cm4BqQv0">
+            <svg class='footer-youtube' role="img" width='20' height='20' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://codepen.io/Hyperplexed/full/YzeOLYe"><svg class='footer-codepen' role="img" width='20' height='20' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CodePen</title><path d="M18.144 13.067v-2.134L16.55 12zm1.276 1.194a.628.628 0 01-.006.083l-.005.028-.011.053-.01.031c-.005.016-.01.031-.017.047l-.014.03a.78.78 0 01-.021.043l-.019.03a.57.57 0 01-.08.1l-.026.025a.602.602 0 01-.036.03l-.029.022-.01.008-6.782 4.522a.637.637 0 01-.708 0L4.864 14.79l-.01-.008a.599.599 0 01-.065-.052l-.026-.025-.032-.034-.021-.028a.588.588 0 01-.067-.11l-.014-.031a.644.644 0 01-.017-.047l-.01-.03c-.004-.018-.008-.036-.01-.054l-.006-.028a.628.628 0 01-.006-.083V9.739c0-.028.002-.055.006-.083l.005-.027.011-.054.01-.03a.574.574 0 01.12-.217l.031-.034.026-.025a.62.62 0 01.065-.052l.01-.008 6.782-4.521a.638.638 0 01.708 0l6.782 4.521.01.008.03.022.035.03c.01.008.017.016.026.025a.545.545 0 01.08.1l.019.03a.633.633 0 01.021.043l.014.03c.007.016.012.032.017.047l.01.031c.004.018.008.036.01.054l.006.027a.619.619 0 01.006.083zM12 0C5.373 0 0 5.372 0 12 0 18.627 5.373 24 12 24c6.628 0 12-5.372 12-12 0-6.627-5.372-12-12-12m0 10.492L9.745 12 12 13.51 14.255 12zm.638 4.124v2.975l4.996-3.33-2.232-1.493zm-6.272-.356l4.996 3.33v-2.974l-2.764-1.849zm11.268-4.52l-4.996-3.33v2.974l2.764 1.85zm-6.272-.356V6.41L6.366 9.74l2.232 1.493zm-5.506 1.549v2.134L7.45 12Z"/></svg></a></p>
+    </footer>
+
+    <script>
+let index = 0,
+    interval = 1000;
+
+const rand = (min, max) => 
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const animate = star => {
+  star.style.setProperty("--star-left", `${rand(-10, 100)}%`);
+  star.style.setProperty("--star-top", `${rand(-40, 80)}%`);
+
+  star.style.animation = "none";
+  star.offsetHeight;
+  star.style.animation = "";
+}
+
+// for(const star of document.getElementsByClassName("magic-star")) {
+//   setTimeout(() => {
+//     animate(star);
+    
+//     setInterval(() => animate(star), 1000);
+//   }, index++ * (interval / 3))
+// }
+
+/* -- ↓↓↓ If you want the sparkle effect to only occur on hover, replace lines 16 and on with this code ↓↓↓ -- */
+
+let timeouts = [],
+    intervals = [];
+
+const magic = document.querySelector(".magic");
+
+magic.onmouseenter = () => {
+  let index = 1;
+  
+  for(const star of document.getElementsByClassName("magic-star")) {
+    timeouts.push(setTimeout(() => {  
+      animate(star);
+      
+      intervals.push(setInterval(() => animate(star), 1000));
+    }, index++ * 300));
+  };
+}
+
+magic.onmouseleave = onMouseLeave = () => {
+  for(const t of timeouts) clearTimeout(t);  
+  for(const i of intervals) clearInterval(i);
+  
+  timeouts = [];
+  intervals = [];
+}
+
+// MY OWN CODE: MAY BREAK THINGS!!!
+
+editText = document.querySelector('.magic-text')
+
+// editText.textContent = 'Lesbian'
+
+function cycle(index) {
+    setTimeout(function() {
+
+        // artist
+        if (index == 1) { editText.textContent = 'a'};
+        if (index == 2) { editText.textContent = 'an' };
+        if (index == 3) { editText.textContent = 'an a' };
+        if (index == 4) { editText.textContent = 'an ar' };
+        if (index == 5) { editText.textContent = 'an art' };
+        if (index == 6) { editText.textContent = 'an arti' };
+        if (index == 7) { editText.textContent = 'an artis' };
+        if (index == 8) { editText.textContent = 'an artist' };
+
+        // INCREMENT BY 20 BEFORE STARTING THE REMOVAL, I WANT TO SEEM CONFIDENT, NOT UNSURE. AND I WANT IT TO LINGER.
+        if (index == 28) { editText.textContent = 'an artist'};
+        if (index == 29) { editText.textContent = 'an artis'};
+        if (index == 30) { editText.textContent = 'an arti' };
+        if (index == 31) { editText.textContent = 'an art' };
+        if (index == 32) { editText.textContent = 'an ar' };
+        if (index == 33) { editText.textContent = 'an a' };
+        if (index == 34) { editText.textContent = 'an ' };
+        if (index == 35) { editText.textContent = 'an' };
+        if (index == 36) { editText.textContent = 'a' };
+
+
+        // designer
+        if (index == 37) { editText.textContent = 'a ' };
+        if (index == 38) { editText.textContent = 'a d' };
+        if (index == 39) { editText.textContent = 'a de' };
+        if (index == 40) { editText.textContent = 'a des' };
+        if (index == 41) { editText.textContent = 'a desi' };
+        if (index == 42) { editText.textContent = 'a desig' };
+        if (index == 43) { editText.textContent = 'a design' };
+        if (index == 44) { editText.textContent = 'a designe' };
+        if (index == 45) { editText.textContent = 'a designer' };
+
+        if (index == 65) { editText.textContent = 'a designer' };
+        if (index == 66) { editText.textContent = 'a designe' };
+        if (index == 67) { editText.textContent = 'a design' };
+        if (index == 68) { editText.textContent = 'a desig' };
+        if (index == 69) { editText.textContent = 'a desi' };
+        if (index == 70) { editText.textContent = 'a des' };
+        if (index == 71) { editText.textContent = 'a de' };
+        if (index == 72) { editText.textContent = 'a d' };
+
+        index++; // Increment the index
+
+        if (index >= 73) { //Reset it exactly ONE CYCLE after the LAST ONE FINISHES.
+            index = 1; // Set it back to `0` when it reaches `3`
+        }
+
+        cycle(index); // recursively call `cycle()`
+
+        //cycle(++index % 3);
+    }, 90);
+}
+
+cycle(0);
+
+    </script>
+</body>
+</html>
