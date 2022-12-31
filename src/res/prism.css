@@ -358,23 +358,3 @@ pre, pre code {
 /* .code-toolbar button:hover { 
     background-color: var(--links-color);
 } */
-
-.code-toolbar pre { 
-    margin-top: 0px !important; 
-    padding-top: 0px !important; 
-}
-
-.toolbar { 
-    display: flex;
-    width: calc(100% - 4rem);
-}
-
-.toolbar-item * { 
-    opacity: 1 !important; 
-    color: blue; 
-}
-
-.toolbar-item span:not(button) { 
-    opacity: 1 !important; 
-    color: yellow;
-}
