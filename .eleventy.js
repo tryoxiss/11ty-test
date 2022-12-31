@@ -12,7 +12,8 @@ module.exports = function
     return { 
         dir: { 
             input: "src", 
-            output: "_public"
+            output: "docs"
+            // I WOULD MAKE THIS _public BUT GITHUB PAGES DONT LIKE THAT
         }
     }
 }

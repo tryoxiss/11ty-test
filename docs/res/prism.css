@@ -1,0 +1,380 @@
+/* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+abap+abnf+actionscript+ada+agda+al+antlr4+apacheconf+apex+apl+applescript+aql+arduino+arff+armasm+arturo+asciidoc+aspnet+asm6502+asmatmel+autohotkey+autoit+avisynth+avro-idl+awk+bash+basic+batch+bbcode+bbj+bicep+birb+bison+bnf+bqn+brainfuck+brightscript+bro+bsl+c+csharp+cpp+cfscript+chaiscript+cil+cilkc+cilkcpp+clojure+cmake+cobol+coffeescript+concurnas+csp+cooklang+coq+crystal+css-extras+csv+cue+cypher+d+dart+dataweave+dax+dhall+diff+django+dns-zone-file+docker+dot+ebnf+editorconfig+eiffel+ejs+elixir+elm+etlua+erb+erlang+excel-formula+fsharp+factor+false+firestore-security-rules+flow+fortran+ftl+gml+gap+gcode+gdscript+gedcom+gettext+gherkin+git+glsl+gn+linker-script+go+go-module+gradle+graphql+groovy+haml+handlebars+haskell+haxe+hcl+hlsl+hoon+http+hpkp+hsts+ichigojam+icon+icu-message-format+idris+ignore+inform7+ini+io+j+javadoclike+javastacktrace+jexl+jolie+jq+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+julia+keepalived+keyman+kotlin+kumir+kusto+latex+latte+less+lilypond+liquid+lisp+livescript+llvm+log+lolcode+lua+magma+makefile+markdown+markup-templating+mata+matlab+maxscript+mel+mermaid+metafont+mizar+mongodb+monkey+moonscript+n1ql+n4js+nand2tetris-hdl+naniscript+nasm+neon+nevod+nginx+nim+nix+nsis+objectivec+ocaml+odin+opencl+openqasm+oz+parigp+parser+pascal+pascaligo+psl+pcaxis+peoplecode+perl+php+phpdoc+php-extras+plant-uml+plsql+powerquery+powershell+processing+prolog+promql+properties+protobuf+pug+puppet+pure+purebasic+purescript+python+qsharp+q+qml+qore+r+racket+cshtml+jsx+tsx+reason+regex+rego+renpy+rescript+rest+rip+roboconf+robotframework+ruby+rust+sas+sass+scss+scheme+shell-session+smali+smalltalk+smarty+sml+solidity+solution-file+soy+sparql+splunk-spl+sqf+sql+squirrel+stan+iecst+stylus+supercollider+swift+systemd+t4-templating+t4-cs+t4-vb+tap+tcl+tt2+textile+toml+tremor+turtle+twig+typescript+typoscript+unrealscript+uorazor+uri+v+vala+vbnet+velocity+verilog+vhdl+vim+visual-basic+warpscript+wasm+web-idl+wgsl+wiki+wolfram+wren+xeora+xml-doc+xojo+xquery+yaml+yang+zig&plugins=line-numbers+autolinker+show-language+highlight-keywords+inline-color+toolbar+copy-to-clipboard+match-braces */
+
+/* CURRENT CONFIG
+https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+abap+abnf+actionscript+ada+agda+al+antlr4+apacheconf+apex+apl+applescript+aql+arduino+arff+armasm+arturo+asciidoc+aspnet+asm6502+asmatmel+autohotkey+autoit+avisynth+avro-idl+awk+bash+basic+batch+bbcode+bbj+bicep+birb+bison+bnf+bqn+brainfuck+brightscript+bro+bsl+c+csharp+cpp+cfscript+chaiscript+cil+cilkc+cilkcpp+clojure+cmake+cobol+coffeescript+concurnas+csp+cooklang+coq+crystal+css-extras+csv+cue+cypher+d+dart+dataweave+dax+dhall+diff+django+dns-zone-file+docker+dot+ebnf+editorconfig+eiffel+ejs+elixir+elm+etlua+erb+erlang+excel-formula+fsharp+factor+false+firestore-security-rules+flow+fortran+ftl+gml+gap+gcode+gdscript+gedcom+gettext+gherkin+git+glsl+gn+linker-script+go+go-module+gradle+graphql+groovy+haml+handlebars+haskell+haxe+hcl+hlsl+hoon+http+hpkp+hsts+ichigojam+icon+icu-message-format+idris+ignore+inform7+ini+io+j+javadoclike+javastacktrace+jexl+jolie+jq+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+julia+keepalived+keyman+kotlin+kumir+kusto+latex+latte+less+lilypond+liquid+lisp+livescript+llvm+log+lolcode+lua+magma+makefile+markdown+markup-templating+mata+matlab+maxscript+mel+mermaid+metafont+mizar+mongodb+monkey+moonscript+n1ql+n4js+nand2tetris-hdl+naniscript+nasm+neon+nevod+nginx+nim+nix+nsis+objectivec+ocaml+odin+opencl+openqasm+oz+parigp+parser+pascal+pascaligo+psl+pcaxis+peoplecode+perl+php+phpdoc+php-extras+plant-uml+plsql+powerquery+powershell+processing+prolog+promql+properties+protobuf+pug+puppet+pure+purebasic+purescript+python+qsharp+q+qml+qore+r+racket+cshtml+jsx+tsx+reason+regex+rego+renpy+rescript+rest+rip+roboconf+robotframework+ruby+rust+sas+sass+scss+scheme+shell-session+smali+smalltalk+smarty+sml+solidity+solution-file+soy+sparql+splunk-spl+sqf+sql+squirrel+stan+iecst+stylus+supercollider+swift+systemd+t4-templating+t4-cs+t4-vb+tap+tcl+tt2+textile+toml+tremor+turtle+twig+typescript+typoscript+unrealscript+uorazor+uri+v+vala+vbnet+velocity+verilog+vhdl+vim+visual-basic+warpscript+wasm+web-idl+wgsl+wiki+wolfram+wren+xeora+xml-doc+xojo+xquery+yaml+yang+zig&plugins=line-numbers+autolinker+show-language+highlight-keywords+inline-color+toolbar+copy-to-clipboard+match-braces
+*/
+
+@import url('https//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root { 
+    --red-300: #FFADAD; 
+    --orange-300: #FFD6A5; 
+    --yellow-300: #fbff95; 
+    --green-300: #CAFFBF; 
+    --blue-300: #82f5ff; 
+    --blueviolet-300: #97bfff; 
+    --violet-300: #BDB2FF;
+    --pink-300: #FFC6FF; 
+
+    --comment: #7e7e7e; 
+    --punctuation: #aaaaaa; 
+}
+
+code { 
+    font-family: 'Hack', 'Consolas', 'Roboto Mono', 'Source Code Pro', monospace;
+}
+
+code[class*=language-], pre[class*=language-] {
+    color:#e6e6e6; 
+    background: 0 0;
+    /* text-shadow: 0 1px #0A070A; */
+    font-family: 'Hack', 'Consolas', 'Source Code Pro', monospace;
+    font-size: 1rem; 
+    text-align:left; 
+    white-space:pre;
+    word-spacing:normal;
+    word-break:normal;
+    word-wrap:normal;
+    line-height:1.5;
+    -moz-tab-size:4;
+    -o-tab-size:4;
+    tab-size:4;
+    -webkit-hyphens:none;
+    -moz-hyphens:none;
+    -ms-hyphens:none;
+    hyphens:none
+}
+
+pre[class*=language-] 
+    {padding: 1rem;
+    margin:.5em 0;
+    overflow:auto;
+    border-radius: 4px; 
+
+    max-height: 80vh; 
+}
+/* :not(pre) > code[class*=language-], pre[class*=language-] { */
+    /* background:#0A070A;  */
+    /* background: #08090a; BG of the rest of the site: looks cool vbut not what im going for.  */
+/* } */
+
+:not(pre) > code[class*=language-] {
+    padding:.1rem;
+    border-radius: .3em;
+    white-space:normal
+}
+
+/* Syntax hilighting */
+.token.cdata, .token.comment, .token.doctype, .token.prolog {color:var(--comment)} 
+.token.punctuation {color:var(--punctuation)} 
+.token.namespace { color: var(--yellow-300); } 
+.token.constant, .token.deleted, .token.property, .token.symbol, .token.tag .token .pseudo-element {color:var(--orange-300)}
+.token.boolean, .token.number {color:var(--blue-300)}
+.token.attr-name, .token.builtin, .token.char, .token.inserted, .token.selector, .token.class, .token.string{color: var(--yellow-300)}
+.token.atrule, .token.attr-value, .token.class-name, .token.rule, .token.combinator {color:var(--blueviolet-300)}
+.token.keyword {color:var(--blue-300)}
+.token.important, .token.regex {color:#fd971f} .token.bold, /*#fd971f*/
+.token.important {font-weight:700}
+.token.italic {font-style:italic}
+.token.entity {cursor:help}
+.token.function, .token.variable{ color: var(--blueviolet-300); }
+.language-css .token.string, .style .token.string, .token.entity, .token.operator {color:var(--punctuation)}
+.token.interpolation { color: var(--blueviolet-300); }
+.token.unit { color: rgb(212, 212, 212); }
+
+/* Make the selection INVERT colors */
+.token *::selection {background-color: rgb(212, 212, 212) !important;}
+.token.cdata::selection, .token.comment::selection, .token.doctype::selection, .token.prolog::selection { background-color:var(--comment) !important} 
+.token.punctuation::selection {background-color:var(--punctuation) !important} 
+.token.namespace::selection {background-color: var(--yellow-300);} 
+.token.constant::selection, .token.deleted::selection, .token.property::selection, .token.symbol::selection, .token.tag::selection {background-color:var(--orange-300) !important}
+.token.boolean::selection, .token.number::selection, .token.rule::selection, .token.combinator::selection {background-color: var(--blue-300) !important}
+.token.attr-name::selection, .token.builtin::selection, .token.char::selection, .token.inserted::selection, .token.selector::selection,  .token.class::selection, .token.string::selection, .token .pseudo-element::selection, .token .pseudo-class::selection {background-color:var(--yellow-300) !important}
+.token.atrule::selection, .token.attr-value::selection, .token.class-name::selection {background-color:var(--blueviolet-300) !important}
+.token.keyword::selection {background-color:var(--blue-300) !important}
+.token.important::selection, .token.regex {background-color:#fd971f !important} /*.token.bold, /*#fd971f*/
+.token.important::selection {font-weight:700 !important}
+/* .token.italic::selection {style:italic} */
+.token.entity::selection {cursor:help !important}
+.token.function::selection, .token.variable::selection {background-color: var(--blueviolet-300) !important; }
+.token.interpolation::selection { background-color: var(--punctuation) !important; }
+.token.color::selection, .token.unit::selection, .token *::selection { background-color: rgb(212, 212, 212) !important; }
+
+span .inline-color-wrapper {
+    background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=);
+    background-position: center;
+    background-size:110%;
+    display:inline-block;
+    height:1.333ch;
+    width:1.333ch;
+    margin:0 .333ch;
+    box-sizing:
+    border-box;
+    border: 1px solid rgb(218, 218, 218);
+    outline: 1px solid rgba(0,0,0,.5);
+    overflow:hidden
+}
+
+span.inline-color {
+    display:block;
+    height:120%;
+    width:120%
+}
+
+code a { 
+    color: inherit !important; 
+    text-decoration: none;
+}
+
+code a:hover { 
+    color: inherit !important; 
+    text-decoration: none;
+}
+
+.language-css .token.string::selection, .style .token.string::selection, .token.entity::selection, .token.operator::selection { 
+    background-color:#aaaaaa
+}
+
+pre code::selection { 
+    /* background-color: white; */
+    /* color: #0A070A; */
+    background-color: white !important;
+}
+
+/* pre code span::selection {  */
+    /* background-color: inherit; */
+    /* color: #0A070A ; */
+/* } */
+
+/* Toolbar stuff (show languahe and copy button) */
+
+div.code-toolbar { position:relative }
+div.code-toolbar > .toolbar { 
+    position: absolute; 
+    z-index: 10;
+    top:.3em; right: .2em;
+    transition: opacity .3s ease-in-out;
+    opacity: 0;
+}
+
+.code-toolbar:hover > .toolbar {
+    opacity:1
+}
+
+div.code-toolbar:focus-within > .toolbar {
+    opacity:1
+}
+
+div.code-toolbar > .toolbar > .toolbar-item {
+    display:inline-block; 
+    cursor: default; 
+    margin-right: 0.3rem; 
+}
+div.code-toolbar > .toolbar > .toolbar-item > a {
+    cursor:pointer;  
+}
+div.code-toolbar > .toolbar > .toolbar-item > button {
+    background:0 0;
+    border:0;
+    color:inherit;
+    font:inherit;
+    line-height:normal;
+    overflow:visible;
+    padding:0;
+    /* -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none; */
+    cursor:pointer;  
+
+    /* background: #212529; */
+    /* background-color: #140226; */
+    color: var(--clr-black);
+
+    background-color: var(--subwindow-bg);
+
+    /* THIS ONE IS THE **COPY** BUTTON */
+}
+
+div.code-toolbar > .toolbar > .toolbar-item > button:hover {
+    /* background-color: var(--clr-hero-700);
+    color: var(--clr-hero-100) */
+
+    background: var(--links-color); 
+    color: var(--subwindow-bg); 
+
+    transition-duration: 100ms;
+
+    /* THIS ONE IS THE **COPY** BUTTON */
+}
+
+
+
+div.code-toolbar > .toolbar > .toolbar-item > a,div.code-toolbar > .toolbar > .toolbar-item > button,div.code-toolbar > .toolbar > .toolbar-item > span {
+    color:#fff;
+    font-size:.8em;
+    padding:0 .5rem;
+    /* background:#f5f2f0; */
+    /* background:rgba  (224,224,224,.2); */
+    /* box-shadow:0 2px 0 0 rgba(0,0,0,.2); */
+    border-radius: 10em;
+
+    /* this one controls ***BOTH*** so style this generally and the copy button diffrently.  */
+}
+
+div.code-toolbar > .toolbar > .toolbar-item > a:focus,div.code-toolbar > .toolbar > .toolbar-item > a:hover, 
+div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .toolbar > .toolbar-item > button:hover, div.code-toolbar > .toolbar > .toolbar-item > span:focus,div.code-toolbar > .toolbar > .toolbar-item > span:hover {
+    /* color: var(--clr-hero-300); */
+    text-decoration:none;
+}
+
+span.inline-color-wrapper { 
+    /* background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=); */
+    background-position:center;
+    background-size:110%;
+    display:inline-block;
+    height:1.333ch;
+    width:1.333ch;
+    margin:0 .333ch;
+    box-sizing:border-box;
+    border:1px solid #fff;
+    outline:1px solid rgba(0,0,0,.5);
+    overflow:hidden
+}
+
+span.inline-color {
+    display:block;
+    height:120%;
+    width:120%
+}
+
+/* IDEA: Code CONTAINS sudo (make the starter symbol a #) otheriwse $. */
+
+span.inline-color-wrapper{background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=);background-position:center;background-size:110%;display:inline-block;height:1.333ch;width:1.333ch;margin:0 .333ch;box-sizing:border-box;border:1px solid #fff;outline:1px solid rgba(0,0,0,.5);overflow:hidden}span.inline-color{display:block;height:120%;width:120%}
+.token.punctuation.brace-hover,.token.punctuation.brace-selected{outline:solid 1px}.rainbow-braces .token.punctuation.brace-level-1,.rainbow-braces .token.punctuation.brace-level-5,.rainbow-braces .token.punctuation.brace-level-9{color:#e50;opacity:1}.rainbow-braces .token.punctuation.brace-level-10,.rainbow-braces .token.punctuation.brace-level-2,.rainbow-braces .token.punctuation.brace-level-6{color:#0b3;opacity:1}.rainbow-braces .token.punctuation.brace-level-11,.rainbow-braces .token.punctuation.brace-level-3,.rainbow-braces .token.punctuation.brace-level-7{color:#26f;opacity:1}.rainbow-braces .token.punctuation.brace-level-12,.rainbow-braces .token.punctuation.brace-level-4,.rainbow-braces .token.punctuation.brace-level-8{color:#e0e;opacity:1} 
+
+.token.punctuation.brace-hover,.token.punctuation.brace-selected { 
+    outline:solid 1px
+}
+
+.rainbow-braces .token.punctuation.brace-level-1,.rainbow-braces .token.punctuation.brace-level-5,.rainbow-braces .token.punctuation.brace-level-9 { 
+    color:#e50;opacity:1
+} 
+.rainbow-braces .token.punctuation.brace-level-10,.rainbow-braces .token.punctuation.brace-level-2,.rainbow-braces .token.punctuation.brace-level-6 { 
+    color:#0b3; 
+    opacity:1 
+}
+
+.rainbow-braces .token.punctuation.brace-level-11,.rainbow-braces .token.punctuation.brace-level-3,.rainbow-braces .token.punctuation.brace-level-7 {color:#26f;opacity:1}.rainbow-braces .token.punctuation.brace-level-12,
+/* .rainbow-braces, { color: inherit; } */
+
+/* LINE NUMBERS */
+
+pre[class*=language-].line-numbers { 
+    position:relative;
+    padding-left:3.8em;
+    counter-reset:linenumber
+}
+
+pre[class*=language-].line-numbers>code { 
+    position:relative;
+    white-space:inherit
+} 
+.line-numbers .line-numbers-rows { 
+    position:absolute;
+    pointer-events:none;
+    top:0;
+    font-size:1rem;
+    left:-3.8em;
+    width:3em;
+    letter-spacing:-1px;
+    /* border-right:1px solid red; */
+    
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.line-numbers-rows>span { 
+    display:block;
+    counter-increment:linenumber
+} 
+
+.line-numbers-rows>span:before { 
+    content:counter(linenumber);
+    color:#999;
+    display:block;
+    padding-right:.8em;
+    text-align:right
+}
+
+/* Use `data-start="-5"` to change the starting value of the line numbers in the HTML. */
+/* data-src="plugins/line-numbers/index.html" data-start="-5" */
+/* But like I cant get it to work so whatever. */
+
+@media (min-width: 900px) { 
+    .code-toolbar { 
+        max-width:65vw; /* */
+    }
+}
+
+@media (max-width: 1079px) { 
+    .code-toolbar { 
+        max-width: 98vw; 
+    }
+}
+
+@media (min-width: 1080px) { 
+    .code-toolbar { 
+        max-width:45vw; /* */
+    }
+}
+
+pre { 
+    max-width: 100%; 
+    /* max-width: 40vw;  */
+}
+
+pre code { 
+    overflow-x: scroll;
+} 
+
+body pre, body code, pre code { 
+    font-family: monospace !important;
+}
+
+pre, pre code { 
+    max-width: 100%; 
+}
+
+.code-toolbar { 
+    background-color: var(--subwindow-bg);
+
+    border-radius: var(--border-subwindow-radius);
+}
+
+/* .code-toolbar button:hover { 
+    background-color: var(--links-color);
+} */
+
+.code-toolbar pre { 
+    margin-top: 0px !important; 
+    padding-top: 0px !important; 
+}
+
+.toolbar { 
+    display: flex;
+    width: calc(100% - 4rem);
+}
+
+.toolbar-item * { 
+    opacity: 1 !important; 
+    color: blue; 
+}
+
+.toolbar-item span:not(button) { 
+    opacity: 1 !important; 
+    color: yellow;
+}
