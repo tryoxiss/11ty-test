@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,800;1,200;1,400;1,800&display=swap');
 
 @import url('http://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
+/* 
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap'); */
 
 /* :root { 
 
@@ -194,7 +198,7 @@
         --base-color: var(--mocha-crust); 
         --main-bg: var(--mocha-base);
         --subwindow-bg: var(--mocha-mantle); /* e.g. spoilers, codeblocks */
-        --border-color: var(--mocha-mantle); 
+        --border-color: var(--mocha-surface1); 
 
         --text-muted: var(--mocha-subtext1); 
         --text-normal: var(--mocha-text); 
@@ -202,7 +206,11 @@
 
         --links-color: var(--mocha-blue); 
 
+        --table-heading-color: var(--mocha-crust); 
+        --table-hover-color: var(--mocha-crust); 
 
+        --table-even-color: var(--mocha-mantle); 
+        --table-odd-color: var(--mocha-crust); 
 
         --red-2:        #FFADAD; 
         --orange-2:     #FFD6A5; 
@@ -341,7 +349,7 @@ a { text-decoration: none;}
 }
 
 main { 
-    max-width: 80vw;
+    max-width: 95vw;
 }
 
 .subtitle { 
@@ -1249,4 +1257,111 @@ footer ul {
 img { 
     width: 100%;
     border-radius: var(--border-subwindow-radius);
+}
+
+h2, h3, h4, h5, h6 { 
+    margin: 0px;
+}
+
+/* h1, h2, h3, h4, h5, h6 { 
+    font-family: 'Mali', serif;
+} */
+
+/* h2 { 
+    border-bottom: 1px solid var(--border-color);
+} */
+
+.callout { 
+    font-style: normal;
+}
+
+.callout__header { 
+    background-color: var(--main-bg);
+}
+
+.callout > p:first-of-type { 
+    margin-top: 0;
+}
+
+.callout__header { 
+    margin-bottom: 0px;
+}
+
+
+/* *******8 */
+
+.tab-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tab-group input[type="radio"] {
+    display: none;
+}
+.tab-group label {
+    font-weight: bold;
+    padding: 1em; 
+}
+
+.tab-group .tab {
+    width: 100%;
+    padding: 20px;
+    order: 1;
+    display: none;
+
+    background-color: var(--subwindow-bg);
+    margin: 0.5em 0.25em; 
+    border-radius: var(--border-subwindow-radius);
+}
+.tab-group .tab h2 {
+    font-size: 3em;
+}
+
+.tab-group input[type='radio']:checked + label + .tab {
+    display: block;
+}
+
+.tab-group input[type="radio"]:checked + label {
+    color: var(--text-strong);
+    background-color: var(--subwindow-bg);
+
+}
+.tab-group input[type="radio"]:not(:checked) + label {
+    color: var(--text-muted);
+}
+
+.tab-group label { 
+    border-radius: var(--border-subwindow-radius);
+}
+
+/* ********* TABLES ******* */
+
+table { 
+    width: 100%;
+}
+
+th { 
+    text-align: left;
+
+    background-color: var(--table-heading-color);
+}
+
+th, tr, td { 
+    padding: 5px;
+}
+
+/* tr:nth-child(odd) { 
+    background-color: var(--table-even-color);
+}
+
+tr:nth-child(even) { 
+    background-color: var(--table-odd-color);
+} */
+
+tr:hover { 
+    background-color: var(--table-hover-color); 
+    color: var(--text-strong); 
+}
+
+p { 
+    margin-top: 0px;
 }

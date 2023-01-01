@@ -47,13 +47,16 @@ code[class*=language-], pre[class*=language-] {
     hyphens:none
 }
 
-pre[class*=language-] 
-    {padding: 1rem;
+pre[class*=language-] {
+    padding: 1rem;
     margin:.5em 0;
     overflow:auto;
     border-radius: 4px; 
 
     max-height: 80vh; 
+
+    padding-top: 0px;
+    margin-top: 0px;
 }
 /* :not(pre) > code[class*=language-], pre[class*=language-] { */
     /* background:#0A070A;  */
@@ -358,3 +361,23 @@ pre, pre code {
 /* .code-toolbar button:hover { 
     background-color: var(--links-color);
 } */
+
+:not(pre) code { 
+    background-color: var(--subwindow-bg) !important;
+    font-size: 0.9rem !important;
+
+    padding: 0px 5px !important; 
+}
+
+pre code { 
+    padding: 0px !important;
+}
+
+code *::selection,
+code::selection { 
+    color: var(--subwindow-bg)
+}
+
+code::selection { 
+    background-color: #eee;
+}

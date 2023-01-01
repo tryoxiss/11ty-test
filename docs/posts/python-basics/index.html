@@ -13,7 +13,7 @@
 </head>
 
 
-<body class="match-braces ">
+<body class="match-braces language-py">
     <script src="/res/prism.js"></script>
     
     <header>
@@ -27,7 +27,7 @@
 
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg><code>Str</code>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>1 minute read 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minute read 
         </p>
 
         
@@ -42,7 +42,40 @@
 The main pourpose of this article is to test the layout and current markup. Not to be a genuine post. However this will likely still be a perfectly serviceable introduction to Python 3.10.</p>
 </blockquote>
 <p>So you want to get into the single best language except for all the better ones. I am of course joking here, python is a great way to get started: and keep going, most applications dont require speed or being compiled. And python is great for ease of use, prototyping, and such cases where speed is not of the utmost priority.</p>
-<p>Go download an IDE, it dosen't really matter which one, <a href="https://code.visualstudio.com">VSCode</a> is good and its what I use. Pulsar (atom fork)</p>
+<p>Go download an IDE, it dosen't really matter which one, <a href="https://code.visualstudio.com">VSCode</a> is good and its what I use, and I have also heard that <a href="https://pulsar-edit.dev/">Pulsar</a> is good, though its still in beta. You will also want to download and install <a href="https://www.python.org/downloads/">Python 3.X</a> (we will be using 3.10, but as long as its 3.X it should work the same).</p>
+<p>So once you have that installed, go into your projects directory and make a new project. This will simply be a directory. I use <code>~/projects/PROJECT_NAME</code>. For this example lets call it <code>python_basics</code>. Make sure to create a <code>main.py</code> file. Python files are denoted by ending with <code>.py</code>, and the convention is to name your projects main runtime file <code>main.py</code>.</p>
+<p>It is generally best practice to wrap everything in a function, so lets declare one right now, add the following code to your file.</p>
+<pre><code class="language-py">def main(): 
+    pass
+
+main()
+</code></pre>
+<p>Lets go over this line by line, in python you declare a function with the <code>def</code> keyword (short for <code>define</code>). The pass instruction simply tells the interpriter to skip past it without causing errors. Lastly we run the function. Don't worry about this too much right now, we will get to it more later.</p>
+<p>This functon isn't very useful, so lets add a print statement to it with <code>print(value)</code>. This is a <em>built in function</em>, which means you dont need to--and can't--define it, the interpriter just knows what to do. The print function in its most basic form takes one argument, the value you want to print. We want to print a string, which means we need to wrap it in single or doubble quotes (<code>&quot;&quot;</code> or <code>''</code>).</p>
+<pre><code class="language-py">def main(): 
+    print(&quot;Hello World&quot;)
+
+main()
+</code></pre>
+<p>Now lets try running our code, the commands your looking for are (this should work in both PowerShell, and BASH):</p>
+<pre><code class="language-sh"># Change to the directory we are working in. 
+# If you are already here (e.g., using an embedded terminal 
+# in your text editor), you may be able to skip this step.
+$ cd projects/python_basics
+
+# Run the python file. 
+$ python main.py
+</code></pre>
+<p>The most foundational programming concept is an <code>object</code>, for now this is basically any variable but later on they can be more complex structures. In python you declare a variable with <code>variable_name  = value</code>. Lets make a variable <code>cookies</code> and set it equal to 7. To do this we would use the following code: <code>cookies = 7</code>. Simple enough, right?</p>
+<p>The variable we just declared is of a type called an <code>intiger</code>, or <code>int</code>. It funnily enough stores an intiger (a posative or negative number that does not support decimals or fractions). Python is <strong>dynamically typed</strong>, which means you don't need to assign types to variables. <s>This is an amazing feature that dosen't negatively impact performance at all</s> <strong>which makes it good for beginners learning programming</strong>.</p>
+<p>Now we can modify our code above to print the variable. You can simply pass it an as the argument of what you want to print.</p>
+<pre><code class="language-py">def main(): 
+    cookies = 7
+
+    print(cookies)
+
+main()
+</code></pre>
 
         
     </main>
