@@ -179,21 +179,37 @@
     --border-subwindow-radius: 6px; 
 }
 
-/* @media (prefers-color-scheme: light) { 
+@media (prefers-color-scheme: light) { 
     :root { 
         --base-color: var(--latte-crust); 
         --main-bg: var(--latte-mantle);
-        --subwindow-bg: var(--latte-base); /* e.g. spoilers, codeblocks 
+        --subwindow-bg: var(--latte-base); /* e.g. spoilers, codeblocks */
 
         --text-muted: var(--latte-subtext0); 
         --text-normal: var(--latte-text); 
         --text-strong: #000; 
 
         --links-color: var(--latte-blue); 
-    }
-} */
 
-/* @media (prefers-color-scheme: dark) {  */
+
+        --red-2:        var(--latte-red); 
+        --orange-2:     var(--latte-peach); 
+        --yellow-2:     var(--latte-yellow); 
+        --green-2:      var(--latte-green); 
+        --blue-2:       var(--latte-sky); 
+        --blueviolet-2: var(--latte-lavender); 
+        --violet-2:     var(--latte-mauve);
+        --pink-2:       var(--latte-pink); 
+    }
+
+    main .code-toolbar::before, 
+    main .canvas-holder,
+    main .has-window-buttons {
+        background-image: url("/res/svg/close-buttons-light.svg");
+    }
+}
+
+@media (prefers-color-scheme: dark) { 
     :root { 
         --base-color: var(--mocha-crust); 
         --main-bg: var(--mocha-base);
@@ -216,16 +232,28 @@
         --orange-2:     #FFD6A5; 
         --yellow-2:     #FDFFB6; 
         --green-2:      #CAFFBF; 
-        --blue-2:       #9BF6FF; 
-        --blueviolet-2: #A0C4FF; 
+        --blue-2:       #9bf6ff; 
+        --blueviolet-2: #a0c4ff; 
         --violet-2:     #BDB2FF;
         --pink-2:       #FFC6FF; 
 
         --red-3: var(--mocha-red);
 
         --yellow-3: var(--mocha-yellow);
+
+        --hilight-color: rgba(160, 196, 255, 0.25);
     }
-/* } */
+
+    main .code-toolbar::before, 
+    main .canvas-holder,
+    main .has-window-buttons {
+        background-image: url("/res/svg/close-buttons-dark.svg");
+    } 
+}
+
+::selection { 
+    background-color: var(--hilight-color);
+}
 
 body { 
     display: grid;
@@ -482,7 +510,6 @@ main .has-window-buttons {
     width:3rem;
     background-size: 3rem 12rem;
 
-    background-image: url("/res/svg/close-buttons-dark.svg");
     background-repeat: no-repeat;
 
     background-position: center;
@@ -639,6 +666,12 @@ ol ol ol {
 /* TODO: Fix the colors, they are just temperary rn */
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+
+    input[type=checkbox]:disabled,
+    input[type=radio]:disabled {
+        --active-inner: var(--mocha-blue);
+    } 
+
     input[type=checkbox],
   input[type=radio] {
 
@@ -1204,7 +1237,7 @@ footer ul {
 }
 
 .dead-link { 
-    color: var(--mocha-red)
+    color: var(--red-2)
 }
 
 footer ul { 
@@ -1364,4 +1397,12 @@ tr:hover {
 
 p { 
     margin-top: 0px;
+}
+
+.text-icon { 
+    margin-bottom: -2px;
+}
+
+footer b { 
+    color: var(--text-strong); 
 }
