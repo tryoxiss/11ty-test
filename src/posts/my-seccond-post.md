@@ -28,6 +28,8 @@ This is a paragraph with **strong** text. It also has ~~struck text~~. This is a
 
 and here is a nice ||spoiler||. 
 
+This is a paragraph with a very gay cat emoji in it <img draggable="false" class="emoji custom-emoji" alt=":QueerCat_Lesbian:" title=":QueerCat_Lesbian:" src="https://link.storjshare.io/raw/jvxikkhiqnksyeatwcn3iigoa3ta/techlgbt/custom_emojis/images/000/243/670/static/QueerCat_Lesbian.png" data-original="https://link.storjshare.io/raw/jvxikkhiqnksyeatwcn3iigoa3ta/techlgbt/custom_emojis/images/000/243/670/original/QueerCat_Lesbian.png" data-static="https://link.storjshare.io/raw/jvxikkhiqnksyeatwcn3iigoa3ta/techlgbt/custom_emojis/images/000/243/670/static/QueerCat_Lesbian.png"> :3!!! Cuuuuteee!
+
 :heart:
 
 <img src="https://picsum.photos/1920/1080">

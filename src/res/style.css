@@ -690,7 +690,8 @@ ol ol ol {
       --border-hover: var(--blueviolet-2);
       /* --background: transparent; */
       --background: var(--border-color); 
-      /* --disabled: var(--blueviolet-2); */
+
+      --disabled: var(--border-color);
       --disabled-inner: var(--mocha-surface1);
 
       appearance: none;
@@ -1405,4 +1406,10 @@ p {
 
 footer b { 
     color: var(--text-strong); 
+}
+
+.emoji { 
+    width: 1rem; 
+    height: 1rem; 
+    margin-bottom: -2px;
 }
