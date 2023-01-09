@@ -10,7 +10,7 @@ module.exports = function
     eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-dark.svg");
     eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-light.svg");
 
-    eleventyConfig.addPassthroughCopy("./src/404.md");
+    // eleventyConfig.addPassthroughCopy("./src/404.md");
 
     eleventyConfig.addPassthroughCopy("res")
 
