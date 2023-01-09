@@ -1414,4 +1414,7 @@ footer b {
     margin-bottom: -6px;
 
     border-radius: 0px;
+
+    -webkit-user-drag: none;
+    cursor: text;
 }

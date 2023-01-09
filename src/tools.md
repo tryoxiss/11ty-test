@@ -3,36 +3,6 @@ title: My Tools
 layout: "base.njk"
 --- 
 
-<table>
-    <tr>
-        <th>Role</th>
-        <th>Item</th>
-        <th>Cost</th>
-    </tr>
-    <tr>
-        <td>Drawing Program</td>
-        <td>Krita</td>
-        <td><a href="https://krita.org/en/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
-    </tr>
-    <tr>
-        <td>Vector Program</td>
-        <td>Inkscape</td>
-        <td><a href="https://inkscape.org/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
-    </tr>
-    <tr>
-        <td>Photo Editor</td>
-        <td>GIMP</td>
-        <td><a href="https://www.gimp.org/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
-    </tr>
-    <tr>
-        <td>Tablet</td>
-        <td>Wacom Intuos S</td>
-        <td>???</td>
-    </tr>
-    <p>Normally I would link a store page but wacom's website is so insufferable I won't bother... </p>
-</table>
-
-
 <h2>My Tools:</h2>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam ratione porro amet. Natus, enim. Ut similique quo sunt nam sit eum quas.</p>

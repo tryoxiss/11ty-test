@@ -30,9 +30,12 @@ and here is a nice ||spoiler||.
 
 This is a paragraph with a very gay cat emoji in it <img draggable="false" class="emoji custom-emoji" alt=":QueerCat_Lesbian:" title=":QueerCat_Lesbian:" src="https://link.storjshare.io/raw/jvxikkhiqnksyeatwcn3iigoa3ta/techlgbt/custom_emojis/images/000/243/670/static/QueerCat_Lesbian.png" data-original="https://link.storjshare.io/raw/jvxikkhiqnksyeatwcn3iigoa3ta/techlgbt/custom_emojis/images/000/243/670/original/QueerCat_Lesbian.png" data-static="https://link.storjshare.io/raw/jvxikkhiqnksyeatwcn3iigoa3ta/techlgbt/custom_emojis/images/000/243/670/static/QueerCat_Lesbian.png"> :3!!! Cuuuuteee!
 
+<img draggable="false" class="emoji custom-emoji" alt=":random_picsum_emoji:" title=":random_picsum_emoji:" src="https://picsum.photos/128/128" data-original="https://picsum.photos/1920/1080" data-static="https://picsum.photos/1920/1080">
+
+:text:
 :heart:
 
-<img src="https://picsum.photos/1920/1080">
+<img src="https://picsum.photos/1920/1080" alt="Random image from https://picsum.photos . The image will be 1920 by 1080.">
 
 <input type="checkbox" class="switch"></input> <input type="checkbox" class="switch" disabled></input>
 
