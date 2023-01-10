@@ -1359,9 +1359,14 @@ h2, h3, h4, h5, h6 {
     background-color: var(--subwindow-bg);
 
 }
+
 .tab-group input[type="radio"]:not(:checked) + label {
     color: var(--text-muted);
 }
+
+.tab-group input[type="radio"] + label:hover {
+    color: var(--text-strong);
+} 
 
 .tab-group label { 
     border-radius: var(--border-subwindow-radius);
@@ -1418,3 +1423,20 @@ footer b {
     -webkit-user-drag: none;
     cursor: text;
 }
+
+/* .button *, .brand-icon, .button { 
+    color: var(--latte-text); 
+}
+
+.brand-icon { 
+    fill: var(--latte-text); 
+} */
+
+.button *, .brand-icon, .button { 
+    color: var(--border-color); 
+}
+
+.brand-icon { 
+    fill: var(--border-color); 
+}
+
