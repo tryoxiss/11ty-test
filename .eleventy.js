@@ -1,3 +1,6 @@
+const fs = require("fs");
+const NOT_FOUND_PATH = "_site/404.html";
+
 module.exports = function 
 (eleventyConfig) { 
     eleventyConfig.addPassthroughCopy("./src/res/style.css");
@@ -16,7 +19,6 @@ module.exports = function
 
     // For images
     eleventyConfig.addPassthroughCopy({ "notes/img_post": "img_post" });
-
 
     return { 
         dir: { 
