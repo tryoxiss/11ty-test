@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonfire Recent Draft</title>
+
+    <link rel="stylesheet" href="/res/style.css">
+    <link rel="stylesheet" href="/res/prism.css">
+
+</head>
+<body class="match-braces">
+    <script src="/res/prism.js"></script>
+    
+    <header>
+        <h1>Bonfire Recent Draft</h1>
+
+        <p class="subtitle">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>20 December 2022
+        </p>
+    </header>
+    
+    <main>
+        <p>Bonfire is a working (and temperary) name for a standard to allow for community-devided federated instant messaging. In laymans terms, its federated discord.</p>
+<h2>Definitions</h2>
+<ul>
+<li>Let <code>i&lt;int&gt;</code> represent 2^int-1. Some examples (and the important ones) are as follows;
+<ul>
+<li><code>i16</code> equals <code>65,535</code></li>
+<li><code>i32</code> equals <code>2,147,483,647</code></li>
+<li><code>i64</code> equals approxamtely <code>1.844674407×10¹⁹</code></li>
+</ul>
+</li>
+<li>Let <code>XML Object</code> represent one XML tag, and any nested objects thereforth. Let this not exeed the manimum status characters of an i16.</li>
+<li>Let <code>packet</code> represent one XML object sent between a client-server, or server-server relationship.</li>
+</ul>
+<h2>Objects</h2>
+<h3>Accounts</h3>
+<p>An account is an object that represents a <code>Person</code> in nature. Its XML Object is as follows:</p>
+<pre><code class="language-xml">&lt;account&gt;
+    &lt;username&gt;Actor&lt;/username&gt;
+    &lt;hash&gt;1234&lt;/hash&gt;
+    &lt;instance&gt;example.net&lt;/instance&gt;
+    &lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;
+
+    &lt;status&gt;
+        &lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;
+        &lt;text&gt;Being gay on example.net&lt;/text&gt;
+    &lt;/status&gt;
+
+    &lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;
+    &lt;!-- This key is arbitrary, but it is a 128 Hex Public Key--&gt;
+
+    &lt;prefrences&gt;
+        ...
+    &lt;/prefrences&gt;
+&lt;/account&gt;
+</code></pre>
+<p><em>We suggest you store this data minified in a deployed server, as it can get bulky with all the indents</em></p>
+<p>When mentioning users, any of the following strucutres can be used, as long as one would bring it down to just one user in the current hub.</p>
+<pre><code class="language-plaintext">@username
+@username#1234
+@username@example.net
+@username#1234@example.net
+</code></pre>
+<h2>Federation</h2>
+<p>Bonfire uses a protocol simillar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
+<h2>URI Sceheme</h2>
+<p>the <code>bonfire://</code> URI scheme is used to link to accounts, messages, hubs on the front end and for the end user, and is used to transmit data on the backend. The frontend portion functions on a basic path function, and the backend functions simillarly to HTTPS. One of the main motivations for the URI sceheme is the ability to redefine reserved characters, and having an inter-instance way to link to things.</p>
+<p>The frontend ideintifer scheme is as follows:</p>
+<pre><code class="language-plaintext">bonfire://[action (view | get | set | add | remove)]:[what (hub | profile | etc...)]:[details (what to operate on?)]
+
+Maybe [what].[action]:details would be better? 
+</code></pre>
+<p>for example, to access a profile:</p>
+<pre><code class="language-plaintext">bonfire://view:profile:@username#1234@example.net
+</code></pre>
+<p>And for a hub, and channel in that order:</p>
+<pre><code class="language-plaintext">bonfire://view:hub:cid#channel@instance.tld
+</code></pre>
+<p>More complex requests, like joining, can also be handled. Below are examples of the remove operator.</p>
+<pre><code class="language-plaintext">bonfire://remove:hub:cid
+bonfire://remove:friend:cid
+bonfire://remove:role:hubname:role
+</code></pre>
+<pre><code class="language-plaintext">bonfire://add:hub:cid:access_key
+bonfire://add:hub:invite
+bonfire://add:instance:invite
+bonfire://remove:role:hubname:role
+</code></pre>
+<p>maybe define where and then use / commands??</p>
+
+    </main>
+
+    
+<footer>
+    
+
+    <ul>
+        <li><a href="#" class="dead-link"><b>Credits</b></a></li>
+        <li><a href="https://www.11ty.dev/">11ty</a> (SSG)</li>
+        <li><a href="https://prismjs.com/">prism.js</a> (Syntax Hilighting)</li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><a href="/specs/milkshake/2.0/"><b>Color Theme</b></a></li>
+        <li><a href="/specs/milkshake/2.0/" class="dead-link">Milkshake 2.0 Theme</a> which is based on <a href="https://github.com/catppuccin/catppuccin">catppuccin</a> <a href="https://github.com/catppuccin/catppuccin/blob/main/LICENSE">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></a> and <a class="dead-link" href="/specs/milkshake/1.0/">Milkshake 1.0</a></li>
+    </ul>
+
+    <ul>
+        <li><a href="/projects/" class="dead-link"><b>Our Stuff!</b></a></li>
+        <li><a href="/specs/bonfire/">Bonfire</a> Drafts, Project Codename</li>
+    </ul>
+
+    
+
+    <ul>
+        <li><a href="#" class="dead-link"><b>DEBUG</b></a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io">Source</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/issues">Issues</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/commit/master">Deployment Status</a></li>
+    </ul>
+
+    <br>
+    <p class="subtitle">Most content on this site is copyright &copy; tryoxiss 2022 or later. Feel free to use any of my content without asking though, just credit me and don't use it for any <a href="/dict/profanity/" class="dead-link">profanity</a> and I will probably be good. Though I do reserve the right to make you stop using it at any time for any reason.</p>
+</footer>
+
+</body>
+</html>

@@ -144,3 +144,20 @@ tip: to manually add pauses.
 tip: but you CANNOT run most other 
 tip: functions in subtitles
 ```
+
+```xml
+<account>
+    <username>Actor</username>
+    <hash>1234</hash>
+    <instance>example.net</instance>
+    <cid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</cid>
+
+    <status>
+        <emoji>:rainbow_flag:</emoji>
+        <text>Being gay on example.net</text>
+    </status>
+
+    <public_key>999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6</public_key>
+    <!-- This key is arbitrary, but it is a 128 Hex Public Key-->
+</account>
+```

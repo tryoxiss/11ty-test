@@ -8,19 +8,19 @@ https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clik
 @import url('https//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-/* :root {  */
-    /* --red-2: #FFADAD; 
+:root {  
+    --red-2: #FFADAD; 
     --orange-2: #FFD6A5; 
     --yellow-2: #fbff95; 
     --green-2: #CAFFBF; 
     --blue-2: #82f5ff; 
     --blueviolet-2: #97bfff; 
     --violet-2: #BDB2FF;
-    --pink-2: #FFC6FF;  */
+    --pink-2: #FFC6FF; 
 
-    /* --comment: #7e7e7e; 
-    --punctuation: #aaaaaa;  */
-/* } */
+    --comment: #7e7e7e; 
+    --punctuation: #aaaaaa;
+}
 
 code { 
     font-family: 'Hack', 'Consolas', 'Roboto Mono', 'Source Code Pro', monospace;
@@ -74,20 +74,20 @@ pre code, pre, code {
 }
 
 /* Syntax hilighting */
-.token.cdata, .token.comment, .token.doctype, .token.prolog {color:var(--text-muted)} 
-.token.punctuation {color:var(--text-normal)} 
+/* .token.cdata, .token.comment, .token.doctype, .token.prolog {color:var(--text-muted);} 
+.token.punctuation {color:var(--text-normal);} 
 .token.namespace { color: var(--yellow-2); } 
-.token.constant, .token.deleted, .token.property, .token.symbol, .token.tag .token .pseudo-element {color:var(--orange-2)}
-.token.boolean, .token.number {color:var(--blue-2)}
-.token.attr-name, .token.builtin, .token.char, .token.inserted, .token.selector, .token.class, .token.string{color: var(--yellow-2)}
-.token.atrule, .token.attr-value, .token.class-name, .token.rule, .token.combinator {color:var(--blueviolet-2)}
-.token.keyword {color:var(--blue-2)}
-.token.important, .token.regex {color:#fd971f} .token.bold, /*#fd971f*/
-.token.important {font-weight:700}
-.token.italic {font-style:italic}
-.token.entity {cursor:help}
+.token.constant, .token.deleted, .token.property, .token.symbol, .token.tag .token .pseudo-element {color:var(--orange-2) !important;}
+.token.boolean, .token.number {color:var(--blue-2);}
+.token.attr-name, .token.builtin, .token.char, .token.inserted, .token.selector, .token.class, .token.string{color: var(--yellow-2);}
+.token.atrule, .token.attr-value, .token.class-name, .token.rule, .token.combinator {color:var(--blueviolet-2);}
+.token.keyword {color:var(--blue-2);}
+.token.important, .token.regex {color:#fd971f;} .token.bold, /*#fd971f
+.token.important {font-weight:700;}
+.token.italic {font-style:italic;}
+.token.entity {cursor:help;}
 .token.function, .token.variable{ color: var(--blueviolet-2); }
-.language-css .token.string, .style .token.string, .token.entity, .token.operator {color:var(--text-muted)}
+.language-css .token.string, .style .token.string, .token.entity, .token.operator {color:var(--text-muted);}
 .token.interpolation { color: var(--blueviolet-2); }
 .token.unit { color: rgb(212, 212, 212); }
 
@@ -96,7 +96,7 @@ pre code::selection, pre::selection, code::selection {
     background-color: var(--text-normal) !important; 
 }
 
-/* Make the selection INVERT colors */
+/* Make the selection INVERT colors *
 .token *::selection {background-color: rgb(212, 212, 212) !important;}
 .token.cdata::selection, .token.comment::selection, .token.doctype::selection, .token.prolog::selection { background-color:var(--text-muted) !important} 
 .token.punctuation::selection {background-color:var(--text-muted) !important} 
@@ -106,13 +106,13 @@ pre code::selection, pre::selection, code::selection {
 .token.attr-name::selection, .token.builtin::selection, .token.char::selection, .token.inserted::selection, .token.selector::selection,  .token.class::selection, .token.string::selection, .token .pseudo-element::selection, .token .pseudo-class::selection {background-color:var(--yellow-2) !important}
 .token.atrule::selection, .token.attr-value::selection, .token.class-name::selection {background-color:var(--blueviolet-2) !important}
 .token.keyword::selection {background-color:var(--blue-2) !important}
-.token.important::selection, .token.regex {background-color:#fd971f !important} /*.token.bold, /*#fd971f*/
+.token.important::selection, .token.regex {background-color:#fd971f !important} /*.token.bold, /*#fd971f*
 .token.important::selection {font-weight:700 !important}
-/* .token.italic::selection {style:italic} */
+/* .token.italic::selection {style:italic} *
 .token.entity::selection {cursor:help !important}
 .token.function::selection, .token.variable::selection {background-color: var(--blueviolet-2) !important; }
 .token.interpolation::selection { background-color: var(--text-muted) !important; }
-.token.color::selection, .token.unit::selection, .token *::selection { background-color: rgb(212, 212, 212) !important; }
+.token.color::selection, .token.unit::selection, .token *::selection { background-color: rgb(212, 212, 212) !important; } */
 
 span .inline-color-wrapper {
     background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=);
@@ -389,4 +389,78 @@ code::selection {
 
 code::selection { 
     background-color: #eee;
+}
+
+
+
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: var(--text-muted);
+}
+
+.token.punctuation {
+	color: var(--text-normal);
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: var(--blueviolet-2);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: var(--yellow-2);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: var(--yellow-2);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: var(--blueviolet-2);
+}
+
+.token.function,
+.token.class-name {
+	color: var(--violet-2);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: var(--orange-2);
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
 }
