@@ -17,28 +17,29 @@ Bonfire is a working (and temperary) name for a standard to allow for community-
 
 ## Definitions
 
-- Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivelents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
-- Let `incorrect` mean MUST NOT; as in, incorrect behaviour comes close to violating the standard. 
+- Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivalents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
+- Let `incorrect` mean SHOULD NOT; as in, incorrect behaviour comes close to violating the standard. 
 - Let `i<int>` represent 2^int-1. Some examples (and the important ones) are as follows;
     - `i6` equals `63`
     - `i8` equals `255`
     - `i16` equals `65,535`
     - `i32` equals `2,147,483,647`
     - `i64` equals approxamtely `1.844674407×10¹⁹`
-- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the manimum status characters of an i16. 
+- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
-- Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and words are seperated with underscores.
+- Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
+- Let `CID` and `cid` mean the [clean ID system](https://github.com/tryoxiss/tryoxiss.github.io/blob/master/src/specs/cleanid.md).
 
-## Design Philopshy 
+## Design Philosophy 
 
 *Some of the following definitions are from [ariadne.space's post on ActivityPub's design falings](https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/).
 
 - **Simplicity**: The standard and protocol should be simple to implement. It is much more important for the protocol and standard to be simple than the backend implementation. 
-- **Cleanliness**: The standard must be clean and easily useable from a end-user perspecrtive. It is more important for it to be clean and simple for end-users than the backend implementation. 
+- **Cleanliness**: The standard must be clean and easily usable from a end-user perspective. It is more important for it to be clean and simple for end-users than the backend implementation. 
 - **Correctness**: All packets and URI's must be verifiably correct or incorrect. It MUST NOT ever be unclear. 
 - **Safety**: The standard and protocol is designed in a way that is safe, any unsafe implementations are considered incorrect. 
 - **Completeness**: The standard and protocol must cover all reasonably expected situations. 
-- **Privacy**: All content should be encyrpted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages. 
+- **Privacy**: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages. 
 - **Prevent Consolidation**: We don't want this to end up like email, where you *can* self host and join a smaller provider, but good luck with all the limitations in place.
 
 ## Objects
@@ -48,7 +49,9 @@ Bonfire is a working (and temperary) name for a standard to allow for community-
 An account is an object that represents a `Person` in nature. Its XML Object is as follows: 
 
 ```xml
-<account>
+<account type="person">
+    <!-- You can specify a bot account with type="bot"; 
+        though we reccommend you use integrations instead -->
     <display_name>I am an ACTOR</display_name>
     <username>actor</username>
     <hash>1234</hash>
@@ -83,12 +86,23 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
     </status>
 
     <friends>
-        <friend handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:"></friend>
+        <user handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:" />
     </friends>
+
+    <blocked>
+        <user handle="@jerk#0001@conservative.social" cid="nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c" />
+        <instance domain="somethingbad.social" />
+    </blocked>
 
     <hubs>
         <hub cid="hub:012a:2918:asd1:jq:sad::example.net"></hub>
     </hubs>
+
+    <pronouns>
+    she/they
+        <o>she/her</o>
+        <o>they/them</o>
+    </pronouns>
 
     <links>
         <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.-->
@@ -108,11 +122,7 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
 ```
 *We suggest you store this data minified in a deployed server, as it can get bulky with all the indents. The following is the same code minified: (you can just FEEL the savings)*
 
-```xml
-<account><display_name>I am an ACTOR</display_name><username>actor</username><hash>1234</hash><instance>example.net</instance><handle>@actor#1234@example.net</handle><cid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</cid><last_edited unit="s">1673395864</last_edited><bio language="en" encoding="UTF-8">Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!</bio><icon size="full">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png</icon><icon size="255x255">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png</icon><icon size="90x90">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png</icon><icon size="40x40">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png</icon><banner size="full">https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png</banner><primary_color>#512BD4</primary_color><username_color>#512BD4</username_color><status><type>online</type><emoji>:rainbow_flag:</emoji><text>Being gay on example.net</text</status><friends><friend handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:"></friend></friends><hubs><hub cid="hub:012a:2918:asd1:jq:sad::example.net"></hub></hubs><links><link rel="nofriend" icon="mastodon">@username@mastodon.social</link><link rel="me" icon="peertube">@username@joinpeertube.org</link></links><public_key>999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6</public_key><prefrences scope="to_owner_only"></prefrences></account>
-```
-
-XML SHOULD work with the reccommended DB (MariaDB (reccommended because you can easily self-host will all features and it is entirely free and open source, and handles large data loads well. You can pay for them to host it with extra stuff like redundent data tho)) [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/), 
+XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/).
 
 When mentioning users, any of the following strucutres can be used, as long as one would bring it down to just one user in the current hub. 
 
@@ -122,6 +132,8 @@ When mentioning users, any of the following strucutres can be used, as long as o
 @username@example.net
 @username#1234@example.net
 ```
+
+
 
 ## Federation 
 
