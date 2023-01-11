@@ -120,7 +120,7 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
     </prefrences>
 </account>
 ```
-*We suggest you store this data minified in a deployed server, as it can get bulky with all the indents. The following is the same code minified: (you can just FEEL the savings)*
+*We suggest you store this data minified in a deployed server, as it can get bulky with all the indents.*
 
 XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/), 
 
@@ -133,7 +133,23 @@ When mentioning users, any of the following structures can be used, as long as o
 @username#1234@example.net
 ```
 
+### Messages
 
+A status object can represent a reaction, message, creation, or anything else that is not a `person` or `bot` in nature.
+
+```xml
+<msg>
+    <author>@actor#1234@example.net</author>
+    <reactions>
+        <o emoji=":rainbow_flag:" count="3" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net]"/>
+        <o emoji=":heart:" count="5" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net], @purr#8888@kitties.social, @neko#1111, @kitties.social"/>
+    </reactions>
+    <content>hello this is my message content</content>
+    <created>1673475563</created>
+    <edited>1673475591</edited>
+    <signature>(whatever a signature looks like)</signature>
+</msg>
+```
 
 ## Federation 
 
