@@ -4,7 +4,7 @@ tags:
     - bonfire
 ---
 
-Bonfire is a working (and temperary) name for a standard to allow for community-devided federated instant messaging. In laymans terms, its federated discord. 
+Bonfire is a working (and temporary) name for a standard to allow for community-divided federated instant messaging. In laymans terms, its federated discord. 
 
 <blockquote class="callout callout--info">
     <!-- <svg src="/_shared-content/lucide/alert-triangle.svg" color="red"></svg> -->
@@ -28,7 +28,7 @@ Bonfire is a working (and temperary) name for a standard to allow for community-
 - Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
-- Let `CID` and `cid` mean the [clean ID system](https://github.com/tryoxiss/tryoxiss.github.io/blob/master/src/specs/cleanid.md).
+- Let `CID` and `cid` mean the [clean ID system](/specs/cid/recent/).
 
 ## Design Philosophy 
 
@@ -108,8 +108,8 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
         <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.-->
         <link rel="me" icon="peertube">@username@joinpeertube.org</link> <!-- This is VERIFIED because it has rel="me" -->
 
-        <!-- The user can specify which icon to use, we reccommend you use https://simpleicons.org for the icons
-             if no icon is specified and the network is unrecignised, use the favicon instead -->
+        <!-- The user can specify which icon to use, we recommend you use https://simpleicons.org for the icons.
+             If no icon is specified and the network is unrecongnised, use the favicon instead -->
     </links>
 
     <public_key>999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6</public_key>
@@ -122,9 +122,9 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
 ```
 *We suggest you store this data minified in a deployed server, as it can get bulky with all the indents. The following is the same code minified: (you can just FEEL the savings)*
 
-XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/).
+XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/), 
 
-When mentioning users, any of the following strucutres can be used, as long as one would bring it down to just one user in the current hub. 
+When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub. 
 
 ```plaintext
 @username
@@ -137,15 +137,15 @@ When mentioning users, any of the following strucutres can be used, as long as o
 
 ## Federation 
 
-Bonfire uses a protocol simillar to [Diaspora*](https://diaspora.github.io/diaspora_federation/federation/magicsig.html) protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire. 
+Bonfire uses a protocol similar to [Diaspora*](https://diaspora.github.io/diaspora_federation/federation/magicsig.html) protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire. 
 
-## URI Sceheme
+## URI Scheme
 
-The `bonfire://` URI Sceheme is motivated by the desire to have a clean, inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in __packets__ instead. However, they can include links *to* actions like joining a hub or being an invite. 
+The `bonfire://` URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in __packets__ instead. However, they can include links *to* actions like joining a hub or being an invite. 
 
-Generally, it follows a `action:what:details` sceheme, however when CIDs are involved they are instead surrounded by forward slashes. 
+Generally, it follows a `action:what:details` scheme, however when CIDs are involved they are instead surrounded by forward slashes. 
 
-Hub CIDs MUST include the inststance in them at the begining, in the following format: `CID:sub.domain.tld`. This allows URIs to be cleaner. 
+Hub CIDs MUST include the instance at the begining in the following format: `CID:sub.domain.tld`. This allows URIs to be cleaner. 
 
 ```
 bonfire://invite/cid/instance.tld
