@@ -84,12 +84,24 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
     </status>
 
     <friends>
-        <friend handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:"></friend>
+        <user handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:"></user>
     </friends>
+
+    <blocked>
+        <user handle="@somejerk#0001@converveative.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:"></user>
+    </blocked>
 
     <hubs>
         <hub cid="hub:012a:2918:asd1:jq:sad::example.net"></hub>
     </hubs>
+
+    <!-- o is short for object, generic subdevider. -->
+    <pronouns>she/her 
+        <detailed>
+            <o>she/her</o>
+            <o>they/them</o>
+        </detailed>
+    </pronouns>
 
     <links>
         <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.-->
