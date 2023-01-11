@@ -28,7 +28,7 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 - Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
-- Let `CID` and `cid` mean the [clean ID system](https://github.com/tryoxiss/tryoxiss.github.io/blob/master/src/specs/cleanid.md).
+- Let `CID` and `cid` mean the [clean ID system](https://github.com/tryoxiss/tryoxiss.github.io/blob/master/src//specs/cid/recent/).
 
 ## Design Philosophy 
 
