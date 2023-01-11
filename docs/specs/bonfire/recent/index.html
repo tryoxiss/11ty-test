@@ -18,16 +18,28 @@
 
         <p class="subtitle">
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>20 December 2022
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>Updated Date Undefined
         </p>
     </header>
     
     <main>
         <p>Bonfire is a working (and temperary) name for a standard to allow for community-devided federated instant messaging. In laymans terms, its federated discord.</p>
+<blockquote class="callout callout--info">
+    <!-- <svg src="/_shared-content/lucide/alert-triangle.svg" color="red"></svg> -->
+    <div class="callout__header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <p>This specification is a draft!</p>
+    </div>
+    <p>it is not finished and is due for many, many revisions down the road. </p>
+</blockquote>
 <h2>Definitions</h2>
 <ul>
+<li>Let the keywords &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, and &quot;MAY&quot; (and lowercase equivelents) be defined as specified in <a href="https://www.rfc-editor.org/rfc/rfc2119">RFC:2119</a></li>
+<li>Let <code>incorrect</code> mean SHOULD NOT; as in, incorrect behaviour comes close to violating the standard.</li>
 <li>Let <code>i&lt;int&gt;</code> represent 2^int-1. Some examples (and the important ones) are as follows;
 <ul>
+<li><code>i6</code> equals <code>63</code></li>
+<li><code>i8</code> equals <code>255</code></li>
 <li><code>i16</code> equals <code>65,535</code></li>
 <li><code>i32</code> equals <code>2,147,483,647</code></li>
 <li><code>i64</code> equals approxamtely <code>1.844674407×10¹⁹</code></li>
@@ -35,30 +47,84 @@
 </li>
 <li>Let <code>XML Object</code> represent one XML tag, and any nested objects thereforth. Let this not exeed the manimum status characters of an i16.</li>
 <li>Let <code>packet</code> represent one XML object sent between a client-server, or server-server relationship.</li>
+<li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and words are seperated with underscores.</li>
+</ul>
+<h2>Design Philopshy</h2>
+<p>*Some of the following definitions are from <a href="https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/">ariadne.space's post on ActivityPub's design falings</a>.</p>
+<ul>
+<li><strong>Simplicity</strong>: The standard and protocol should be simple to implement. It is much more important for the protocol and standard to be simple than the backend implementation.</li>
+<li><strong>Cleanliness</strong>: The standard must be clean and easily useable from a end-user perspecrtive. It is more important for it to be clean and simple for end-users than the backend implementation.</li>
+<li><strong>Correctness</strong>: All packets and URI's must be verifiably correct or incorrect. It MUST NOT ever be unclear.</li>
+<li><strong>Safety</strong>: The standard and protocol is designed in a way that is safe, any unsafe implementations are considered incorrect.</li>
+<li><strong>Completeness</strong>: The standard and protocol must cover all reasonably expected situations.</li>
+<li><strong>Privacy</strong>: All content should be encyrpted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages.</li>
+<li><strong>Prevent Consolidation</strong>: We don't want this to end up like email, where you <em>can</em> self host and join a smaller provider, but good luck with all the limitations in place.</li>
 </ul>
 <h2>Objects</h2>
 <h3>Accounts</h3>
 <p>An account is an object that represents a <code>Person</code> in nature. Its XML Object is as follows:</p>
 <pre><code class="language-xml">&lt;account&gt;
-    &lt;username&gt;Actor&lt;/username&gt;
+    &lt;display_name&gt;I am an ACTOR&lt;/display_name&gt;
+    &lt;username&gt;actor&lt;/username&gt;
     &lt;hash&gt;1234&lt;/hash&gt;
     &lt;instance&gt;example.net&lt;/instance&gt;
+
+    &lt;handle&gt;@actor#1234@example.net&lt;/handle&gt;
+
     &lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;
 
+    &lt;last_edited unit=&quot;s&quot;&gt;1673395864&lt;/last_edited&gt;
+    &lt;!-- UNIX Timestamp in secconds.  --&gt;
+
+    &lt;bio language=&quot;en&quot; encoding=&quot;UTF-8&quot;&gt;
+    Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!
+    &lt;/bio&gt;
+
+    &lt;icon size=&quot;full&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/icon&gt;
+    &lt;icon size=&quot;255x255&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&lt;/icon&gt;
+    &lt;icon size=&quot;90x90&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&lt;/icon&gt;
+    &lt;icon size=&quot;40x40&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&lt;/icon&gt;
+
+    &lt;banner size=&quot;full&quot;&gt;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/banner&gt;
+
+    &lt;primary_color&gt;#512BD4&lt;/primary_color&gt;
+    &lt;username_color&gt;#512BD4&lt;/username_color&gt;
+
     &lt;status&gt;
+        &lt;!-- Valid Values: online, offline, away, idle, do not disturb --&gt;
+        &lt;type&gt;online&lt;/type&gt;
         &lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;
         &lt;text&gt;Being gay on example.net&lt;/text&gt;
     &lt;/status&gt;
 
+    &lt;friends&gt;
+        &lt;friend handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/friend&gt;
+    &lt;/friends&gt;
+
+    &lt;hubs&gt;
+        &lt;hub cid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;
+    &lt;/hubs&gt;
+
+    &lt;links&gt;
+        &lt;link rel=&quot;nofriend&quot; icon=&quot;mastodon&quot;&gt;@username@mastodon.social&lt;/link&gt; &lt;!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.--&gt;
+        &lt;link rel=&quot;me&quot; icon=&quot;peertube&quot;&gt;@username@joinpeertube.org&lt;/link&gt; &lt;!-- This is VERIFIED because it has rel=&quot;me&quot; --&gt;
+
+        &lt;!-- The user can specify which icon to use, we reccommend you use https://simpleicons.org for the icons
+             if no icon is specified and the network is unrecignised, use the favicon instead --&gt;
+    &lt;/links&gt;
+
     &lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;
     &lt;!-- This key is arbitrary, but it is a 128 Hex Public Key--&gt;
 
-    &lt;prefrences&gt;
+    &lt;prefrences scope=&quot;to_owner_only&quot;&gt;
         ...
     &lt;/prefrences&gt;
 &lt;/account&gt;
 </code></pre>
-<p><em>We suggest you store this data minified in a deployed server, as it can get bulky with all the indents</em></p>
+<p><em>We suggest you store this data minified in a deployed server, as it can get bulky with all the indents. The following is the same code minified: (you can just FEEL the savings)</em></p>
+<pre><code class="language-xml">&lt;account&gt;&lt;display_name&gt;I am an ACTOR&lt;/display_name&gt;&lt;username&gt;actor&lt;/username&gt;&lt;hash&gt;1234&lt;/hash&gt;&lt;instance&gt;example.net&lt;/instance&gt;&lt;handle&gt;@actor#1234@example.net&lt;/handle&gt;&lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;&lt;last_edited unit=&quot;s&quot;&gt;1673395864&lt;/last_edited&gt;&lt;bio language=&quot;en&quot; encoding=&quot;UTF-8&quot;&gt;Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!&lt;/bio&gt;&lt;icon size=&quot;full&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/icon&gt;&lt;icon size=&quot;255x255&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&lt;/icon&gt;&lt;icon size=&quot;90x90&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&lt;/icon&gt;&lt;icon size=&quot;40x40&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&lt;/icon&gt;&lt;banner size=&quot;full&quot;&gt;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/banner&gt;&lt;primary_color&gt;#512BD4&lt;/primary_color&gt;&lt;username_color&gt;#512BD4&lt;/username_color&gt;&lt;status&gt;&lt;type&gt;online&lt;/type&gt;&lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;&lt;text&gt;Being gay on example.net&lt;/text&lt;/status&gt;&lt;friends&gt;&lt;friend handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/friend&gt;&lt;/friends&gt;&lt;hubs&gt;&lt;hub cid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;&lt;/hubs&gt;&lt;links&gt;&lt;link rel=&quot;nofriend&quot; icon=&quot;mastodon&quot;&gt;@username@mastodon.social&lt;/link&gt;&lt;link rel=&quot;me&quot; icon=&quot;peertube&quot;&gt;@username@joinpeertube.org&lt;/link&gt;&lt;/links&gt;&lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;&lt;prefrences scope=&quot;to_owner_only&quot;&gt;&lt;/prefrences&gt;&lt;/account&gt;
+</code></pre>
+<p>XML SHOULD work with the reccommended DB (MariaDB (reccommended because you can easily self-host will all features and it is entirely free and open source, and handles large data loads well. You can pay for them to host it with extra stuff like redundent data tho)) <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>,</p>
 <p>When mentioning users, any of the following strucutres can be used, as long as one would bring it down to just one user in the current hub.</p>
 <pre><code class="language-plaintext">@username
 @username#1234
@@ -68,29 +134,21 @@
 <h2>Federation</h2>
 <p>Bonfire uses a protocol simillar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
 <h2>URI Sceheme</h2>
-<p>the <code>bonfire://</code> URI scheme is used to link to accounts, messages, hubs on the front end and for the end user, and is used to transmit data on the backend. The frontend portion functions on a basic path function, and the backend functions simillarly to HTTPS. One of the main motivations for the URI sceheme is the ability to redefine reserved characters, and having an inter-instance way to link to things.</p>
-<p>The frontend ideintifer scheme is as follows:</p>
-<pre><code class="language-plaintext">bonfire://[action (view | get | set | add | remove)]:[what (hub | profile | etc...)]:[details (what to operate on?)]
+<p>The <code>bonfire://</code> URI Sceheme is motivated by the desire to have a clean, inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
+<p>Generally, it follows a <code>action:what:details</code> sceheme, however when CIDs are involved they are instead surrounded by forward slashes.</p>
+<p>Hub CIDs MUST include the inststance in them at the begining, in the following format: <code>CID:sub.domain.tld</code>. This allows URIs to be cleaner.</p>
+<pre><code>bonfire://invite/cid/instance.tld
 
-Maybe [what].[action]:details would be better? 
+( bonfire://invite/1233:45::671: )
+( bonfire://invite/13fg:45::6io: )
+
+bonfire://view:@username#0000@instance.tld
+
+( bonfire://view:@tryoxiss#8100@bonfire.example.net )
+( bonfire://view:@khaim#0919@app.instance.tld )
+
+bonfire://view/cid#channel
 </code></pre>
-<p>for example, to access a profile:</p>
-<pre><code class="language-plaintext">bonfire://view:profile:@username#1234@example.net
-</code></pre>
-<p>And for a hub, and channel in that order:</p>
-<pre><code class="language-plaintext">bonfire://view:hub:cid#channel@instance.tld
-</code></pre>
-<p>More complex requests, like joining, can also be handled. Below are examples of the remove operator.</p>
-<pre><code class="language-plaintext">bonfire://remove:hub:cid
-bonfire://remove:friend:cid
-bonfire://remove:role:hubname:role
-</code></pre>
-<pre><code class="language-plaintext">bonfire://add:hub:cid:access_key
-bonfire://add:hub:invite
-bonfire://add:instance:invite
-bonfire://remove:role:hubname:role
-</code></pre>
-<p>maybe define where and then use / commands??</p>
 
     </main>
 

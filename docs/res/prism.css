@@ -464,3 +464,78 @@ code::selection {
 .token.entity {
 	cursor: help;
 }
+
+/* ***************** */
+/* INVERT ON HILIGHT */
+/* ***************** */
+
+.token.comment::selection,
+.token.prolog::selection,
+.token.doctype::selection,
+.token.cdata::selection {
+	background-color: var(--text-muted);
+}
+
+.token.punctuation::selection {
+	background-color: var(--text-normal);
+}
+
+.token.namespace::selection {
+	opacity: .7;
+}
+
+.token.property::selection,
+.token.tag::selection,
+.token.boolean::selection,
+.token.number::selection,
+.token.constant::selection,
+.token.symbol::selection,
+.token.deleted::selection {
+	background-color: var(--blueviolet-2);
+}
+
+.token.selector::selection,
+.token.attr-name::selection,
+.token.string::selection,
+.token.char::selection,
+.token.builtin::selection,
+.token.inserted::selection {
+	background-color: var(--yellow-2);
+}
+
+.token.operator::selection,
+.token.entity::selection,
+.token.url::selection,
+.language-css .token.string::selection,
+.style .token.string::selection {
+	background-color: var(--yellow-2);
+}
+
+.token.atrule::selection,
+.token.attr-value::selection,
+.token.keyword::selection {
+	background-color: var(--blueviolet-2);
+}
+
+.token.function::selection,
+.token.class-name::selection {
+	background-color: var(--violet-2);
+}
+
+.token.regex::selection,
+.token.important::selection,
+.token.variable::selection {
+	background-color: var(--orange-2);
+}
+
+.token.important::selection,
+.token.bold::selection {
+	font-weight: bold;
+}
+.token.italic::selection {
+	font-style: italic;
+}
+
+.token.entity::selection {
+	cursor: help;
+}
