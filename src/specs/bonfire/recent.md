@@ -18,7 +18,7 @@ Bonfire is a working (and temperary) name for a standard to allow for community-
 ## Definitions
 
 - Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivelents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
-- Let `incorrect` mean SHOULD NOT; as in, incorrect behaviour comes close to violating the standard. 
+- Let `incorrect` mean MUST NOT; as in, incorrect behaviour comes close to violating the standard. 
 - Let `i<int>` represent 2^int-1. Some examples (and the important ones) are as follows;
     - `i6` equals `63`
     - `i8` equals `255`
