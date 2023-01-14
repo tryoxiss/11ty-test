@@ -1,5 +1,7 @@
 --- 
 title: Title Two
+
+date: 2022-01-10
 --- 
 
 my seccond post
@@ -32,8 +34,20 @@ This is a paragraph with a very gay cat emoji in it <img draggable="false" class
 
 <img draggable="false" class="emoji custom-emoji" alt=":random_picsum_emoji:" title=":random_picsum_emoji:" src="https://picsum.photos/128/128" data-original="https://picsum.photos/1920/1080" data-static="https://picsum.photos/1920/1080">
 
+## Spells
+
+lorem32
+
+\<span class="h2-reminder">Spells</span>
+### Fireball {#fireball}
+<span class="h2-subhead">Level 4 <span class="red-2">FIRE</span></span>
+
 :text:
 :heart:
+
+- [ ] testing
+- [x] checklists
+- [ ] owo
 
 <img src="https://picsum.photos/1920/1080" alt="Random image from https://picsum.photos . The image will be 1920 by 1080.">
 

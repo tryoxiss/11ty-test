@@ -2,6 +2,8 @@
 author: tryoxiss
 title: Python Basics
 code_language: py
+
+date: 2022-01-12
 ---
 
 > [!info] 

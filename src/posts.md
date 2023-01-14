@@ -4,7 +4,7 @@ layout: "listout.njk"
 eleventyExcludeFromCollections: true
 --- 
 
-{% for posts in collections.posts %}
+{% for posts in collections.posts limit:30 %}
 
 <div class="code-toolbar">
 <a class="postcard" href="{{posts.url}}"> 
