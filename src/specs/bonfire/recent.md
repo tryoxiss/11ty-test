@@ -29,6 +29,8 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 
 ## Definitions
 
+Let the keywords that follow be case insensative unless otherwise specified. 
+
 - Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivalents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
 - Let `incorrect` mean MUST NOT; as in, incorrect behaviour violates the standard.
 - Let `i<int>` represent 2^int-1. Some examples (and the important ones) are as follows;
@@ -40,7 +42,7 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 - Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
-- Let `CID` and `cid` mean the [clean ID system](/specs/cid/recent/).
+- Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).
 
 ## Design Philosophy 
 
