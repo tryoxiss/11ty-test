@@ -2,24 +2,21 @@
 
 module.exports = function 
 (eleventyConfig) { 
-    eleventyConfig.addPassthroughCopy("./src/res/style.css");
+    // eleventyConfig.addPassthroughCopy("./src/res/style.css");
     
-    eleventyConfig.addPassthroughCopy("./src/res/prism.css");
-    eleventyConfig.addPassthroughCopy("./src/res/prism.js");
+    // eleventyConfig.addPassthroughCopy("./src/res/prism.css");
+    // eleventyConfig.addPassthroughCopy("./src/res/prism.js");
 
-    eleventyConfig.addPassthroughCopy("./src/index.html");
+    // eleventyConfig.addPassthroughCopy("./src/index.html");
 
-    eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-dark.svg");
-    eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-light.svg");
+    // eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-dark.svg");
+    // eleventyConfig.addPassthroughCopy("./src/res/svg/close-buttons-light.svg");
 
-    eleventyConfig.addPassthroughCopy("./src/res/ico/favicon.ico");
+    // eleventyConfig.addPassthroughCopy("./src/res/ico/favicon.ico");
+
+    eleventyConfig.addPassthroughCopy("./src/res/");
 
     // eleventyConfig.addPassthroughCopy("./src/404.md");
-
-    eleventyConfig.addPassthroughCopy("res")
-
-    // For images
-    eleventyConfig.addPassthroughCopy({ "notes/img_post": "img_post" });
 
     // https://dev.to/giulia_chiola/add-html-classes-to-11ty-markdown-content-18ic {
     // const markdownIt = require('markdown-it')
