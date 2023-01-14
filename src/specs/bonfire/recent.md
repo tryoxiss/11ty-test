@@ -42,11 +42,15 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 - **Privacy**: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages. 
 - **Prevent Consolidation**: We don't want this to end up like email, where you *can* self host and join a smaller provider, but good luck with all the limitations in place.
 
+## Conventions followed
+
+- Variables and XML Objects will be denoted in snake case. Variables in code which remain constant should be all capitalised. 
+
 ## Objects
 
 ### Accounts
 
-An account is an object that represents a `Person` in nature. Its XML Object is as follows: 
+An account is an object that represents a `person` in nature. Its XML Object is as follows: 
 
 ```xml
 <account type="person">
@@ -54,7 +58,7 @@ An account is an object that represents a `Person` in nature. Its XML Object is 
         though we reccommend you use integrations instead -->
     <display_name>I am an ACTOR</display_name>
     <username>actor</username>
-    <hash>1234</hash>
+    <tag>1234</tag>
     <instance>example.net</instance>
 
     <handle>@actor#1234@example.net</handle>
