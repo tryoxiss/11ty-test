@@ -5,6 +5,9 @@ author: Tryoxiss
 date: 2022-01-13
 ---
 
+> [!info]
+> *This is a written text-based article. However, if you would prefer a video guide, [Install Linux instead of Windows 11](https://www.youtube.com/watch?v=_Ua-d9OeUOg) is a good guide. This is much more comprehensive, but they cover largely the same stuff (except they use Pop_OS! instead of fedora) when installing and inital setup.*
+
 Ok, if you're here I think its fairly safe to say your frustrated with your walled garden of choice, be it MacOS or Windows, and want to try something more open. Well, your in luck, because this guide will cover everyting you should need to know to get started with linux, it's really not that complex! Its a bit lengthly because I will be giving explanations on things, so you are better equipped to deal with things down the road. 
 
 This should be fairly non-technical but I will use some stuff here and there, but I will explain what it all means.
@@ -75,11 +78,9 @@ Drawing and Photo Editing:
 - [GIMP](https://www.gimp.org/) (GNU Image Manipulation Program), is, in my huble opinion, just better than photoshop. In most ways. It has a bit of a diffrent workflow, but is ultimately very good at what it does!
 - [Krita](https://krita.org/en/) is an amazing drawing software, entirely free and open source. It's actually one of the most popular, even on windows!
 
-## Hello Terminal, My Old Friend
+## Getting your applications
 
-The terminal is a big part of linux, but don't worry--you almost never need to interact with it!
 
-It is, however quite a powerful tool. 
 
 -- Software Repos
 --- Package Managers

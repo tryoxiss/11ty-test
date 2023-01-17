@@ -1,8 +1,11 @@
 --- 
 title: Title Two
+# eleventyExcludeFromCollections: true
 
 date: 2022-01-10
 --- 
+
+**This post exists to be a typography and markdown test for 11ty. This is NOT INTENDED to be read as a proper post.**
 
 my seccond post
 

@@ -42,11 +42,11 @@ Let the keywords that follow be case insensative unless otherwise specified.
 - Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
-- Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).
+- ~~Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).~~
+- Let `GUID` and `UUID` represnet a [Universually Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier). 
 - Let the character sets `reserved`, `escaped`, `delims`, `unwise`, `lowalpha`, `upalpha`, `alpha`, `digit`, `alphanum`, `mark` and `unreserved` are to be defined as in [RFC:2396](https://www.ietf.org/rfc/rfc2396.txt). This is only when these keywords are in refrence to a **character set**.
 - Let `inalpha` represent the character set including `upalpha` and `lowalpha`, where no distinction is made between uppercase and lowercase. ("A" is the same as "a").
 - Let the character set `safe` be the culmination of `inalpha` and `digit` and the characters `_` and `-`. 
-- Let `cid char` equal `alpha` + `digit` + `_` + `-`. 
 
 ## Design Philosophy 
 
@@ -84,7 +84,7 @@ An account is an object that represents a `person` in nature. Its XML Object is 
 
     <handle>@actor#1234@example.net</handle>
 
-    <cid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</cid>
+    <guid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</guid>
 
     <last_edited unit="s">1673395864</last_edited>
     <!-- UNIX Timestamp in secconds.  -->
@@ -111,16 +111,16 @@ An account is an object that represents a `person` in nature. Its XML Object is 
     </status>
 
     <friends visibility="friends">
-        <user handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:" />
+        <user handle="@khaim#0919@instance.tld" guid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:" />
     </friends>
 
     <blocked visibility="owner">
-        <user handle="@jerk#0001@somethingbad.social" cid="nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c" />
+        <user handle="@jerk#0001@somethingbad.social" guid="nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c" />
         <instance domain="somethingbad.social" />
     </blocked>
 
     <hubs visibility="shared_and_friend">
-        <hub cid="hub:012a:2918:asd1:jq:sad::example.net"></hub>
+        <hub guid="hub:012a:2918:asd1:jq:sad::example.net"></hub>
     </hubs>
 
     <pronouns summary="she/they" visibility="anyone">
@@ -148,17 +148,11 @@ An account is an object that represents a `person` in nature. Its XML Object is 
 ```
 *We suggest you store this data minified in a deployed server, as it can get bulky with all the indents.*
 
-XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/), 
+XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/). 
+
+For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change thier username. Thier GUID is thier GUID for life unless reset*) will be fed in to create a GUIDv5. The users defult tag is generated with the first 14 bytes from thier guid, if the tag would be `0000`, or is above `#9999`, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be `#0001`. if it goes above, until the end, then they are instead automatically assigned the tag `#9999`. 
 
 When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub. 
-
-A user's CID is 8 segments long. For this example we will analyse `0s9h:3t0r:mqcs:xzpy:vwfg99:5d0s:zd0fg:7z9o`
-
-- The first 4 segments denote the first 16 characters displayed as safe of the ??? of the UNIX timestamp to millaseccond percision that they joined on, dis
-- The following 3 segments denote the first 12 characters of the ??? hash of current instance instances domain (e.g., ??? hash of "example.com").
-- The final segment is a rabdom number generated based on the conbined string of your countrys code and the current timezone your computer is set to. [!CHANGE MAYBE!]
-
-This has a small, but existent chance for collisions, due to seeding. Which means that ALL IDs must be checked before going through. If a collision woulf occur, simply automatically send the request again as soon as it recives the denined response, it can simply resend it. This can occuur up to thirty times before giving a "Singup Failed" response to the user.
 
 ```plaintext
 @username
@@ -199,12 +193,10 @@ Bonfire uses a protocol similar to [Diaspora*](https://diaspora.github.io/diaspo
 
 The `bonfire://` URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in **packets** instead. However, they can include links *to* actions like joining a hub or being an invite. 
 
-Generally, it follows a `action:what:details` scheme, however when CIDs are involved they are instead surrounded by forward slashes. 
-
-Hub CIDs MUST include the instance at the begining in the following format: `CID:sub.domain.tld`. This allows URIs to be cleaner. 
+Generally, it follows a `action:what:details` scheme, however when UUIDs are involved they are instead surrounded by forward slashes. 
 
 ```
-bonfire://invite/cid
+bonfire://invite/guid
 
 ( bonfire://invite/1233:45::671: )
 ( bonfire://invite/13fg:45::6io: )
@@ -214,6 +206,6 @@ bonfire://view:@username#0000@instance.tld
 ( bonfire://view:@tryoxiss#8100@bonfire.example.net )
 ( bonfire://view:@khaim#0919@app.instance.tld )
 
-bonfire://view/cid#channel
+bonfire://view/guid#channel
 ```
 
