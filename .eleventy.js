@@ -1,9 +1,4 @@
-// Import prior to `module.exports` within `.eleventy.js`
-// const { DateTime } = require("luxon");
 
-// eleventyConfig.addFilter("postDate", (dateObj) => {
-//   return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
-// });
 
 module.exports = function 
 (eleventyConfig) { 
@@ -22,6 +17,21 @@ module.exports = function
     eleventyConfig.addPassthroughCopy("./src/res/");
 
     // eleventyConfig.addPassthroughCopy("./src/404.md");
+
+    // https://dev.to/giulia_chiola/add-html-classes-to-11ty-markdown-content-18ic {
+    // const markdownIt = require('markdown-it')
+    // const markdownItAttrs = require('markdown-it-attrs')
+
+    // const markdownItOptions = {
+    // html: true,
+    // breaks: true,
+    // linkify: true
+    // }
+
+    // const markdownLib = markdownIt(markdownItOptions).use(markdownItAttrs)
+    // eleventyConfig.setLibrary('md', markdownLib)
+    // esc };
+
 
     // https://dev.to/giulia_chiola/add-html-classes-to-11ty-markdown-content-18ic {
     // const markdownIt = require('markdown-it')
