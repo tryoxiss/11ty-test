@@ -2,6 +2,8 @@
 title: Characters!
 author: tryoxiss
 
+eleventyExcludeFromCollections: true # Reason: DRAFT
+
 date: 2022-01-12
 ---
 

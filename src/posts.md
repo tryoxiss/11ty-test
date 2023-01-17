@@ -4,12 +4,16 @@ layout: "listout.njk"
 eleventyExcludeFromCollections: true
 --- 
 
+{% for posts in collections.posts limit:30 reversed %}
+<!-- class="code-toolbar"  -->
+<div class="postcard">
+<a href="{{posts.url}}"> 
 {% for posts in collections.posts limit:30 %}
 
 <div class="code-toolbar">
 <a class="postcard" href="{{posts.url}}"> 
     <h2>{{ posts.data.title }}</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam accusamus quos magni molestias deleniti. Blanditiis numquam, id eveniet doloribus impedit voluptas veritatis temporibus, commodi illo, quod magnam quibusdam quisquam ea reiciendis totam.</p>
+    <p>(IDK how to have a preview yet)</p>
 </a>
 </div>
 

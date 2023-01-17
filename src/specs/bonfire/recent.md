@@ -15,7 +15,21 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
     <p>it is not finished and is due for many, many revisions down the road. </p>
 </blockquote>
 
+<blockquote class="callout callout--warning">
+    <!-- <svg src="/_shared-content/lucide/alert-triangle.svg" color="red"></svg> -->
+    <div class="callout__header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path><path d="M14 2v6h6"></path><path d="m3 12.5 5 5"></path><path d="m8 12.5-5 5"></path></svg>
+        <p>Dependy Issue</p>
+    </div>
+    <p>This specification seems to refrence or cite 1 or more speicfications that appear to be missing. These issues must be resolved before 1.0. A list can be found below: </p>
+    <ul style="margin-top: -1rem;">
+        <li>Clean ID System</li>
+    </ul>
+</blockquote>
+
 ## Definitions
+
+Let the keywords that follow be case insensitive unless otherwise specified. 
 
 - Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivalents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
 - Let `incorrect` mean MUST NOT; as in, incorrect behaviour violates the standard.
@@ -24,11 +38,15 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
     - `i8` equals `255`
     - `i16` equals `65,535`
     - `i32` equals `2,147,483,647`
-    - `i64` equals approxamtely `1.844674407×10¹⁹`
-- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
+    - `i64` equals approximately `1.844674407×10¹⁹`
+- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
-- Let `CID` and `cid` mean the [clean ID system](/specs/cid/recent/).
+- ~~Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).~~
+- Let `GUID` and `UUID` represent a [Universally Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier). 
+- Let the character sets `reserved`, `escaped`, `delims`, `unwise`, `lowalpha`, `upalpha`, `alpha`, `digit`, `alphanum`, `mark` and `unreserved` are to be defined as in [RFC:2396](https://www.ietf.org/rfc/rfc2396.txt). This is only when these keywords are in reference to a **character set**.
+- Let `inalpha` represent the character set including `upalpha` and `lowalpha`, where no distinction is made between uppercase and lowercase. ("A" is the same as "a").
+- Let the character set `safe` be the culmination of `inalpha` and `digit` and the characters `_` and `-`. 
 
 ## Design Philosophy 
 
@@ -42,15 +60,18 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 - **Privacy**: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages. 
 - **Prevent Consolidation**: We don't want this to end up like email, where you *can* self host and join a smaller provider, but good luck with all the limitations in place.
 
+Other, smaller goals are to make it extensible so at no point will there ever be breaking changes (No "bonfire 2.0"). While we cannot guarantee this, a finished 1.0 spec should be backwards compatible for at least the next 30 years, while still being able to add support for new features. 
+
 ## Conventions followed
 
-- Variables and XML Objects will be denoted in snake case. Variables in code which remain constant should be all capitalised. 
+- Variables and XML Objects will be denoted in snake case. (`variable_name`)
+- Variables in code which remain constant should be all capitalised. (`VARIABLE_NAME`)
 
 ## Objects
 
 ### Accounts
 
-An account is an object that represents a `person` in nature. Its XML Object is as follows: 
+An account is an object that represents a `person` in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a `visibility` field cannot have its visibility edited. 
 
 ```xml
 <account type="person">
@@ -63,12 +84,12 @@ An account is an object that represents a `person` in nature. Its XML Object is 
 
     <handle>@actor#1234@example.net</handle>
 
-    <cid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</cid>
+    <guid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</guid>
 
     <last_edited unit="s">1673395864</last_edited>
     <!-- UNIX Timestamp in secconds.  -->
 
-    <bio language="en" encoding="UTF-8">
+    <bio language="en" encoding="UTF-8" visibility="friends">
     Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!
     </bio>
 
@@ -82,35 +103,35 @@ An account is an object that represents a `person` in nature. Its XML Object is 
     <primary_color>#512BD4</primary_color>
     <username_color>#512BD4</username_color>
 
-    <status>
+    <status visibility="anyone">
         <!-- Valid Values: online, offline, away, idle, do not disturb -->
         <type>online</type>
         <emoji>:rainbow_flag:</emoji>
         <text>Being gay on example.net</text>
     </status>
 
-    <friends>
-        <user handle="@khaim#0919@instance.tld" cid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:" />
+    <friends visibility="friends">
+        <user handle="@khaim#0919@instance.tld" guid="000000000-0000-5000-0000-000000000000" nickname="Khaim :heart:" />
     </friends>
 
-    <blocked>
-        <user handle="@jerk#0001@conservative.social" cid="nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c" />
+    <blocked visibility="owner">
+        <user handle="@jerk#0001@somethingbad.social" guid="000000000-0000-5000-0000-000000000000" />
         <instance domain="somethingbad.social" />
     </blocked>
 
-    <hubs>
-        <hub cid="hub:012a:2918:asd1:jq:sad::example.net"></hub>
+    <hubs visibility="shared_and_friend">
+        <hub guid="000000000-0000-5000-0000-000000000000"></hub>
     </hubs>
 
-    <pronouns>
-    she/they
+    <pronouns summary="she/they" visibility="anyone">
         <o>she/her</o>
         <o>they/them</o>
     </pronouns>
 
-    <links>
-        <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.-->
-        <link rel="me" icon="peertube">@username@joinpeertube.org</link> <!-- This is VERIFIED because it has rel="me" -->
+    <links visibility="friends">
+        <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to their bonfire account publicly on the linked account. -->
+        <link rel="me" icon="peertube" visbility="everyone">@username@joinpeertube.org</link> <!-- This is VERIFIED because it has rel="me" -->
+        <!-- THIS connection will override the whole links setting. -->
 
         <!-- The user can specify which icon to use, we recommend you use https://simpleicons.org for the icons.
              If no icon is specified and the network is unrecongnised, use the favicon instead -->
@@ -119,14 +140,17 @@ An account is an object that represents a `person` in nature. Its XML Object is 
     <public_key>999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6</public_key>
     <!-- This key is arbitrary, but it is a 128 Hex Public Key-->
 
-    <prefrences scope="to_owner_only">
+    <prefrences visibility="owner">
+        <!-- Owner (account owner), shared_and_friend (if the friend or hub is mutual, and you are friends with them), Friends, shared (if the friend or hub is mutual), Anyone not blocked (`unblocked`), Everyone-->
         ...
     </prefrences>
 </account>
 ```
 *We suggest you store this data minified in a deployed server, as it can get bulky with all the indents.*
 
-XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/), 
+XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/). 
+
+For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 14 bytes from their guid, if the tag would be `0000`, or is above `#9999`, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be `#0001`. if it goes above, until the end, then they are instead automatically assigned the tag `#9999`. 
 
 When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub. 
 
@@ -137,22 +161,28 @@ When mentioning users, any of the following structures can be used, as long as o
 @username#1234@example.net
 ```
 
+an account suspended by the instance will add the `suspended` keyword to the `<account>` object, such as `<account type="person" suspended>`. 
+
+When an account is suspended, all mentions of them should display as `@suspended#0000`. 
+
+Deleted accounts should instead be removed from the database entirely, and their mentions should be replaced with `@unknown#0000`. If they simply moved to another instance, their mentions should update accordingly.
+
 ### Messages
 
 A status object can represent a reaction, message, creation, or anything else that is not a `person` or `bot` in nature.
 
 ```xml
-<msg>
+<message>
     <author>@actor#1234@example.net</author>
     <reactions>
-        <o emoji=":rainbow_flag:" count="3" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net]"/>
-        <o emoji=":heart:" count="5" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net], @purr#8888@kitties.social, @neko#1111, @kitties.social"/>
+        <:rainbow_flag: count="3" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net]"/>
+        <:heart: count="5" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net], @purr#8888@kitties.social, @neko#1111, @kitties.social"/>
     </reactions>
     <content>hello this is my message content</content>
     <created>1673475563</created>
     <edited>1673475591</edited>
     <signature>(whatever a signature looks like)</signature>
-</msg>
+</message>
 ```
 
 ## Federation 
@@ -161,14 +191,12 @@ Bonfire uses a protocol similar to [Diaspora*](https://diaspora.github.io/diaspo
 
 ## URI Scheme
 
-The `bonfire://` URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in __packets__ instead. However, they can include links *to* actions like joining a hub or being an invite. 
+The `bonfire://` URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in **packets** instead. However, they can include links *to* actions like joining a hub or being an invite. 
 
-Generally, it follows a `action:what:details` scheme, however when CIDs are involved they are instead surrounded by forward slashes. 
-
-Hub CIDs MUST include the instance at the begining in the following format: `CID:sub.domain.tld`. This allows URIs to be cleaner. 
+Generally, it follows a `action:what:details` scheme, however when UUIDs are involved they are instead surrounded by forward slashes. 
 
 ```
-bonfire://invite/cid/instance.tld
+bonfire://invite/guid
 
 ( bonfire://invite/1233:45::671: )
 ( bonfire://invite/13fg:45::6io: )
@@ -178,5 +206,6 @@ bonfire://view:@username#0000@instance.tld
 ( bonfire://view:@tryoxiss#8100@bonfire.example.net )
 ( bonfire://view:@khaim#0919@app.instance.tld )
 
-bonfire://view/cid#channel
+bonfire://view/guid#channel
 ```
+
