@@ -74,7 +74,7 @@ Other, smaller goals are to make it extensible so at no point will there ever be
 An account is an object that represents a `person` in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a `visability` field cannot have its visibility edited. 
 
 ```xml
-<account type="person">
+<account type="person" guid="000000000-0000-5000-0000-000000000000">
     <!-- You can specify a bot account with type="bot"; 
         though we reccommend you use integrations instead -->
     <display_name>I am an ACTOR</display_name>
@@ -83,8 +83,6 @@ An account is an object that represents a `person` in nature. Its XML Object is 
     <instance>example.net</instance>
 
     <handle>@actor#1234@example.net</handle>
-
-    <guid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</guid>
 
     <last_edited unit="s">1673395864</last_edited>
     <!-- UNIX Timestamp in secconds.  -->

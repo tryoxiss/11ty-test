@@ -60,11 +60,11 @@
 <li>Let <code>XML Object</code> represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16.</li>
 <li>Let <code>packet</code> represent one XML object sent between a client-server, or server-server relationship.</li>
 <li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
-<li>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</li>
+<li><s>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</s></li>
+<li>Let <code>GUID</code> and <code>UUID</code> represnet a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">Universually Unique Identifier</a>.</li>
 <li>Let the character sets <code>reserved</code>, <code>escaped</code>, <code>delims</code>, <code>unwise</code>, <code>lowalpha</code>, <code>upalpha</code>, <code>alpha</code>, <code>digit</code>, <code>alphanum</code>, <code>mark</code> and <code>unreserved</code> are to be defined as in <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC:2396</a>. This is only when these keywords are in refrence to a <strong>character set</strong>.</li>
 <li>Let <code>inalpha</code> represent the character set including <code>upalpha</code> and <code>lowalpha</code>, where no distinction is made between uppercase and lowercase. (&quot;A&quot; is the same as &quot;a&quot;).</li>
 <li>Let the character set <code>safe</code> be the culmination of <code>inalpha</code> and <code>digit</code> and the characters <code>_</code> and <code>-</code>.</li>
-<li>Let <code>cid char</code> equal <code>alpha</code> + <code>digit</code> + <code>_</code> + <code>-</code>.</li>
 </ul>
 <h2>Design Philosophy</h2>
 <p>*Some of the following definitions are from <a href="https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/">ariadne.space's post on ActivityPub's design falings</a>.</p>
@@ -86,7 +86,7 @@
 <h2>Objects</h2>
 <h3>Accounts</h3>
 <p>An account is an object that represents a <code>person</code> in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a <code>visability</code> field cannot have its visibility edited.</p>
-<pre><code class="language-xml">&lt;account type=&quot;person&quot;&gt;
+<pre><code class="language-xml">&lt;account type=&quot;person&quot; guid=&quot;000000000-0000-5000-0000-000000000000&quot;&gt;
     &lt;!-- You can specify a bot account with type=&quot;bot&quot;; 
         though we reccommend you use integrations instead --&gt;
     &lt;display_name&gt;I am an ACTOR&lt;/display_name&gt;
@@ -95,8 +95,6 @@
     &lt;instance&gt;example.net&lt;/instance&gt;
 
     &lt;handle&gt;@actor#1234@example.net&lt;/handle&gt;
-
-    &lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;
 
     &lt;last_edited unit=&quot;s&quot;&gt;1673395864&lt;/last_edited&gt;
     &lt;!-- UNIX Timestamp in secconds.  --&gt;
@@ -123,16 +121,16 @@
     &lt;/status&gt;
 
     &lt;friends visibility=&quot;friends&quot;&gt;
-        &lt;user handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot; /&gt;
+        &lt;user handle=&quot;@khaim#0919@instance.tld&quot; guid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot; /&gt;
     &lt;/friends&gt;
 
     &lt;blocked visibility=&quot;owner&quot;&gt;
-        &lt;user handle=&quot;@jerk#0001@somethingbad.social&quot; cid=&quot;nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c&quot; /&gt;
+        &lt;user handle=&quot;@jerk#0001@somethingbad.social&quot; guid=&quot;nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c&quot; /&gt;
         &lt;instance domain=&quot;somethingbad.social&quot; /&gt;
     &lt;/blocked&gt;
 
     &lt;hubs visibility=&quot;shared_and_friend&quot;&gt;
-        &lt;hub cid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;
+        &lt;hub guid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;
     &lt;/hubs&gt;
 
     &lt;pronouns summary=&quot;she/they&quot; visibility=&quot;anyone&quot;&gt;
@@ -159,15 +157,9 @@
 &lt;/account&gt;
 </code></pre>
 <p><em>We suggest you store this data minified in a deployed server, as it can get bulky with all the indents.</em></p>
-<p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>,</p>
+<p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>.</p>
+<p>For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change thier username. Thier GUID is thier GUID for life unless reset*) will be fed in to create a GUIDv5. The users defult tag is generated with the first 14 bytes from thier guid, if the tag would be <code>0000</code>, or is above <code>#9999</code>, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be <code>#0001</code>. if it goes above, until the end, then they are instead automatically assigned the tag <code>#9999</code>.</p>
 <p>When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub.</p>
-<p>A user's CID is 8 segments long. For this example we will analyse <code>0s9h:3t0r:mqcs:xzpy:vwfg99:5d0s:zd0fg:7z9o</code></p>
-<ul>
-<li>The first 4 segments denote the first 16 characters displayed as safe of the ??? of the UNIX timestamp to millaseccond percision that they joined on, dis</li>
-<li>The following 3 segments denote the first 12 characters of the ??? hash of current instance instances domain (e.g., ??? hash of &quot;example.com&quot;).</li>
-<li>The final segment is a rabdom number generated based on the conbined string of your countrys code and the current timezone your computer is set to. [!CHANGE MAYBE!]</li>
-</ul>
-<p>This has a small, but existent chance for collisions, due to seeding. Which means that ALL IDs must be checked before going through. If a collision woulf occur, simply automatically send the request again as soon as it recives the denined response, it can simply resend it. This can occuur up to thirty times before giving a &quot;Singup Failed&quot; response to the user.</p>
 <pre><code class="language-plaintext">@username
 @username#1234
 @username@example.net
@@ -194,9 +186,8 @@
 <p>Bonfire uses a protocol similar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
 <h2>URI Scheme</h2>
 <p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
-<p>Generally, it follows a <code>action:what:details</code> scheme, however when CIDs are involved they are instead surrounded by forward slashes.</p>
-<p>Hub CIDs MUST include the instance at the begining in the following format: <code>CID:sub.domain.tld</code>. This allows URIs to be cleaner.</p>
-<pre><code>bonfire://invite/cid
+<p>Generally, it follows a <code>action:what:details</code> scheme, however when UUIDs are involved they are instead surrounded by forward slashes.</p>
+<pre><code>bonfire://invite/guid
 
 ( bonfire://invite/1233:45::671: )
 ( bonfire://invite/13fg:45::6io: )
@@ -206,7 +197,7 @@ bonfire://view:@username#0000@instance.tld
 ( bonfire://view:@tryoxiss#8100@bonfire.example.net )
 ( bonfire://view:@khaim#0919@app.instance.tld )
 
-bonfire://view/cid#channel
+bonfire://view/guid#channel
 </code></pre>
 
     </main>
