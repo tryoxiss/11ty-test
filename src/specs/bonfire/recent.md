@@ -29,7 +29,7 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 
 ## Definitions
 
-Let the keywords that follow be case insensative unless otherwise specified. 
+Let the keywords that follow be case insensitive unless otherwise specified. 
 
 - Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivalents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
 - Let `incorrect` mean MUST NOT; as in, incorrect behaviour violates the standard.
@@ -38,13 +38,13 @@ Let the keywords that follow be case insensative unless otherwise specified.
     - `i8` equals `255`
     - `i16` equals `65,535`
     - `i32` equals `2,147,483,647`
-    - `i64` equals approxamtely `1.844674407×10¹⁹`
-- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16. 
+    - `i64` equals approximately `1.844674407×10¹⁹`
+- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
 - ~~Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).~~
-- Let `GUID` and `UUID` represnet a [Universually Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier). 
-- Let the character sets `reserved`, `escaped`, `delims`, `unwise`, `lowalpha`, `upalpha`, `alpha`, `digit`, `alphanum`, `mark` and `unreserved` are to be defined as in [RFC:2396](https://www.ietf.org/rfc/rfc2396.txt). This is only when these keywords are in refrence to a **character set**.
+- Let `GUID` and `UUID` represent a [Universally Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier). 
+- Let the character sets `reserved`, `escaped`, `delims`, `unwise`, `lowalpha`, `upalpha`, `alpha`, `digit`, `alphanum`, `mark` and `unreserved` are to be defined as in [RFC:2396](https://www.ietf.org/rfc/rfc2396.txt). This is only when these keywords are in reference to a **character set**.
 - Let `inalpha` represent the character set including `upalpha` and `lowalpha`, where no distinction is made between uppercase and lowercase. ("A" is the same as "a").
 - Let the character set `safe` be the culmination of `inalpha` and `digit` and the characters `_` and `-`. 
 
@@ -60,7 +60,7 @@ Let the keywords that follow be case insensative unless otherwise specified.
 - **Privacy**: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages. 
 - **Prevent Consolidation**: We don't want this to end up like email, where you *can* self host and join a smaller provider, but good luck with all the limitations in place.
 
-Other, smaller goals are to make it extensible so at no point will there ever be breaking changes (No "bonfire 2.0"). While we cannot gaurntee this, a finished 1.0 spec should be backwards compatible for at least the next 30 years, while still being able to add support for new features. 
+Other, smaller goals are to make it extensible so at no point will there ever be breaking changes (No "bonfire 2.0"). While we cannot guarantee this, a finished 1.0 spec should be backwards compatible for at least the next 30 years, while still being able to add support for new features. 
 
 ## Conventions followed
 
@@ -71,7 +71,7 @@ Other, smaller goals are to make it extensible so at no point will there ever be
 
 ### Accounts
 
-An account is an object that represents a `person` in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a `visability` field cannot have its visibility edited. 
+An account is an object that represents a `person` in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a `visibility` field cannot have its visibility edited. 
 
 ```xml
 <account type="person" guid="000000000-0000-5000-0000-000000000000">
@@ -109,16 +109,16 @@ An account is an object that represents a `person` in nature. Its XML Object is 
     </status>
 
     <friends visibility="friends">
-        <user handle="@khaim#0919@instance.tld" guid="l012:l10a:9abc:a::nl:pqrs:92" nickname="Khaim :heart:" />
+        <user handle="@khaim#0919@instance.tld" guid="000000000-0000-5000-0000-000000000000" nickname="Khaim :heart:" />
     </friends>
 
     <blocked visibility="owner">
-        <user handle="@jerk#0001@somethingbad.social" guid="nqlvw:sjifg:yo7h:zh9p:dhya:fg9vwc:q553:fg71c" />
+        <user handle="@jerk#0001@somethingbad.social" guid="000000000-0000-5000-0000-000000000000" />
         <instance domain="somethingbad.social" />
     </blocked>
 
     <hubs visibility="shared_and_friend">
-        <hub guid="hub:012a:2918:asd1:jq:sad::example.net"></hub>
+        <hub guid="000000000-0000-5000-0000-000000000000"></hub>
     </hubs>
 
     <pronouns summary="she/they" visibility="anyone">
@@ -127,7 +127,7 @@ An account is an object that represents a `person` in nature. Its XML Object is 
     </pronouns>
 
     <links visibility="friends">
-        <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.-->
+        <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to their bonfire account publicly on the linked account. -->
         <link rel="me" icon="peertube" visbility="everyone">@username@joinpeertube.org</link> <!-- This is VERIFIED because it has rel="me" -->
         <!-- THIS connection will override the whole links setting. -->
 
@@ -148,7 +148,7 @@ An account is an object that represents a `person` in nature. Its XML Object is 
 
 XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/). 
 
-For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change thier username. Thier GUID is thier GUID for life unless reset*) will be fed in to create a GUIDv5. The users defult tag is generated with the first 14 bytes from thier guid, if the tag would be `0000`, or is above `#9999`, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be `#0001`. if it goes above, until the end, then they are instead automatically assigned the tag `#9999`. 
+For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 14 bytes from their guid, if the tag would be `0000`, or is above `#9999`, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be `#0001`. if it goes above, until the end, then they are instead automatically assigned the tag `#9999`. 
 
 When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub. 
 
@@ -159,11 +159,11 @@ When mentioning users, any of the following structures can be used, as long as o
 @username#1234@example.net
 ```
 
-an account suspended by the instance will add the `suspended` keyword to the `<account>`object, such as `<account type="person" suspended>`. 
+an account suspended by the instance will add the `suspended` keyword to the `<account>` object, such as `<account type="person" suspended>`. 
 
 When an account is suspended, all mentions of them should display as `@suspended#0000`. 
 
-Deleted accounts should instead be removed from the database entirely, and thier mentions should be replaced with `@unknown#0000`. If they simply moved to another instance, thier mentions should update accordingly.
+Deleted accounts should instead be removed from the database entirely, and their mentions should be replaced with `@unknown#0000`. If they simply moved to another instance, their mentions should update accordingly.
 
 ### Messages
 
