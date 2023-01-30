@@ -28,8 +28,8 @@ These attributes do not need to be set when they are just the defult behavour.
 
 - **Burning!**: Quick! Put yourself out! You're on fire!
 - **Grappled**: You don't have free reign of movement, someone is grabbing you!
-- **Nausea**: Unable to eat or drink until the effect ends. 
-    - On Fumble: Puke food and deal 1d4 poison damage. 
+- **Nausea**: Eat or drink at your own risk! Roll 1d6 each time you eat or roll an atheltics check to determine if you fumble. Fumbles from other sources also count.
+    - On Fumble: Puke food and deal 1d4 poison damage. Remove the effects of all the food and drink you have had in the last hour. (Do not remove instant effects, only things with lasting effects).
 
 ## Curses
 - **Cursed: {Curse}**: a
