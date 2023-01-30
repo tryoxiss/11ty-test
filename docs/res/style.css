@@ -622,16 +622,17 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
     background-color: var(--subwindow-bg);
     border-radius: var(--border-subwindow-radius);
     padding: 0.8rem;
+
+    border-bottom: 0;
 }
 
-.postcard > * { 
-    margin: 1rem;
-    margin-top: -0.75rem;
-}
+/* .postcard > * { 
+    /* margin-top: -0.25rem; *
+} */
 
 .postcard h2 { 
     font-size: 1rem; 
-    margin-top: -1.75rem;
+    /* margin-top: -1.75rem; */
     /* margin-left: 4.5rem; */
 }
 
@@ -1262,7 +1263,7 @@ footer ul {
     text-decoration: none;
     border-bottom: 0; 
 
-    color: #4b4b4b; 
+    color: var(--main-bg); 
     background-color: var(--violet-bg);
     padding: .5rem 1rem ;
 
@@ -1287,7 +1288,7 @@ footer ul {
     height: 24px; 
     margin-top: -3px;
 
-    fill: #4b4b4b; 
+    fill: var(--main-bg); 
 }
 
 img { 
@@ -1540,3 +1541,32 @@ footer b {
 
 .primary-nav * { 
     color: var(--text-muted);
+}
+
+
+
+
+
+/* ************** */
+
+
+
+
+.randomword-button {
+    border-color: #ff8ad0;
+    background-color: #413c74;
+    color: #ff8ad0; }
+    .randomword-button.light {
+      border-color: #413c74;
+      background-color: #ffffff;
+      color: #413c74; }
+      .randomword-button.light:hover {
+        color: #ffffff;
+        background-color: #413c74; }
+    .randomword-button:hover {
+      color: #413c74;
+      background-color: #ff8ad0; }
+
+button { 
+    border: 0;
+}

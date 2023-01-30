@@ -133,7 +133,6 @@ Hubs:
 profiles: 
 ```json
 { 
-    { 
     "@context": {
             "spec": "https://tryoxiss.github.io/specs/bonfire/recent/",
             "lang": "en",
@@ -223,12 +222,12 @@ profiles:
     "links": [{ 
             "rel": "nofriend", // UNVERIFIED
             "icon": "mastodon",
-            "icon": "@username@example.social", 
+            "link": "@username@example.social", 
             "visibility": "everyone",
         }, { 
             "rel": "me", // VERIFIED
             "icon": "peertube",
-            "icon": "@username@joinpeertube.org",
+            "link": "@username@joinpeertube.org",
             "visibility": "everyone",
         },
     ],
