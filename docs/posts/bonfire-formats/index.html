@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picking formats and standards for Bonfire ★ tryoxiss</title>
+
+    <link rel="stylesheet" href="/res/style.css">
+    <link rel="stylesheet" href="/res/prism.css">
+
+    <link rel="icon" href="/res/ico/favicon.ico">
+
+</head>
+
+
+<body class="match-braces language-">
+    <script src="/res/prism.js"></script>
+
+    
+
+    <nav role="primary navigation" class="primary-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li style="margin-left: auto;"><a href="/about/">About</a></li>
+            <li><a href="/projects/">Our Stuff</a></li>
+            <li><a href="/links/">Our Links</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+        
+        <h1>Picking formats and standards for Bonfire</h1>
+
+        <p class="subtitle">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>tryoxiss
+            
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+            
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>11 minute read 
+        </p>
+
+        
+
+        
+    </header>
+    
+    <nav role="related articles" class="glossary">
+        
+    </nav>
+
+    <main>
+        
+        <p>In the process of making a specification for, what is currently known as bonfire (temperary name), a large part is picking formats and standards to use. Let's start with what I am currently working on, which is the data transmission format.</p>
+<h2>Data Transmission Format</h2>
+<p>This is the format that packets are sent as. In the current version, this is XML--but that has some downsides. Notably, it sends a LOT of redundent data, which obviously isn't ideal.</p>
+<p>We initally chose this format, because it is what <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diasporta*</a> (our rough base), used. But the time has come to reconsider our transmission format (the format that we send and recieve data as, databases not may, WILL, store it diffrently).</p>
+<p>So what exactly <strong>do we want</strong> out of our data transmission format?</p>
+<ul>
+<li><strong>Lightweight</strong>: It is more important for it to be light than human readable. This means it will likely be binary.</li>
+<li><strong>Partially Human Readable</strong>: If people can't open up thier data and see thier messages in a semi-recigniseable way, it seems like a non-open proprietary format.</li>
+<li><strong>Minimise Redundent Data</strong>: If data dosen't need to be sent twice, it shouldn't be. No more <code>&lt;message&gt; ... &lt;/message&gt;</code>. That's just wasteful.</li>
+<li><strong>No big tech</strong>: The format can't be controlled or maintained by big tech. It needs to be an indevidual, non-profit, W3C, or simillar.</li>
+<li><strong>Wrapable</strong>: Our basic premise relies on sending messages in Magic Envolpes which define who can open them. because of that, all content needs to be nestable to create meaningful useage.</li>
+<li><strong>Minifiable</strong>: The data should be able to be minified to waste no space.</li>
+</ul>
+<p>Other things that are good to have, but not needed:</p>
+<ul>
+<li><strong>Well Established</strong>: This is useful because it decreeses the chances of needing to write your own interpriter.</li>
+<li><strong>Supports Comments</strong>: Not very practical in the real world, but it can be very useful for documentation and test servers if they send a response with a comment explaining why.</li>
+<li><strong>Standardised</strong>: This makes interpriters easier to find and use, but it also has the disadvantage of making it harder to modify to our needs.</li>
+<li><strong>No JSON</strong>: JavaScript Standard Object Notation is just ugly. There's no denying it. It also sends useless data with the quotes, dosen't support comments, and is generally hated by most people who use it.</li>
+</ul>
+<h3>Why not make your own?</h3>
+<p>As mentioned, it makes it harder to find interpriters for it. Also I really want to.</p>
+<h3>Why we made our own.</h3>
+<p>Simple: nothing fit all our required needs. (Please note: Signauter is EMPTY for now).</p>
+<p>Create a message:</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: {
+            &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+            &quot;lang&quot;: &quot;en&quot;,
+        },
+    &quot;request&quot;: &quot;CREATE&quot;,
+    &quot;type&quot;: &quot;message&quot;,
+    &quot;author&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+    &quot;adressed&quot;: [&quot;000000000-0000-5000-0000-000000000000&quot;, &quot;000000000-0000-5000-0000-000000000000&quot;], 
+    &quot;content&quot;: &quot;What does the message contain? Remember to escape doubble quotes with a backslash! \\! if the server recieves an invalid object, it will ignore it!&quot;,
+    &quot;time&quot;: &quot;1673475563&quot;,
+    &quot;signature&quot;: &quot;&quot;
+}
+</code></pre>
+<p>Edit a message:</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: {
+            &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+            &quot;lang&quot;: &quot;en&quot;,
+        },
+    &quot;request&quot;: &quot;EDIT&quot;,
+    &quot;type&quot;: &quot;message&quot;,
+    &quot;author&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+    &quot;editable_id&quot;: &quot;000000000-0000-5000-0000-000000000110&quot;,
+    &quot;content&quot;: &quot;I am trying to edit this message!&quot;,
+    &quot;time&quot;: &quot;1673475591&quot;,
+    &quot;signature&quot;: &quot;&quot;
+}
+</code></pre>
+<p>This way, the database can just add them for thier own things instead of sending it again.</p>
+<p>For reactions, the only content should be the emoji you wish to add. Any other requests will be ignored. They also don't need a timestamp.</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: {
+            &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+            &quot;lang&quot;: &quot;en&quot;,
+        },
+    &quot;request&quot;: &quot;CREATE&quot;,
+    &quot;type&quot;: &quot;reaction&quot;,
+    &quot;author&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+    &quot;content&quot;: &quot;♥️&quot;,
+    &quot;signature&quot;: &quot;&quot;
+}
+</code></pre>
+<p>Statuses (plain and rich):</p>
+<p>Ok, so we have seen what it looks like with smaller requests, but what about returning data? Well, for that we wrap it with a <code>&quot;request&quot;: &quot;RETURN&quot;</code> (for raw data).</p>
+<p>Hubs:</p>
+<pre><code class="language-json">{ 
+    { 
+    &quot;@context&quot;: {
+            &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+            &quot;lang&quot;: &quot;en&quot;,
+        },
+
+    &quot;guid&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+
+    &quot;display_name&quot;: &quot;Alice&quot;,
+
+    &quot;roles&quot;: { 
+        &quot;role_name&quot;: { 
+            &quot;color&quot;: &quot;#f00&quot;, 
+            &quot;badge&quot;: &quot;moderator&quot;,
+            &quot;permissions&quot;: { 
+                &quot;delete_messages&quot;: true,
+                &quot;display_seperatly&quot;: true,
+            },
+        },
+    },
+
+    &quot;channels&quot;: { 
+        &quot;#channel1&quot;: { 
+            &quot;guid&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+            &quot;roles&quot;: { 
+                &quot;role_name&quot; { 
+                    &quot;permission1&quot;: true,
+                }
+            }, 
+
+            &quot;description&quot;: &quot;A channel!&quot;,
+            &quot;type&quot;: &quot;text&quot;,
+        }
+    }
+}
+</code></pre>
+<p>profiles:</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: {
+            &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+            &quot;lang&quot;: &quot;en&quot;,
+        },
+    &quot;guid&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+    
+    &quot;display_name&quot;: &quot;Alice&quot;,
+
+    &quot;handle&quot;: { 
+        &quot;username&quot;: &quot;alice&quot;,
+        &quot;tag&quot;: &quot;0001&quot;,
+        &quot;instance&quot;: &quot;example.social&quot;,
+    }, 
+
+    &quot;icon&quot;: { 
+        &quot;full&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&quot;,
+        &quot;255&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&quot;,
+        &quot;90&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&quot;,
+        &quot;40&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&quot;,
+    },
+
+    &quot;banner&quot;: { 
+        &quot;full&quot;: &quot;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&quot;,
+    },
+
+    &quot;colors&quot;: { 
+        &quot;primary&quot;: &quot;#512BD4&quot;,
+        &quot;username&quot;: &quot;#512BD4&quot;,
+    },
+
+    &quot;status&quot;: { 
+        &quot;visibility&quot;: &quot;friends&quot;,
+        &quot;type&quot;: &quot;plain&quot;,
+        &quot;activity&quot;: &quot;online&quot;,
+        &quot;emoji&quot;: &quot;♥️&quot;, 
+        &quot;text&quot;: &quot;Avatar!&quot;,
+    },
+
+    &quot;connections&quot;: { 
+        // asdasda
+    }, 
+
+    &quot;friends&quot;: [
+        {&quot;visibility&quot;: &quot;everyone&quot;},
+        {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+            &quot;nickname&quot;: &quot;your nick &lt;3&quot;,
+            &quot;note&quot;: &quot;your note on them&quot;, 
+            &quot;other info&quot;: &quot;sotre whatever custom fields you want!&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        },
+    ],
+
+    &quot;blocked&quot;: [{
+            &quot;guid&quot;: &quot;GUID1&quot;,
+            &quot;note&quot;: &quot;your note on them&quot;, 
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }],
+
+    &quot;hubs&quot;: [
+        {&quot;visibility&quot;: &quot;friend_and_mutual&quot;},
+        {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        },
+    ],
+
+    &quot;pronouns&quot;: [&quot;she/they&quot;, &quot;she/her&quot;, &quot;they/them&quot;],
+    // the frist one is shown, then seperated by slashes and when hovered it will show the one at that index
+    // So if you have &quot;she/they&quot; and you hover &quot;she&quot; with the array above, it will show a tooltip saying &quot;she/her&quot;
+
+    &quot;links&quot;: [{ 
+            &quot;rel&quot;: &quot;nofriend&quot;, // UNVERIFIED
+            &quot;icon&quot;: &quot;mastodon&quot;,
+            &quot;link&quot;: &quot;@username@example.social&quot;, 
+            &quot;visibility&quot;: &quot;everyone&quot;,
+        }, { 
+            &quot;rel&quot;: &quot;me&quot;, // VERIFIED
+            &quot;icon&quot;: &quot;peertube&quot;,
+            &quot;link&quot;: &quot;@username@joinpeertube.org&quot;,
+            &quot;visibility&quot;: &quot;everyone&quot;,
+        },
+    ],
+
+    &quot;public_key&quot;: &quot;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&quot;,
+
+    &quot;prefrences&quot;: {
+        &quot;visibility&quot;: &quot;private&quot;,
+
+        // maybe include ALL visabilities in &quot;prefrences&quot;?
+    }
+}
+</code></pre>
+<p>and the type is <code>&quot;user_data&quot;</code>.
+Data Package:</p>
+
+        
+    </main>
+
+    <nav role="table of contents" class="toc">dasd</nav>
+
+    
+<footer>
+    
+
+    <ul>
+        <li><a href="#" class="dead-link"><b>Credits</b></a></li>
+        <li><a href="https://www.11ty.dev/">11ty</a> (SSG)</li>
+        <li><a href="https://prismjs.com/">prism.js</a> (Syntax Hilighting)</li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><b>Theme</b></li>
+        <li><a href="/specs/milkshake/2.0/" class="dead-link">Milkshake 2.0 Theme</a></li>
+        <li><a href="https://github.com/catppuccin/catppuccin">catppuccin</a></li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><a href="/projects/" class="dead-link"><b>Our Stuff!</b></a></li>
+        <li><a href="/specs/bonfire/">Bonfire</a> Drafts, Project Codename</li>
+    </ul>
+
+    <ul>
+        <li><b>DEBUG</b></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io">Source</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/issues">Issues</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/commit/master">Deployment Status</a></li>
+        <li><a href="/debug/">Build Info</a></li>
+    </ul>
+
+    <br>
+    <p class="subtitle">Most content on this site is copyright &copy; tryoxiss 2022 or later. Feel free to use any of my content without asking though, just credit me and don't use it for any <a href="/dict/profanity/" class="dead-link">profanity</a> and I will probably be good. Though I do reserve the right to make you stop using it at any time for any reason.</p>
+</footer>
+
+</body>
+</html>

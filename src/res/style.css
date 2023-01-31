@@ -265,6 +265,7 @@ body {
 nav { grid-area: navb; }
 main { grid-area: main; }
 .toc { grid-area: toch; }
+.glossary { grid-area: glos; }
 footer { grid-area: foot; }
 header { grid-area: head; }
 
@@ -319,15 +320,33 @@ body {
         grid-template-areas: 
         "navb navb navb navb navb navb navb navb"
         ".... .... head head head head .... ...." 
-        ".... .... main main main main .... ...." 
-        ".... .... foot foot foot foot .... ....";
+        "glos glos main main main main .... ...." 
+        "glos glos foot foot foot foot .... ....";
     }
+}
+
+.glossary { 
+    margin: 1rem;
+    color: var(--text-normal);
+
+    /* border: 1px solid var(--border-color);  */
+    border-radius: var(--border-subwindow-radius);
+
+    background-color: var(--subwindow-bg);
+    padding: 0.5rem;
+
+    height: max-content;
+}
+
+.glossary ul { 
+    margin: 0px;
+    list-style: none;
+    margin-left: -1rem;
 }
 
 body { 
     background-color: var(--base-color);
 }
-
 html { 
     font-family: var(--font-family);
 }
@@ -622,17 +641,18 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
     background-color: var(--subwindow-bg);
     border-radius: var(--border-subwindow-radius);
     padding: 0.8rem;
+
+    border-bottom: 0;
 }
 
-.postcard > * { 
-    margin: 1rem;
-    margin-top: -0.75rem;
-}
+/* .postcard > * { 
+    /* margin-top: -0.25rem; *
+} */
 
 .postcard h2 { 
     font-size: 1rem; 
+    /* margin-top: -1.75rem; */
     margin-top: -1.75rem;
-    /* margin-left: 4.5rem; */
 }
 
 .postcard p { 
@@ -1262,7 +1282,7 @@ footer ul {
     text-decoration: none;
     border-bottom: 0; 
 
-    color: #4b4b4b; 
+    color: var(--main-bg); 
     background-color: var(--violet-bg);
     padding: .5rem 1rem ;
 
@@ -1287,7 +1307,7 @@ footer ul {
     height: 24px; 
     margin-top: -3px;
 
-    fill: #4b4b4b; 
+    fill: var(--main-bg); 
 }
 
 img { 
@@ -1540,4 +1560,51 @@ footer b {
 
 .primary-nav * { 
     color: var(--text-muted);
+}
+
+
+
+
+
+/* ************** */
+
+
+
+
+.randomword-button {
+    border-color: #ff8ad0;
+    background-color: #413c74;
+    color: #ff8ad0; }
+    .randomword-button.light {
+      border-color: #413c74;
+      background-color: #ffffff;
+      color: #413c74; }
+      .randomword-button.light:hover {
+        color: #ffffff;
+        background-color: #413c74; }
+    .randomword-button:hover {
+      color: #413c74;
+      background-color: #ff8ad0; }
+
+button { 
+    border: 0;
+}
+
+/* li::before { 
+    content: '';
+    -webkit-mask: url(/res/svg/alert-circle.svg) no-repeat 50% 50%;
+    mask: url(/res/svg/alert-circle.svg) no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+
+    width: 48px;
+    height: 48px;
+}
+
+li:after {
+    background-color: red;
+} */
+
+ul { 
+    margin-left: -1rem;
 }

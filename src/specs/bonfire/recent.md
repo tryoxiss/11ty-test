@@ -39,7 +39,7 @@ Let the keywords that follow be case insensitive unless otherwise specified.
     - `i16` equals `65,535`
     - `i32` equals `2,147,483,647`
     - `i64` equals approximately `1.844674407×10¹⁹`
-- Let `XML Object` represent one XML tag, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16. 
+- Let `JSON Object`, `Object`, or `Packet` represent one JSON object, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16. 
 - Let `packet` represent one XML object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
 - ~~Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).~~
@@ -69,84 +69,123 @@ Other, smaller goals are to make it extensible so at no point will there ever be
 
 ## Objects
 
+Objects are just how we send stuff store it however you please, ideally SQL. 
+
 ### Accounts
 
 An account is an object that represents a `person` in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a `visibility` field cannot have its visibility edited. 
 
-```xml
-<account type="person">
-    <!-- You can specify a bot account with type="bot"; 
-        though we reccommend you use integrations instead -->
-    <display_name>I am an ACTOR</display_name>
-    <username>actor</username>
-    <tag>1234</tag>
-    <instance>example.net</instance>
+```json
+{ 
+    "@context": {
+        "spec": "https://tryoxiss.github.io/specs/bonfire/recent/",
+        "lang": "en"
+    },
+    
+    "guid": "000000000-0000-5000-0000-000000000000",
+    
+    "display_name": "Alice",
 
-    <handle>@actor#1234@example.net</handle>
+    "handle": { 
+        "username": "alice",
+        "discriminator": "0001",
+        "instance": "example.social"
+    }, 
 
-    <guid>1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw</guid>
+    "icon": { 
+        "full": "https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png",
+        "255": "https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png",
+        "90": "https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png",
+        "40": "https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png"
+    },
 
-    <last_edited unit="s">1673395864</last_edited>
-    <!-- UNIX Timestamp in secconds.  -->
+    "banner": { 
+        "full": "https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png"
+    },
 
-    <bio language="en" encoding="UTF-8" visibility="friends">
-    Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!
-    </bio>
+    "colors": { 
+        "primary": "#512BD4",
+        "username": "#512BD4"
+    },
 
-    <icon size="full">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png</icon>
-    <icon size="255x255">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png</icon>
-    <icon size="90x90">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png</icon>
-    <icon size="40x40">https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png</icon>
+    "status": { 
+        "visibility": "friends",
+        "type": "plain",
+        "activity": "online",
+        "emoji": "♥️", 
+        "text": "Avatar!"
+    },
 
-    <banner size="full">https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png</banner>
+    "connections": { 
+        // asdasda
+    }, 
 
-    <primary_color>#512BD4</primary_color>
-    <username_color>#512BD4</username_color>
+    "friends": [
+        {"visibility": "everyone"},
+        {
+            "guid": "GUID1",
+            "nickname": "your nick <3",
+            "note": "your note on them", 
+            "other info": "sotre whatever custom fields you want!"
+        }, {
+            "guid": "GUID2",
+        }, {
+            "guid": "GUID1",
+        }, {
+            "guid": "GUID2",
+        }
+    ],
 
-    <status visibility="anyone">
-        <!-- Valid Values: online, offline, away, idle, do not disturb -->
-        <type>online</type>
-        <emoji>:rainbow_flag:</emoji>
-        <text>Being gay on example.net</text>
-    </status>
+    "blocked": [{
+            "guid": "GUID1",
+            "note": "your note on them", 
+        }, {
+            "guid": "GUID2",
+        }, {
+            "guid": "GUID1",
+        }, {
+            "guid": "GUID2"
+        }],
 
-    <friends visibility="friends">
-        <user handle="@khaim#0919@instance.tld" guid="000000000-0000-5000-0000-000000000000" nickname="Khaim :heart:" />
-    </friends>
+    "hubs": [
+        {"visibility": "friend_and_mutual"},
+        {
+            "guid": "GUID1",
+        }, {
+            "guid": "GUID2",
+        }, {
+            "guid": "GUID1",
+        }, {
+            "guid": "GUID2"
+        }
+    ],
 
-    <blocked visibility="owner">
-        <user handle="@jerk#0001@somethingbad.social" guid="000000000-0000-5000-0000-000000000000" />
-        <instance domain="somethingbad.social" />
-    </blocked>
+    "pronouns": ["she/they", "she/her", "they/them"],
+    // the frist one is shown, then seperated by slashes and when hovered it will show the one at that index
+    // So if you have "she/they" and you hover "she" with the array above, it will show a tooltip saying "she/her"
 
-    <hubs visibility="shared_and_friend">
-        <hub guid="000000000-0000-5000-0000-000000000000"></hub>
-    </hubs>
+    "links": [{ 
+            "rel": "nofriend", // UNVERIFIED
+            "icon": "mastodon",
+            "link": "@username@example.social", 
+            "visibility": "everyone"
+        }, { 
+            "rel": "me", // VERIFIED
+            "icon": "peertube",
+            "link": "@username@joinpeertube.org",
+            "visibility": "everyone"
+        }
+    ],
 
-    <pronouns summary="she/they" visibility="anyone">
-        <o>she/her</o>
-        <o>they/them</o>
-    </pronouns>
+    "public_key": "999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6",
 
-    <links visibility="friends">
-        <link rel="nofriend" icon="mastodon">@username@mastodon.social</link> <!-- UNVERIFIED accounts. They get verified by linking to their bonfire account publicly on the linked account. -->
-        <link rel="me" icon="peertube" visbility="everyone">@username@joinpeertube.org</link> <!-- This is VERIFIED because it has rel="me" -->
-        <!-- THIS connection will override the whole links setting. -->
+    "prefrences": {
+        "visibility": "private"
 
-        <!-- The user can specify which icon to use, we recommend you use https://simpleicons.org for the icons.
-             If no icon is specified and the network is unrecongnised, use the favicon instead -->
-    </links>
-
-    <public_key>999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6</public_key>
-    <!-- This key is arbitrary, but it is a 128 Hex Public Key-->
-
-    <prefrences visibility="owner">
-        <!-- Owner (account owner), shared_and_friend (if the friend or hub is mutual, and you are friends with them), Friends, shared (if the friend or hub is mutual), Anyone not blocked (`unblocked`), Everyone-->
-        ...
-    </prefrences>
-</account>
+        // maybe include ALL visabilities in "prefrences"?
+    }
+}
 ```
-*We suggest you store this data minified in a deployed server, as it can get bulky with all the indents.*
 
 XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). [^1](https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/). 
 
@@ -171,18 +210,21 @@ Deleted accounts should instead be removed from the database entirely, and their
 
 A status object can represent a reaction, message, creation, or anything else that is not a `person` or `bot` in nature.
 
-```xml
-<message>
-    <author>@actor#1234@example.net</author>
-    <reactions>
-        <:rainbow_flag: count="3" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net]"/>
-        <:heart: count="5" reactors="[@username#1234@instance.tld, @othername#0919@instance.tld, @actor#8008@example.net], @purr#8888@kitties.social, @neko#1111, @kitties.social"/>
-    </reactions>
-    <content>hello this is my message content</content>
-    <created>1673475563</created>
-    <edited>1673475591</edited>
-    <signature>(whatever a signature looks like)</signature>
-</message>
+Creation:
+```json
+{ 
+    "@context": {
+            "spec": "https://tryoxiss.github.io/specs/bonfire/recent/",
+            "lang": "en",
+        },
+    "request": "CREATE",
+    "type": "message",
+    "author": "000000000-0000-5000-0000-000000000000",
+    "adressed": ["000000000-0000-5000-0000-000000000000", "000000000-0000-5000-0000-000000000000"], 
+    "content": "What does the message contain? Remember to escape doubble quotes with a backslash! \\! if the server recieves an invalid object, it will ignore it!",
+    "time": "1673475563",
+    "signature": ""
+}
 ```
 
 ## Federation 
