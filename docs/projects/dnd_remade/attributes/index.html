@@ -1,58 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DnD Remade Attributes ★ tryoxiss</title>
+    <title>DnD Remade Attributes</title>
 
     <link rel="stylesheet" href="/res/style.css">
     <link rel="stylesheet" href="/res/prism.css">
 
-    <link rel="icon" href="/res/ico/favicon.ico">
-
 </head>
-
-
-<body class="match-braces language-">
+<body class="match-braces">
     <script src="/res/prism.js"></script>
-
-    
-
-    
     
     <header>
-        
         <h1>DnD Remade Attributes</h1>
 
         <p class="subtitle">
-            
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
-            
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>8 minute read 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>Updated Date Undefined
         </p>
-
-        
-
-        
     </header>
     
+    <nav role="related articles" class="glossary">
+
+    <details>
+        <summary>Basics</summary>
+        <ul>
+            <li><a href="../basics/">Framework Basics</a></li>
+            <li><a href="../attributes/">Attributes</a></li>
+            <li>delor</li>
+            <li>sit</li>
+            <li>amet</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Getting Started</summary>
+        <ul>
+            <li><a href="../create-a-character/">Character Creation</a></li>
+            <li><a href="../basic-mechanics/">Basic Mechanics</a></li>
+            <li>sit</li>
+            <li>amet</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Mechanics</summary>
+        <ul>
+            <li><a href="../basics/">Framework</a></li>
+            <li></li>
+            <li>delor</li>
+            <li>sit</li>
+            <li>amet</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Items</summary>
+        <ul>
+            <li><a href="../potions/">Potions</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li>delor</li>
+            <li>sit</li>
+            <li>amet</li>
+        </ul>
+
+    </details>
+
+    <details>
+        <summary>Homebrew</summary>
+        <ul>
+            <li><a href="../basics/">Framework</a></li>
+            <li></li>
+            <li>delor</li>
+            <li>sit</li>
+            <li>amet</li>
+        </ul>
+    </details>
+
+    </nav>
+
     <main>
-        
         <p>Attributes are simple tag-based modifiers you can add to any item to modify how it works. If you are looking for stats, or these don't seem what your looking for, see <a href="../stats/">stats</a>.</p>
 <ul>
 <li><s>Mini crits can be gaurnteed. Crits are random. They do the same damage modifer. It's just to prevent cheese builds.</s></li>
-<li><s>Struckthrough</s> items are <strong>Marked For Death</strong> and will be <strong>removed or reworked</strong> in a future revision.</li>
+<li>Struckthrough (<s>Struckthrough</s>) items are <strong>Marked For Death</strong> and will be <strong>removed or reworked</strong> in a future revision.</li>
+<li>Some effects have paramaters, denoted with brackets <code>()</code> around them. These are additional information about it, for example, where you are burned.</li>
+<li><strong>TODO</strong>: These categories make no sense. Just... clean it up? - Mads</li>
 </ul>
 <h2>Baisc Attributes</h2>
 <p>These attributes do not need to be set when they are just the defult behavour.</p>
 <ul>
 <li><strong>Description</strong>: Flavour, mostly.</li>
 <li><strong>On Equip</strong>: Determines what stat changes occur when the item is equipped.</li>
-<li><strong>When Eqipped</strong>: Determines what happens when the item is actively equipped.</li>
+<li><strong>When Eqipped</strong>, <strong>When On {slot}</strong>: (e.g., &quot;When On Main Hand&quot;, &quot;When On Head&quot;, &quot;When On Body&quot;) Determines what happens when the item is actively equipped.</li>
 <li><strong>On Use</strong>: Determines what happens when used.</li>
 <li><strong>On Hit</strong>:</li>
 <li><strong>On Action</strong>:</li>
@@ -113,6 +155,13 @@
 <li><strong>Freezing</strong>: You are uncomfortably cold!</li>
 <li><strong>Hpothermia</strong>: Take (1d4 / 2) damage a turn. If our of combat: Take (1d4 / 2) damage each ingame minute. Round down.</li>
 </ul>
+<p>And then these are not really climate but...</p>
+<ul>
+<li><strong>Burned 1 (where)</strong>: First degree burns</li>
+<li><strong>Burned 2 (where)</strong>: Seccond degree burns</li>
+<li><strong>Burned 3 (where)</strong>: Third degree burns</li>
+<li><strong>Burned 4 (where)</strong>: Fourth degree burns. (i.e., you just got turned into charcoal).</li>
+</ul>
 <!-- - Burn-out
 On Use: -2 to all stats ? idk for this one 
 
@@ -124,7 +173,10 @@ On Use: Gain inability to function on charisma, intelligence, or constitution sa
 <li><strong>Not Tradeable</strong>: Prohibit this item from being traded to and from NPCs.</li>
 <li><strong>Not Marketable</strong>: Prohibit this item from being marketed (sold for gold), to any NPC or shop.</li>
 <li><strong>Not Lootable</strong>: Prohibit this item from being pick-pocketed or looted from a corpose. It is reccommended you apply this to all critical items, as it can be frustrating to have it get lost. (Good DMs shouldn't make them get lost <em>anyway</em> (unless its a quest!), but it can serve as a nice reminder to that).</li>
-<li><strong>Soulbound</strong>: Not Tradeable, Not Marketable, Not Lootable. This item will be with you, forever, weather you like it or not. You may be able to find a shaman who can break it, but you risk cursing it in the process!</li>
+<li><strong>Not Droppable</strong>: Cannot be dropped or left behind.</li>
+<li><strong>Soulbound</strong>: Not Tradeable, Not Marketable, Not Lootable, Not Dropable. This item will be with you, forever, weather you like it or not. You may be able to find a shaman who can break it, but you risk cursing it in the process!</li>
+<li><strong>Cannot Be Teleported</strong>: This item cannot go through teleporters, or be transported while having teleportation spells.</li>
+<li>**</li>
 <li><strong>Illegal</strong>: Less NPCs will want to buy it, it is harder to aquire. Don't let the city gaurds find out!</li>
 </ul>
 <h2>Misc Attributes</h2>
@@ -137,9 +189,7 @@ On Use: Gain inability to function on charisma, intelligence, or constitution sa
 </li>
 </ul>
 
-        
     </main>
-
 
     
 <footer>

@@ -5,7 +5,9 @@ title: DnD Remade Attributes
 Attributes are simple tag-based modifiers you can add to any item to modify how it works. If you are looking for stats, or these don't seem what your looking for, see [stats](../stats/).
 
 - ~~Mini crits can be gaurnteed. Crits are random. They do the same damage modifer. It's just to prevent cheese builds.~~
-- ~~Struckthrough~~ items are **Marked For Death** and will be **removed or reworked** in a future revision. 
+- Struckthrough (~~Struckthrough~~) items are **Marked For Death** and will be **removed or reworked** in a future revision. 
+- Some effects have paramaters, denoted with brackets `()` around them. These are additional information about it, for example, where you are burned. 
+- **TODO**: These categories make no sense. Just... clean it up? - Mads
 
 ## Baisc Attributes
 
@@ -13,7 +15,7 @@ These attributes do not need to be set when they are just the defult behavour.
 
 - **Description**: Flavour, mostly. 
 - **On Equip**: Determines what stat changes occur when the item is equipped. 
-- **When Eqipped**: Determines what happens when the item is actively equipped.
+- **When Eqipped**, **When On {slot}**: (e.g., "When On Main Hand", "When On Head", "When On Body") Determines what happens when the item is actively equipped.
 - **On Use**: Determines what happens when used. 
 - **On Hit**: 
 - **On Action**: 
@@ -63,6 +65,13 @@ These attributes do not need to be set when they are just the defult behavour.
 - **Freezing**: You are uncomfortably cold!
 - **Hpothermia**: Take (1d4 / 2) damage a turn. If our of combat: Take (1d4 / 2) damage each ingame minute. Round down. 
 
+And then these are not really climate but...
+
+- **Burned 1 (where)**: First degree burns
+- **Burned 2 (where)**: Seccond degree burns
+- **Burned 3 (where)**: Third degree burns
+- **Burned 4 (where)**: Fourth degree burns. (i.e., you just got turned into charcoal).
+
 <!-- - Burn-out
 On Use: -2 to all stats ? idk for this one 
 
@@ -75,7 +84,10 @@ These attributes dictate how an item can transfer from one person to another. Th
 - **Not Tradeable**: Prohibit this item from being traded to and from NPCs. 
 - **Not Marketable**: Prohibit this item from being marketed (sold for gold), to any NPC or shop. 
 - **Not Lootable**: Prohibit this item from being pick-pocketed or looted from a corpose. It is reccommended you apply this to all critical items, as it can be frustrating to have it get lost. (Good DMs shouldn't make them get lost *anyway* (unless its a quest!), but it can serve as a nice reminder to that).
-- **Soulbound**: Not Tradeable, Not Marketable, Not Lootable. This item will be with you, forever, weather you like it or not. You may be able to find a shaman who can break it, but you risk cursing it in the process!
+- **Not Droppable**: Cannot be dropped or left behind. 
+- **Soulbound**: Not Tradeable, Not Marketable, Not Lootable, Not Dropable. This item will be with you, forever, weather you like it or not. You may be able to find a shaman who can break it, but you risk cursing it in the process!
+- **Cannot Be Teleported**: This item cannot go through teleporters, or be transported while having teleportation spells. 
+- **
 - **Illegal**: Less NPCs will want to buy it, it is harder to aquire. Don't let the city gaurds find out!
 
 ## Misc Attributes

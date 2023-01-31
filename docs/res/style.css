@@ -265,6 +265,7 @@ body {
 nav { grid-area: navb; }
 main { grid-area: main; }
 .toc { grid-area: toch; }
+.glossary { grid-area: glos; }
 footer { grid-area: foot; }
 header { grid-area: head; }
 
@@ -319,9 +320,28 @@ body {
         grid-template-areas: 
         "navb navb navb navb navb navb navb navb"
         ".... .... head head head head .... ...." 
-        ".... .... main main main main .... ...." 
-        ".... .... foot foot foot foot .... ....";
+        "glos glos main main main main .... ...." 
+        "glos glos foot foot foot foot .... ....";
     }
+}
+
+.glossary { 
+    margin: 1rem;
+    color: var(--text-normal);
+
+    /* border: 1px solid var(--border-color);  */
+    border-radius: var(--border-subwindow-radius);
+
+    background-color: var(--subwindow-bg);
+    padding: 0.5rem;
+
+    height: max-content;
+}
+
+.glossary ul { 
+    margin: 0px;
+    list-style: none;
+    margin-left: -1rem;
 }
 
 body { 
@@ -1569,4 +1589,23 @@ footer b {
 
 button { 
     border: 0;
+}
+
+/* li::before { 
+    content: '';
+    -webkit-mask: url(/res/svg/alert-circle.svg) no-repeat 50% 50%;
+    mask: url(/res/svg/alert-circle.svg) no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+
+    width: 48px;
+    height: 48px;
+}
+
+li:after {
+    background-color: red;
+} */
+
+ul { 
+    margin-left: -1rem;
 }
