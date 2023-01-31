@@ -347,7 +347,6 @@ body {
 body { 
     background-color: var(--base-color);
 }
-
 html { 
     font-family: var(--font-family);
 }
@@ -653,7 +652,7 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
 .postcard h2 { 
     font-size: 1rem; 
     /* margin-top: -1.75rem; */
-    /* margin-left: 4.5rem; */
+    margin-top: -1.75rem;
 }
 
 .postcard p { 
