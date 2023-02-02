@@ -276,6 +276,7 @@ header { grid-area: head; }
 body { 
     grid-template-areas: 
     "navb navb navb navb navb navb navb navb"
+    "glos glos glos glos glos glos glos glos"
     "head head head head head head head head" 
     "main main main main main main main main" 
     "foot foot foot foot foot foot foot foot";
@@ -285,6 +286,7 @@ body {
     body { 
         grid-template-areas: 
         "navb navb navb navb navb navb navb navb"
+        "glos glos glos glos glos glos glos glos"
         "head head head head head head head head"
         "main main main main main main main main" 
         "foot foot foot foot foot foot foot ....";
@@ -295,6 +297,7 @@ body {
     body { 
         grid-template-areas: 
         "navb navb navb navb navb navb navb navb"
+        "glos glos glos glos glos glos glos glos"
         "head head head head head head head head" 
         "main main main main main main main main" 
         ".... foot foot foot foot foot foot ....";
@@ -305,6 +308,7 @@ body {
     body { 
         grid-template-areas: 
         "navb navb navb navb navb navb navb navb"
+        "glos glos glos glos glos glos glos glos"
         "head head head head head head head head" 
         "main main main main main main main main" 
         "foot foot foot foot foot foot foot foot";
@@ -347,7 +351,6 @@ body {
 body { 
     background-color: var(--base-color);
 }
-
 html { 
     font-family: var(--font-family);
 }
@@ -490,8 +493,9 @@ code {
     grid-gap: 1em; 
 }
 
-h1, h2, h3, h4, h5, h6, strong { 
+h1, h2, h3, h4, h5, h6, strong, .h2, .h3, .h4, .h5, .h6 { 
     color: var(--text-strong); 
+    font-weight: bold;
 }
 
 a { 
@@ -644,20 +648,25 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
     padding: 0.8rem;
 
     border-bottom: 0;
+}
 
 /* .postcard > * { 
     /* margin-top: -0.25rem; *
 } */
 
-.postcard h2 { 
-    font-size: 1rem; 
-    /* margin-top: -1.75rem; */
-    /* margin-left: 4.5rem; */
+.postcard-50 { 
+    max-width: 20rem;
 }
 
-.postcard p { 
-    color: var(--text-normal)
+.postcard h2, .postcard .h2 { 
+    font-size: 1rem; 
+    /* margin-top: -1.75rem; */
+    margin-top: -1.75rem;
 }
+
+/* .postcard p { 
+    color: var(--text-normal)
+} */
 
 s { 
     color: var(--text-muted); 
@@ -1315,7 +1324,7 @@ img {
     border-radius: var(--border-subwindow-radius);
 }
 
-h2, h3, h4, h5, h6 { 
+h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { 
     margin: 0px;
 }
 
@@ -1510,6 +1519,11 @@ footer b {
     color: var(--pink-2)
 }
 
+.muted { 
+    color: var(--text-muted);
+    font-size: var(--font-small);
+}
+
 /* .postcard { 
     background-color: var(--subwindow-bg);
     padding: 0.5rem;
@@ -1521,6 +1535,14 @@ footer b {
     margin: 0;
     margin-top: -1rem;
 } */
+
+.postcard strong { 
+    color: var(--text-strong);
+}
+
+.postcard ul ul { 
+    margin-left: -2.5rem;
+}
 
 .fa-icon { 
     width: 16px; 
