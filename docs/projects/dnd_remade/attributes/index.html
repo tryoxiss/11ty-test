@@ -88,12 +88,127 @@
 <li>Struckthrough (<s>Struckthrough</s>) items are <strong>Marked For Death</strong> and will be <strong>removed or reworked</strong> in a future revision.</li>
 <li>Some effects have paramaters, denoted with brackets <code>()</code> around them. These are additional information about it, for example, where you are burned.</li>
 <li><strong>TODO</strong>: These categories make no sense. Just... clean it up? - Mads</li>
+<li>Weapons can only strike physical enemies by defult.</li>
+<li>1 Unit is 1m centimeters.
+<ul>
+<li>We reccommend 3x3cm tiles, if using a board IRL</li>
+<li>In game, 1 square tile is 1m<sup>2</sup></li>
+<li>In game, 1 hex tile is 1x1m.</li>
+<li>It is designed to be played with either square <em>or</em> hex tiles. But hex is more fun fight me.</li>
 </ul>
+  <!-- - Convert from meters to tiles: `(tiles * 100) / 75` -->
+</li>
+</ul>
+<p>-<strong>Khaim</strong>: yeah, but i also feel like the characters get to much hp to fast, like having them start out at 8 and at max only getting to like 50 would be better than starting at 10 and getting to 300</p>
+<ul>
+<li>Levels run from 1 (defult) to 20 (max). Characters cannot exeed level 20, but should not <em>reach</em> level 20 in the first place.</li>
+</ul>
+<p>Basic item design:</p>
+<div class="postcard postcard-50">
+<p class="h2">Item Name</p>
+<p><span class="muted">{Rarity} {Type}</span></p>
+<p>Item description. This can be as long as you want.</p>
+<ul>
+<li>Attribute</b>: Description</li>
+</ul>
+<p class="muted" style="margin-bottom: 0px;">List, Of Attributes, In Short, form</p>
+</div>
+<p>Example:</p>
+<div class="postcard postcard-50">
+<p class="h2 pink-2">The Atomizer</p>
+<p><span class="muted">Mythical Scientific Marvel</span></p>
+<p>Destroy the essence of your foes with a single hit.</p>
+<ul>
+<li><b>While Equiped</b>: Reduce your max health to 1.</li>
+<li><b>On Use</b>: Reduce your health to 1, even when putting the weapon away. (but, you return to your old max health when putting it away, so you can heal back)</li>
+<li><b>Honor</b>: You are considered honorable while you only use it to take the lives of those who hurt you. Killing an enemy that has not attacked you (directly or indirectly (your party, village, nation, etc)) will break your honor. 
+</li>
+<li><b>On Break Honor</b>: Permanently destroy the atomizer, and give your character and party grief, and give yourself trauma (killed enemy type and faction) attributes. Give the faction that you used it on the Vengeance Attribute. (Or die, and make a new character. If you play that way)
+</li>
+</ul>
+<p class="muted" style="margin-bottom: 0px;">Honor Bound, Mythical</p>
+</div>
+<p>And a more practical example:</p>
+<div class="postcard postcard-50">
+<p class="h2 green-2">English Longbow</p>
+<p><span class="muted">Uncommon Bow</span></p>
+<p>With great range and power, comes great strength requirements.</p>
+<ul>
+    <li><b>On Use</b>: Fire an arrow</li>
+    <ul>
+        <li>Range: 60m</li>
+        <li>Damage: 3d6</li>
+        <li>Stat Check: strengh 8+</li>
+    </ul>
+</ul>
+<p class="muted" style="margin-bottom: 0px;">Two-handed, Bow, Longbow, Uncommon</p>
+</div>
+<p>And of a consumeable item:</p>
+<div class="postcard postcard-50">
+<p class="h2">Fint Arrow</p>
+<p><span class="muted">Common Ammunition (Supply: 80)</span></p>
+<p>Can be used with most bows and are easily craftable.</p>
+<p class="muted" style="margin-bottom: 0px;">Consumeable, Arrow, Not Enchantable</p>
+</div>
+<p>For ranged weapons, ammo can add or edit your main weapons stats. For example: using a feathered arrow can increese range, and using a heavy arrow can increese damage but decreese range. To do this, take the weapons base stats and modify them with the ammo. For example:</p>
+<ul>
+<li>Bow:
+<ul>
+<li>Damage: 3d6</li>
+</ul>
+</li>
+<li>Tin Feathered Arrow
+<ul>
+<li>Damage: + 1d6</li>
+</ul>
+</li>
+</ul>
+<p>Class Type Summary:</p>
+<ul>
+<li>Melee
+<ul>
+<li>Can be quite tanky</li>
+</ul>
+<ul>
+<li>Can be quite agile</li>
+<li>No worry about ammo</li>
+<li>Quite Versitle</li>
+<li>Good close range</li>
+<li>Useless long range</li>
+</ul>
+</li>
+<li>Magic
+<ul>
+<li>Very light class</li>
+<li>Can be quite agile</li>
+<li>Can be useful close and far range, but most useful mid-range</li>
+<li>Very Versitile</li>
+<li>Needs to worry about mana
+<ul>
+<li>Mana can be recovered over time or at rest stops</li>
+<li>Restored with mana potions, which can be crafted or bought</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Ranged
+<ul>
+<li>Moderately armoured</li>
+<li>Good at stealth</li>
+<li>Ammo can get quite costly, especially when using guns</li>
+<li>Quite versitile</li>
+<li>Near useless close range</li>
+<li>Best long range</li>
+</ul>
+</li>
+</ul>
+<p>So to calculate your damage, roll 4d6</p>
 <h2>Baisc Attributes</h2>
 <p>These attributes do not need to be set when they are just the defult behavour.</p>
 <ul>
 <li><strong>Description</strong>: Flavour, mostly.</li>
 <li><strong>On Equip</strong>: Determines what stat changes occur when the item is equipped.</li>
+<li><strong>On Holster</strong>: Determines what stat changes occur when the item is uneqipped. (It does not need to be put into a holster)</li>
 <li><strong>When Eqipped</strong>, <strong>When On {slot}</strong>: (e.g., &quot;When On Main Hand&quot;, &quot;When On Head&quot;, &quot;When On Body&quot;) Determines what happens when the item is actively equipped.</li>
 <li><strong>On Use</strong>: Determines what happens when used.</li>
 <li><strong>On Hit</strong>:</li>
@@ -110,6 +225,8 @@
 </ul>
 </li>
 <li><strong>Consumeable</strong>: This item will be consumed on use. If you want it to return an item, add that as an on-use along with the status effect. for example: drinking a potion returns its bottle as an inventory item.</li>
+<li><strong>On Break</strong></li>
+<li><strong>On Desroy</strong></li>
 </ul>
 <h2>Debuffs</h2>
 <ul>
@@ -137,7 +254,6 @@
 <li><strong>Mirrage</strong>: Your seeing things! Can only inflict emotional side effects.</li>
 <li><strong>Hallucination</strong>: Your seeing things! Can only inflict emotional side effects.</li>
 <li><strong>Hologram</strong>: You seem unable to attack them!</li>
-<li><s><strong>Distanced</strong>: The enemy has spaced themselves from you signifigantly.</s></li>
 <li><strong>Stone</strong>: Status effects won't work here... (I mean,  you can try, but stones aren't known for taking poison damage :P).</li>
 <li><strong>Metal</strong>: Many status effect's won't work here... maybe try splashing it?</li>
 <li><strong>Plant</strong>: Vulnerable to fire, weak to plants and water.</li>
@@ -215,7 +331,7 @@ On Use: Gain inability to function on charisma, intelligence, or constitution sa
     </ul>
 
     <ul>
-        <li><b>DEBUG</b></li>
+        <li><b>Developement</b></li>
         <li><a href="https://github.com/tryoxiss/tryoxiss.github.io">Source</a></li>
         <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/issues">Issues</a></li>
         <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/commit/master">Deployment Status</a></li>
