@@ -196,18 +196,10 @@
         // maybe include ALL visabilities in &quot;prefrences&quot;?
     }
 }
-
 </code></pre>
 <p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>.</p>
 <p>For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 14 bytes from their guid, if the tag would be <code>0000</code>, or is above <code>#9999</code>, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be <code>#0001</code>. if it goes above, until the end, then they are instead automatically assigned the tag <code>#9999</code>.</p>
 <p>When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub.</p>
-<p>A user's CID is 8 segments long. For this example we will analyse <code>0s9h:3t0r:mqcs:xzpy:vwfg99:5d0s:zd0fg:7z9o</code></p>
-<ul>
-<li>The first 4 segments denote the first 16 characters displayed as safe of the ??? of the UNIX timestamp to millaseccond percision that they joined on, dis</li>
-<li>The following 3 segments denote the first 12 characters of the ??? hash of current instance instances domain (e.g., ??? hash of &quot;example.com&quot;).</li>
-<li>The final segment is a rabdom number generated based on the conbined string of your countrys code and the current timezone your computer is set to. [!CHANGE MAYBE!]</li>
-</ul>
-<p>This has a small, but existent chance for collisions, due to seeding. Which means that ALL IDs must be checked before going through. If a collision woulf occur, simply automatically send the request again as soon as it recives the denined response, it can simply resend it. This can occuur up to thirty times before giving a &quot;Singup Failed&quot; response to the user.</p>
 <pre><code class="language-plaintext">@username
 @username#1234
 @username@example.net
@@ -239,9 +231,6 @@
 <p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
 <p>Generally, it follows a <code>action:what:details</code> scheme, however when UUIDs are involved they are instead surrounded by forward slashes.</p>
 <pre><code>bonfire://invite/guid
-<p>Generally, it follows a <code>action:what:details</code> scheme, however when CIDs are involved they are instead surrounded by forward slashes.</p>
-<p>Hub CIDs MUST include the instance at the begining in the following format: <code>CID:sub.domain.tld</code>. This allows URIs to be cleaner.</p>
-<pre><code>bonfire://invite/cid
 
 ( bonfire://invite/1233:45::671: )
 ( bonfire://invite/13fg:45::6io: )
