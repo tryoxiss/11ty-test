@@ -57,8 +57,8 @@
 <li><code>i64</code> equals approximately <code>1.844674407×10¹⁹</code></li>
 </ul>
 </li>
-<li>Let <code>JSON Object</code>, <code>Object</code>, or <code>Packet</code> represent one JSON object, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16.</li>
-<li>Let <code>packet</code> represent one XML object sent between a client-server, or server-server relationship.</li>
+<li>Let <code>JSON Object</code> or <code>Object</code> represent one JSON object, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16.</li>
+<li>Let <code>packet</code> represent one JSON Object sent between a client-server, or server-server relationship.</li>
 <li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
 <li><s>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</s></li>
 <li>Let <code>GUID</code> and <code>UUID</code> represent a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">Universally Unique Identifier</a>.</li>
@@ -80,13 +80,13 @@
 <p>Other, smaller goals are to make it extensible so at no point will there ever be breaking changes (No &quot;bonfire 2.0&quot;). While we cannot guarantee this, a finished 1.0 spec should be backwards compatible for at least the next 30 years, while still being able to add support for new features.</p>
 <h2>Conventions followed</h2>
 <ul>
-<li>Variables and XML Objects will be denoted in snake case. (<code>variable_name</code>)</li>
+<li>Variables and JSON Objects will be denoted in snake case. (<code>variable_name</code>)</li>
 <li>Variables in code which remain constant should be all capitalised. (<code>VARIABLE_NAME</code>)</li>
 </ul>
 <h2>Objects</h2>
 <p>Objects are just how we send stuff store it however you please, ideally SQL.</p>
 <h3>Accounts</h3>
-<p>An account is an object that represents a <code>person</code> in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a <code>visibility</code> field cannot have its visibility edited.</p>
+<p>An account is an object that represents a <code>person</code> in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a <code>visibility</code> field cannot have its visibility edited. You can store any information you want on the persons paramaters.</p>
 <pre><code class="language-json">{ 
     &quot;@context&quot;: {
         &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
@@ -137,6 +137,7 @@
             &quot;guid&quot;: &quot;GUID1&quot;,
             &quot;nickname&quot;: &quot;your nick &lt;3&quot;,
             &quot;note&quot;: &quot;your note on them&quot;, 
+            &quot;birthday&quot;: &quot;your note on them&quot;, 
             &quot;other info&quot;: &quot;sotre whatever custom fields you want!&quot;
         }, {
             &quot;guid&quot;: &quot;GUID2&quot;,
@@ -197,8 +198,7 @@
     }
 }
 </code></pre>
-<p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>.</p>
-<p>For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 14 bytes from their guid, if the tag would be <code>0000</code>, or is above <code>#9999</code>, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be <code>#0001</code>. if it goes above, until the end, then they are instead automatically assigned the tag <code>#9999</code>.</p>
+<p>For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 4 digits of the timestamp denoted in decimal, if the tag would be <code>#0000</code>, defult it to <code>#0001</code>.</p>
 <p>When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub.</p>
 <pre><code class="language-plaintext">@username
 @username#1234
@@ -208,6 +208,13 @@
 <p>an account suspended by the instance will add the <code>suspended</code> keyword to the <code>&lt;account&gt;</code> object, such as <code>&lt;account type=&quot;person&quot; suspended&gt;</code>.</p>
 <p>When an account is suspended, all mentions of them should display as <code>@suspended#0000</code>.</p>
 <p>Deleted accounts should instead be removed from the database entirely, and their mentions should be replaced with <code>@unknown#0000</code>. If they simply moved to another instance, their mentions should update accordingly.</p>
+<p>The tag <code>0000</code> is <em>always</em> reserved, but the following cases use it. Mentions defult to #0000 if no tag is specified. If no #0000 exists, but multiple non-zero tags exist, digits must be specified until they are differntiated.</p>
+<ul>
+<li>@<strong>suspended</strong>#0000 - A suspended user account.</li>
+<li>@<strong>unknown</strong>#0000 - An unknown user account.</li>
+<li>@<strong>everyone</strong>#0000 - Mentions everyone</li>
+<li>@<strong>someone</strong>#0000 - mentions a random person.</li>
+</ul>
 <h3>Messages</h3>
 <p>A status object can represent a reaction, message, creation, or anything else that is not a <code>person</code> or <code>bot</code> in nature.</p>
 <p>Creation:</p>
@@ -226,21 +233,265 @@
 }
 </code></pre>
 <h2>Federation</h2>
+<p>All packets must be encrypted end-to-end via RSA, with the exception of voice protocol packets, which can use AES with a key establed via RSA. This key must be diffrent for every voice session. If a voice session lasts longer than 6 hours, it must be rotated every 6 hours.</p>
 <p>Bonfire uses a protocol similar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
+<h2>Commands</h2>
+<p>Bonfire has a lot of commands that must or should be built in and supported. Any action that is possible via the UI must be possible via a command.</p>
+<p>Therefore, every implenetation MUST have support for the following commands:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/invite <span class="violet-2">[duration]</span> <span class="blue-2">[uses]</span></td>
+<td>Invite a user to your hub!</td>
+</tr>
+<tr>
+<td>/addbot <span class="violet-2">{URI}</span></td>
+<td>Integrate a bot into your hub!</td>
+</tr>
+<tr>
+<td>/kick <span class="violet-2">{user}</span> <span class="blue-2">[reason]</span></td>
+<td>Removes a user from your hub or group chat.</td>
+</tr>
+<tr>
+<td>/ban {user} [reason] [duratation (default: permenent)]</td>
+<td>Removes a user from your hub, and prevents them fron returning with a new invite for the specified time.</td>
+</tr>
+<tr>
+<td>/mute {user} [reason] [duration (defult: 10m)]</td>
+<td>Prevents a user in your hub from talking in voice or text chat for the specified time.</td>
+</tr>
+<tr>
+<td>/quarintine {user} [reason]</td>
+<td>prevents a user from seeing any main voice or text channels, and removes all permissions. They can only see rules, server info, and a help channel. Useful for if you believe an account has been compromised.</td>
+</tr>
+<tr>
+<td>/role {([add | remove] {role} {user})</td>
+<td>([create</td>
+</tr>
+<tr>
+<td>/archive {channel}</td>
+<td>Makes a channel read-only and be taken out of the standard channels list. Used for clearing up clutter without deleting history.</td>
+</tr>
+<tr>
+<td>/nuke {channel}</td>
+<td>Clears all messages in a channel.</td>
+</tr>
+<tr>
+<td>/emote {add | delete | edit} {name} (specific cases)</td>
+<td>Manages emojis</td>
+</tr>
+<tr>
+<td>/nick (user) {nick}</td>
+<td>Change your or someone elses nicknames.</td>
+</tr>
+</tbody>
+</table>
+<h2>Permissions</h2>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>viewChannels</td>
+<td>Allow members to view channels by defult.</td>
+</tr>
+<tr>
+<td>manageChannels</td>
+<td>Allow this group to create, edit, and delete channels.</td>
+</tr>
+<tr>
+<td>manageRoles</td>
+<td>Allow this group to manage all roles below them.</td>
+</tr>
+<tr>
+<td>manageEmoji</td>
+<td>Allow users in this group to manage hub emoji</td>
+</tr>
+<tr>
+<td>viewAuditLog</td>
+<td>Allow members to view a reccord of all changes to the hub</td>
+</tr>
+<tr>
+<td>manageWebhooks</td>
+<td>Allow members to create, edit, or delete webhooks, which can post messages in the hub.</td>
+</tr>
+<tr>
+<td>manageIntegrations</td>
+<td>Allow members to add, remove, and edit integrated bots.</td>
+</tr>
+<tr>
+<td>manageGuild</td>
+<td>Allow members to edit the hubs name, avatar, rules, and description</td>
+</tr>
+<tr>
+<td>createInvite</td>
+<td>Allow users to create hub invites by defult.</td>
+</tr>
+<tr>
+<td>changeAlias</td>
+<td>Allow users to change thier own nickname in the hub</td>
+</tr>
+<tr>
+<td>manageAlias</td>
+<td>Allow users to change anyones nickname in the hub</td>
+</tr>
+<tr>
+<td>canKick</td>
+<td>Allow users to kick members</td>
+</tr>
+<tr>
+<td>canBan</td>
+<td>Allow users to ban members.</td>
+</tr>
+<tr>
+<td>canMute</td>
+<td>Allow users to issue mutes</td>
+</tr>
+<tr>
+<td>sendMessages</td>
+<td>Allow users to send messages in text channels.</td>
+</tr>
+<tr>
+<td>createThreads</td>
+<td></td>
+</tr>
+<tr>
+<td>messageTreads</td>
+<td></td>
+</tr>
+<tr>
+<td>createPrivateThreads</td>
+<td></td>
+</tr>
+<tr>
+<td>embedImages</td>
+<td>Allows users to embed only image links</td>
+</tr>
+<tr>
+<td>embedLinks</td>
+<td>Can embed links to make them look better.</td>
+</tr>
+<tr>
+<td>canReact</td>
+<td>Allows users to react to messages</td>
+</tr>
+<tr>
+<td>useExternalEmoji</td>
+<td>Allows users to use emoji  from other hubs, instnaces, or thier own in your hub.</td>
+</tr>
+<tr>
+<td>canPingAll</td>
+<td>Allow users to mention @everyone</td>
+</tr>
+<tr>
+<td>canPingHere</td>
+<td>Allow users to mention @here</td>
+</tr>
+<tr>
+<td>canPingOnline</td>
+<td>Allow users to mention @online</td>
+</tr>
+<tr>
+<td>canPingRandom</td>
+<td>Allow users to mention @someone</td>
+</tr>
+<tr>
+<td>canPingThis</td>
+<td>Allow users to ping this role</td>
+</tr>
+<tr>
+<td>canPingRoles</td>
+<td>Allow users to ping all roles raguardless of <code>canPingThis</code></td>
+</tr>
+<tr>
+<td>manageMessages</td>
+<td>Allow members to delete messages sent by other people.</td>
+</tr>
+<tr>
+<td>manageThreads</td>
+<td>Allow users to delete or archive threads by other people</td>
+</tr>
+<tr>
+<td>viewMessageHistory</td>
+<td>Allow users to view messgages sent before an hour ago</td>
+</tr>
+<tr>
+<td>blindMessages</td>
+<td>Hide all messages in a channel to a user, except for replies to thier messages and messages sent by them. useful for verification channels</td>
+</tr>
+<tr>
+<td>useCommands</td>
+<td>A blanket commands off button, Probably NOT what you are looking for.</td>
+</tr>
+<tr>
+<td>voiceConnect</td>
+<td>Can connect to voice channels</td>
+</tr>
+<tr>
+<td>voiceSpeak</td>
+<td>Can speak in voice channels</td>
+</tr>
+<tr>
+<td>voiceVideo</td>
+<td>Can use video in voice channels</td>
+</tr>
+<tr>
+<td>voiceActivity</td>
+<td></td>
+</tr>
+<tr>
+<td>voicePriority</td>
+<td>Determine if this user can speak over other people with a keybind</td>
+</tr>
+<tr>
+<td>voiceForceMute</td>
+<td>Allow muting of other members</td>
+</tr>
+<tr>
+<td>voiceForceDeafen</td>
+<td>Allow force deafing members</td>
+</tr>
+<tr>
+<td>voiceDeafenNoMute</td>
+<td>Determine if a user can deafen without also muting.</td>
+</tr>
+<tr>
+<td>moveMembers</td>
+<td>Determine if you can move members between channels</td>
+</tr>
+<tr>
+<td>manageEvents</td>
+<td></td>
+</tr>
+<tr>
+<td>manageAll</td>
+<td>Override all permissions given with yes, for all channels. Doing this will make someone have all the same powers as the hub owner, except for deleting it.</td>
+</tr>
+</tbody>
+</table>
 <h2>URI Scheme</h2>
 <p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
-<p>Generally, it follows a <code>action:what:details</code> scheme, however when UUIDs are involved they are instead surrounded by forward slashes.</p>
-<pre><code>bonfire://invite/guid
+<p>As a general rule, it follows the sceme <code>bonfire://guid</code> scheme.</p>
+<p>Examples:</p>
+<pre><code>View a users profile: 
+bonfire://@username#0000@instance.tld  -- Can change if they change thier username
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82  - Cannot change
 
-( bonfire://invite/1233:45::671: )
-( bonfire://invite/13fg:45::6io: )
+View a channel: 
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
 
-bonfire://view:@username#0000@instance.tld
-
-( bonfire://view:@tryoxiss#8100@bonfire.example.net )
-( bonfire://view:@khaim#0919@app.instance.tld )
-
-bonfire://view/guid#channel
+View a specific message: 
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
 </code></pre>
 
     </main>
@@ -277,6 +528,8 @@ bonfire://view/guid#channel
     </ul>
 
     <br>
+    <p>Made with <svg xmlns="http://www.w3.org/2000/svg" style="fill: currentColor; margin-bottom: -3px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>love</title><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path></svg>, weaponised autism, and a whole lot of <a href="/credits/">libraries</a></p>
+
     <p class="subtitle">Most content on this site is copyright &copy; tryoxiss 2022 or later. Feel free to use any of my content without asking though, just credit me and don't use it for any <a href="/dict/profanity/" class="dead-link">profanity</a> and I will probably be good. Though I do reserve the right to make you stop using it at any time for any reason.</p>
 </footer>
 

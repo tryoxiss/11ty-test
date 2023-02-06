@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} ★ tryoxiss</title>
+    <title>{% block title %}{{ title }}{% endblock %}★ tryoxiss</title>
 
     <link rel="stylesheet" href="/res/style.css">
     <link rel="stylesheet" href="/res/prism.css">
 
     <link rel="icon" href="/res/ico/favicon.ico">
+    {% block customimport %}
+    {% endblock %}
 
 </head>
 {% endblock %}
@@ -51,10 +53,9 @@
         {% endblock %}
     </header>
     
-    <nav role="related articles" class="glossary">
+    {# <nav role="related articles" class="glossary"> #}
         {# {% include "glossary.njk" %} #}
-        <i>t</i>
-    </nav>
+    {# </nav> #}
 
     <main>
         {% block main %}
@@ -62,7 +63,10 @@
         {% endblock %}
     </main>
 
-    <nav role="table of contents" class="toc">dasd</nav>
+    {# <aside role="Sidebar" class="sidebar">
+    {% block sidebar %}
+    {% endblock %}
+    </aside> #}
 
     {% include "footer.njk" %}
 </body>

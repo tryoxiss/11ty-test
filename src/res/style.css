@@ -1,9 +1,8 @@
 /* Normalise all properties to spec */
 @import url(normalize.css);
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,800;1,200;1,400;1,800&display=swap');
-
 @import url('http://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
+
 /* 
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
@@ -228,6 +227,8 @@
         --table-even-color: var(--mocha-mantle); 
         --table-odd-color: var(--mocha-crust); 
 
+        --font-small: 0.85rem;
+
         --red-2:        #FFADAD; 
         --orange-2:     #FFD6A5; 
         --yellow-2:     #FDFFB6; 
@@ -264,10 +265,15 @@ body {
 /* GRID TEMPLATE AREAS */
 nav { grid-area: navb; }
 main { grid-area: main; }
-.toc { grid-area: toch; }
+.sidebar { grid-area: side; }
 .glossary { grid-area: glos; }
 footer { grid-area: foot; }
 header { grid-area: head; }
+
+
+footer { 
+    color: var(--text-normal);
+}
 
 .cards-list > * { 
     grid-column: span 2;
@@ -277,7 +283,8 @@ body {
     grid-template-areas: 
     "navb navb navb navb navb navb navb navb"
     "glos glos glos glos glos glos glos glos"
-    "head head head head head head head head" 
+    "head head head head head head head head"
+    "side side side side side side side side" 
     "main main main main main main main main" 
     "foot foot foot foot foot foot foot foot";
 }
@@ -288,6 +295,7 @@ body {
         "navb navb navb navb navb navb navb navb"
         "glos glos glos glos glos glos glos glos"
         "head head head head head head head head"
+        "side side side side side side side side"
         "main main main main main main main main" 
         "foot foot foot foot foot foot foot ....";
     }
@@ -299,6 +307,7 @@ body {
         "navb navb navb navb navb navb navb navb"
         "glos glos glos glos glos glos glos glos"
         "head head head head head head head head" 
+        "side side side side side side side side"
         "main main main main main main main main" 
         ".... foot foot foot foot foot foot ....";
     }
@@ -310,6 +319,7 @@ body {
         "navb navb navb navb navb navb navb navb"
         "glos glos glos glos glos glos glos glos"
         "head head head head head head head head" 
+        "side side side side side side side side"
         "main main main main main main main main" 
         "foot foot foot foot foot foot foot foot";
     }
@@ -324,12 +334,12 @@ body {
         grid-template-areas: 
         "navb navb navb navb navb navb navb navb"
         ".... .... head head head head .... ...." 
-        "glos glos main main main main .... ...." 
-        "glos glos foot foot foot foot .... ....";
+        "glos glos main main main main side side" 
+        "glos glos foot foot foot foot side side"
     }
 }
 
-.glossary { 
+.glossary, .sidebar { 
     margin: 1rem;
     color: var(--text-normal);
 
@@ -340,6 +350,33 @@ body {
     padding: 0.5rem;
 
     height: max-content;
+}
+
+.sidebar:empty { 
+    display: none;
+}
+
+.small { 
+    font-size: var(--font-small);
+}
+
+.nomar { 
+    margin: 0;
+}
+
+p svg { 
+    width: 16px; 
+    height: 16px;
+    margin-bottom: -3px;
+}
+
+.sidebar-header { 
+    color: var(--text-muted); 
+    margin: 0; 
+    margin-top: 0.25rem;
+    font-weight: bold;
+
+    font-size: var(--font-small);
 }
 
 .glossary ul { 
@@ -363,10 +400,6 @@ main {
     padding: 1.5rem; 
 
     border-radius: 1rem;
-}
-
-.toc { 
-    background-color: yellowgreen;
 }
 
 h1 { 
@@ -650,10 +683,6 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
     border-bottom: 0;
 }
 
-/* .postcard > * { 
-    /* margin-top: -0.25rem; *
-} */
-
 .postcard-50 { 
     max-width: 20rem;
 }
@@ -661,7 +690,7 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
 .postcard h2, .postcard .h2 { 
     font-size: 1rem; 
     /* margin-top: -1.75rem; */
-    margin-top: -1.75rem;
+    margin-top: -.3rem;
 }
 
 /* .postcard p { 
@@ -690,9 +719,16 @@ ol ol ol {
 }
 
 
+/* Deeeevious kitten was here 
+    - Superr blurry and blendy */
+
 /* ********* COPYPASTA STARTS ************ */
 
 /* FROM CSSTRICKS @ https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ OR https://codepen.io/aaroniker/pen/ZEYoxEY (it's literally 1:1 minus some variables and pickey tweaks) */
+
+.tab h2 { 
+    font-size: 1.5rem !important;
+}
 
 /* TODO: Fix the colors, they are just temperary rn */
 

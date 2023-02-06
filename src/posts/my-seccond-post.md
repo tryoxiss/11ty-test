@@ -7,6 +7,10 @@ date: 2022-01-10
 
 **This post exists to be a typography and markdown test for 11ty. This is NOT INTENDED to be read as a proper post.**
 
+{% block sidebar %}
+Audit Info
+{% endblock %}
+
 my seccond post
 
 This is a paragraph with **strong** text. It also has ~~struck text~~. This is an update.
