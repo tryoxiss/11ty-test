@@ -1,5 +1,5 @@
 /* Normalise all properties to spec */
-@import url(normalize.css);
+@import url(normalize.min.css);
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,800;1,200;1,400;1,800&display=swap');
 @import url('http://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
 
@@ -7,54 +7,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap'); */
-
-/* :root { 
-
-    --red-2:        #FFADAD; 
-    --orange-2:     #FFD6A5; 
-    --yellow-2:     #FDFFB6; 
-    --green-2:      #CAFFBF; 
-    --blue-2:       #9BF6FF; 
-    --blueviolet-2: #A0C4FF; 
-    --violet-2:     #BDB2FF;
-    --pink-2:       #FFC6FF; 
-    /* 8 col */
-    /* 5 variants */
-    /* 8 * 5 = 40 colors 
-
-    --violet-1: #ece8fd;
-
-    --mono-0: #fff; 
-    --mono-1: #e4e4e4; 
-    /*     --mono-1: #f7f7f7;  
-    --mono-2: #e5e5e5; 
-    --mono-3: #afafaf; 
-    --mono-4: #4b4b4b; 
-    --mono-5: #202020; 
-    --mono-6: #0a0a0a; 
-
-    /* heros trans 
-
-    --red-t-2:        rgba(255, 173, 173, .8); 
-    --orange-t-2:     rgba(255, 214, 165, .8); 
-    --yellow-t-2:     rgba(253, 255, 182, .8); 
-    --green-t-2:      rgba(202, 255, 191, .8); 
-    --blue-t-2:       rgba(155, 246, 255, .8); 
-    --blueviolet-t-2: rgba(160, 196, 255, .8); 
-    --violet-t-2:     rgba(189, 178, 255, .8);
-    --pink-t-2:       rgba(255, 198, 255, .8); 
-
-    --red-t3-2:        rgba(255, 173, 173, .1); 
-    --orange-t3-2:     rgba(255, 214, 165, .1); 
-    --yellow-t3-2:     rgba(253, 255, 182, .1); 
-    --green-t3-2:      rgba(202, 255, 191, .1); 
-    --blue-t3-2:       rgba(155, 246, 255, .1); 
-    --blueviolet-t3-2: rgba(160, 196, 255, .1); 
-    --violet-t3-2:     rgba(189, 178, 255, .1);
-    --pink-t3-2:       rgba(255, 198, 255, .1); 
-
-    --left-to-right-rainbow: linear-gradient(red, yellow, blue);
-} */
 
 :root {
     --latte-rosewater: rgb(222, 149, 132);
@@ -1620,33 +1572,7 @@ footer b {
     color: var(--text-muted);
 }
 
-
-
-
-
 /* ************** */
-
-
-
-
-.randomword-button {
-    border-color: #ff8ad0;
-    background-color: #413c74;
-    color: #ff8ad0; }
-    .randomword-button.light {
-      border-color: #413c74;
-      background-color: #ffffff;
-      color: #413c74; }
-      .randomword-button.light:hover {
-        color: #ffffff;
-        background-color: #413c74; }
-    .randomword-button:hover {
-      color: #413c74;
-      background-color: #ff8ad0; }
-
-button { 
-    border: 0;
-}
 
 /* li::before { 
     content: '';
