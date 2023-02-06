@@ -24,7 +24,6 @@
     
     <main>
         <p>Bonfire is a working (and temporary) name for a standard to allow for community-divided federated instant messaging. In laymans terms, its federated discord.</p>
-        <p>Bonfire is a working (and temporary) name for a standard to allow for community-divided federated instant messaging. In laymans terms, its federated discord.</p>
 <blockquote class="callout callout--info">
     <!-- <svg src="/_shared-content/lucide/alert-triangle.svg" color="red"></svg> -->
     <div class="callout__header">
@@ -49,8 +48,6 @@
 <ul>
 <li>Let the keywords &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, and &quot;MAY&quot; (and lowercase equivalents) be defined as specified in <a href="https://www.rfc-editor.org/rfc/rfc2119">RFC:2119</a></li>
 <li>Let <code>incorrect</code> mean MUST NOT; as in, incorrect behaviour violates the standard.</li>
-<li>Let the keywords &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, and &quot;MAY&quot; (and lowercase equivalents) be defined as specified in <a href="https://www.rfc-editor.org/rfc/rfc2119">RFC:2119</a></li>
-<li>Let <code>incorrect</code> mean SHOULD NOT; as in, incorrect behaviour comes close to violating the standard.</li>
 <li>Let <code>i&lt;int&gt;</code> represent 2^int-1. Some examples (and the important ones) are as follows;
 <ul>
 <li><code>i6</code> equals <code>63</code></li>
@@ -61,7 +58,6 @@
 </ul>
 </li>
 <li>Let <code>JSON Object</code>, <code>Object</code>, or <code>Packet</code> represent one JSON object, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16.</li>
-<li>Let <code>XML Object</code> represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16.</li>
 <li>Let <code>packet</code> represent one XML object sent between a client-server, or server-server relationship.</li>
 <li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
 <li><s>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</s></li>
@@ -69,20 +65,15 @@
 <li>Let the character sets <code>reserved</code>, <code>escaped</code>, <code>delims</code>, <code>unwise</code>, <code>lowalpha</code>, <code>upalpha</code>, <code>alpha</code>, <code>digit</code>, <code>alphanum</code>, <code>mark</code> and <code>unreserved</code> are to be defined as in <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC:2396</a>. This is only when these keywords are in reference to a <strong>character set</strong>.</li>
 <li>Let <code>inalpha</code> represent the character set including <code>upalpha</code> and <code>lowalpha</code>, where no distinction is made between uppercase and lowercase. (&quot;A&quot; is the same as &quot;a&quot;).</li>
 <li>Let the character set <code>safe</code> be the culmination of <code>inalpha</code> and <code>digit</code> and the characters <code>_</code> and <code>-</code>.</li>
-<li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
-<li>Let <code>CID</code> and <code>cid</code> mean the <a href="https://github.com/tryoxiss/tryoxiss.github.io/blob/master/src//specs/cid/recent/">clean ID system</a>.</li>
 </ul>
-<h2>Design Philosophy</h2>
 <h2>Design Philosophy</h2>
 <p>*Some of the following definitions are from <a href="https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/">ariadne.space's post on ActivityPub's design falings</a>.</p>
 <ul>
 <li><strong>Simplicity</strong>: The standard and protocol should be simple to implement. It is much more important for the protocol and standard to be simple than the backend implementation.</li>
 <li><strong>Cleanliness</strong>: The standard must be clean and easily usable from a end-user perspective. It is more important for it to be clean and simple for end-users than the backend implementation.</li>
-<li><strong>Cleanliness</strong>: The standard must be clean and easily usable from a end-user perspective. It is more important for it to be clean and simple for end-users than the backend implementation.</li>
 <li><strong>Correctness</strong>: All packets and URI's must be verifiably correct or incorrect. It MUST NOT ever be unclear.</li>
 <li><strong>Safety</strong>: The standard and protocol is designed in a way that is safe, any unsafe implementations are considered incorrect.</li>
 <li><strong>Completeness</strong>: The standard and protocol must cover all reasonably expected situations.</li>
-<li><strong>Privacy</strong>: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages.</li>
 <li><strong>Privacy</strong>: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages.</li>
 <li><strong>Prevent Consolidation</strong>: We don't want this to end up like email, where you <em>can</em> self host and join a smaller provider, but good luck with all the limitations in place.</li>
 </ul>
@@ -167,31 +158,6 @@
             &quot;guid&quot;: &quot;GUID2&quot;
         }],
 
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-    &lt;friends&gt;
-        &lt;user handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/user&gt;
-    &lt;/friends&gt;
-
-    &lt;blocked&gt;
-        &lt;user handle=&quot;@somejerk#0001@converveative.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/user&gt;
-    &lt;/blocked&gt;
-
-    &lt;hubs&gt;
-        &lt;hub cid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;
-    &lt;/hubs&gt;
-
-    &lt;!-- o is short for object, generic subdevider. --&gt;
-    &lt;pronouns&gt;she/her 
-        &lt;detailed&gt;
-            &lt;o&gt;she/her&lt;/o&gt;
-            &lt;o&gt;they/them&lt;/o&gt;
-        &lt;/detailed&gt;
-    &lt;/pronouns&gt;
-
-    &lt;links&gt;
-        &lt;link rel=&quot;nofriend&quot; icon=&quot;mastodon&quot;&gt;@username@mastodon.social&lt;/link&gt; &lt;!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.--&gt;
-        &lt;link rel=&quot;me&quot; icon=&quot;peertube&quot;&gt;@username@joinpeertube.org&lt;/link&gt; &lt;!-- This is VERIFIED because it has rel=&quot;me&quot; --&gt;
-=======
     &quot;hubs&quot;: [
         {&quot;visibility&quot;: &quot;friend_and_mutual&quot;},
         {
@@ -221,12 +187,8 @@
             &quot;visibility&quot;: &quot;everyone&quot;
         }
     ],
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; c355da9af4afcc7946ecd482be6100c14a8d4662
 
     &quot;public_key&quot;: &quot;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&quot;,
-        &lt;!-- The user can specify which icon to use, we recommend you use https://simpleicons.org for the icons.
-             If no icon is specified and the network is unrecongnised, use the favicon instead --&gt;
-    &lt;/links&gt;
 
     &quot;prefrences&quot;: {
         &quot;visibility&quot;: &quot;private&quot;
@@ -237,11 +199,6 @@
 </code></pre>
 <p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>.</p>
 <p>For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 14 bytes from their guid, if the tag would be <code>0000</code>, or is above <code>#9999</code>, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be <code>#0001</code>. if it goes above, until the end, then they are instead automatically assigned the tag <code>#9999</code>.</p>
-<p>When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub.</p>
-<p><em>We suggest you store this data minified in a deployed server, as it can get bulky with all the indents. The following is the same code minified: (you can just FEEL the savings)</em></p>
-<pre><code class="language-xml">&lt;account&gt;&lt;display_name&gt;I am an ACTOR&lt;/display_name&gt;&lt;username&gt;actor&lt;/username&gt;&lt;hash&gt;1234&lt;/hash&gt;&lt;instance&gt;example.net&lt;/instance&gt;&lt;handle&gt;@actor#1234@example.net&lt;/handle&gt;&lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;&lt;last_edited unit=&quot;s&quot;&gt;1673395864&lt;/last_edited&gt;&lt;bio language=&quot;en&quot; encoding=&quot;UTF-8&quot;&gt;Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!&lt;/bio&gt;&lt;icon size=&quot;full&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/icon&gt;&lt;icon size=&quot;255x255&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&lt;/icon&gt;&lt;icon size=&quot;90x90&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&lt;/icon&gt;&lt;icon size=&quot;40x40&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&lt;/icon&gt;&lt;banner size=&quot;full&quot;&gt;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/banner&gt;&lt;primary_color&gt;#512BD4&lt;/primary_color&gt;&lt;username_color&gt;#512BD4&lt;/username_color&gt;&lt;status&gt;&lt;type&gt;online&lt;/type&gt;&lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;&lt;text&gt;Being gay on example.net&lt;/text&lt;/status&gt;&lt;friends&gt;&lt;friend handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/friend&gt;&lt;/friends&gt;&lt;hubs&gt;&lt;hub cid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;&lt;/hubs&gt;&lt;links&gt;&lt;link rel=&quot;nofriend&quot; icon=&quot;mastodon&quot;&gt;@username@mastodon.social&lt;/link&gt;&lt;link rel=&quot;me&quot; icon=&quot;peertube&quot;&gt;@username@joinpeertube.org&lt;/link&gt;&lt;/links&gt;&lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;&lt;prefrences scope=&quot;to_owner_only&quot;&gt;&lt;/prefrences&gt;&lt;/account&gt;
-</code></pre>
-<p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>,</p>
 <p>When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub.</p>
 <pre><code class="language-plaintext">@username
 @username#1234
@@ -274,12 +231,6 @@
 <p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
 <p>Generally, it follows a <code>action:what:details</code> scheme, however when UUIDs are involved they are instead surrounded by forward slashes.</p>
 <pre><code>bonfire://invite/guid
-<p>Bonfire uses a protocol similar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
-<h2>URI Scheme</h2>
-<p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
-<p>Generally, it follows a <code>action:what:details</code> scheme, however when CIDs are involved they are instead surrounded by forward slashes.</p>
-<p>Hub CIDs MUST include the instance at the begining in the following format: <code>CID:sub.domain.tld</code>. This allows URIs to be cleaner.</p>
-<pre><code>bonfire://invite/cid/instance.tld
 
 ( bonfire://invite/1233:45::671: )
 ( bonfire://invite/13fg:45::6io: )
