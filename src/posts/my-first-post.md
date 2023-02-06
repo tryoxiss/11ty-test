@@ -2,7 +2,12 @@
 title: Code Stress Tests
 author: tryoxiss
 #code_language: python
+# eleventyExcludeFromCollections: true
+
+date: 2022-01-11
 --- 
+
+**This post exists to be a typography and markdown test for 11ty. This is NOT INTENDED to be read as a proper post.**
 
 Stress test Example
 

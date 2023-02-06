@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Stress Tests ★ tryoxiss</title>
+
+    <link rel="stylesheet" href="/res/style.css">
+    <link rel="stylesheet" href="/res/prism.css">
+
+    <link rel="icon" href="/res/ico/favicon.ico">
+
+</head>
+
+
+<body class="match-braces language-">
+    <script src="/res/prism.js"></script>
+    
+    <header>
+        
+        <h1>Code Stress Tests</h1>
+
+        <p class="subtitle">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>tryoxiss
+            
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minute read 
+        </p>
+
+        
+
+        
+    </header>
+    
+    <main>
+        
+        <p>Stress test Example</p>
+<pre><code class="language-python">print(&quot;The docs are at https://docs.example.com/example&quot;)
+# The docs are at https://docs.example.com/example
+
+def pythonCodeBlock(betterThanJavascript): 
+    for i in range(1, 10): 
+        print(i)
+        print('Just... why?')
+
+        if i == NaN: 
+            break
+    if betterThanJavascript == True: 
+        print(&quot;you dont deserve me then&quot;)
+        break up
+</code></pre>
+<p>ALWAYS wrap inline/not full screen canvas in a div with the class <code>code-toolbar</code> so it has the buttons. Can't figure out why it works diffrenly than its own seperate wrapper, but it does.</p>
+<div class="code-toolbar">
+<canvas id="app"></canvas>
+</div>
+<p>here is a <a href="https://example.com">link</a></p>
+<p><code>print('hello world')</code></p>
+<p>And here is some rust .rs code</p>
+<pre><code class="language-rust">mod my {
+    // A public struct with a public field of generic type `T`
+    pub struct OpenBox&lt;T&gt; {
+        pub contents: T,
+    }
+
+    // A public struct with a private field of generic type `T`
+    pub struct ClosedBox&lt;T&gt; {
+        contents: T,
+    }
+
+    impl&lt;T&gt; ClosedBox&lt;T&gt; {
+        // A public constructor method
+        pub fn new(contents: T) -&gt; ClosedBox&lt;T&gt; {
+            ClosedBox {
+                contents: contents,
+            }
+        }
+    }
+}
+
+fn main() {
+    // Public structs with public fields can be constructed as usual
+    let open_box = my::OpenBox { contents: &quot;public information&quot; };
+
+    // and their fields can be normally accessed.
+    println!(&quot;The open box contains: {}&quot;, open_box.contents);
+
+    // Public structs with private fields cannot be constructed using field names.
+    // Error! `ClosedBox` has private fields
+    //let closed_box = my::ClosedBox { contents: &quot;classified information&quot; };
+    // TODO ^ Try uncommenting this line
+
+    // However, structs with private fields can be created using
+    // public constructors
+    let _closed_box = my::ClosedBox::new(&quot;classified information&quot;);
+
+    // and the private fields of a public struct cannot be accessed.
+    // Error! The `contents` field is private
+    //println!(&quot;The closed box contains: {}&quot;, _closed_box.contents);
+    // TODO ^ Try uncommenting this line
+}
+
+</code></pre>
+<p>And here is are yarn-aligned dialogue system beta dictionary file and dialogue file.</p>
+<pre><code class="language-yaml">[items] 
+- color: ff3b3b
+
+vault_key: {
+  - name: vault key
+  - description: a key to open the vault # shown on hover. # means comment. 
+}
+
+[characters] # color
+Mira: 
+  - color: 008cff # it will be hex by defult, and is currently the only supported option.
+
+mira: Some dialogue that has stuff
+  -&gt; Option 1
+  -&gt; Option 2 {function()} # function is optional
+mira: include dictionary items by using [square brackets] around them to make the game know you want the dictionary entry 
+mira: every time a characters name is mentioned, it creates a new disloaue box. 
+</code></pre>
+<p>Here is a basic scene showing an option and a fn call option.</p>
+<pre><code class="language-yaml">mira: Some dialogue that has stuff
+  -&gt; Option 1
+  -&gt; Option 2 {function()} # function is optional
+mira: include dictionary items by using [square brackets] around them to make the game know you want the dictionary entry 
+mira: every time a characters name is mentioned, it creates a new disloaue box. 
+</code></pre>
+<p>And here is a cutscene.</p>
+<pre><code class="language-yaml">[cutscene_1]
+mira: the first time a characters name
+mira: is mentioned in a sceneit will have
+mira: thier name show up and it will 
+mira: be colored in.
+mira: after that; it will only
+mira: be colored in, unless the 
+mira: always show names
+mira: accesability option is checked. 
+
+tip: try to keep lines of 
+tip: subtitles to 3-8 words
+tip: Never seperate a subject
+tip: from its object in a line, hovever. 
+tip: commas, colons, and periods 
+tip: are the best places to split a line
+
+tip: subtitles will stay up for an 
+tip: amount of time detemrned by the game
+tip: based on the number of spaces
+
+tip: but you CAN use the \{wait} function # functuions need to be escaped witg a \ if you dont want them to run
+tip: to manually add pauses. 
+
+{wait: 500ms} 
+
+tip: but you CANNOT run most other 
+tip: functions in subtitles
+</code></pre>
+<pre><code class="language-xml">&lt;account&gt;
+    &lt;username&gt;Actor&lt;/username&gt;
+    &lt;hash&gt;1234&lt;/hash&gt;
+    &lt;instance&gt;example.net&lt;/instance&gt;
+    &lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;
+
+    &lt;status&gt;
+        &lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;
+        &lt;text&gt;Being gay on example.net&lt;/text&gt;
+    &lt;/status&gt;
+
+    &lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;
+    &lt;!-- This key is arbitrary, but it is a 128 Hex Public Key--&gt;
+&lt;/account&gt;
+</code></pre>
+
+        
+    </main>
+
+
+    
+<footer>
+    
+
+    <ul>
+        <li><a href="#" class="dead-link"><b>Credits</b></a></li>
+        <li><a href="https://www.11ty.dev/">11ty</a> (SSG)</li>
+        <li><a href="https://prismjs.com/">prism.js</a> (Syntax Hilighting)</li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><b>Theme</b></li>
+        <li><a href="/specs/milkshake/2.0/" class="dead-link">Milkshake 2.0 Theme</a></li>
+        <li><a href="https://github.com/catppuccin/catppuccin">catppuccin</a></li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><a href="/projects/" class="dead-link"><b>Our Stuff!</b></a></li>
+        <li><a href="/specs/bonfire/">Bonfire</a> Drafts, Project Codename</li>
+    </ul>
+
+    <ul>
+        <li><b>DEBUG</b></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io">Source</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/issues">Issues</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/commit/master">Deployment Status</a></li>
+    </ul>
+
+    <br>
+    <p class="subtitle">Most content on this site is copyright &copy; tryoxiss 2022 or later. Feel free to use any of my content without asking though, just credit me and don't use it for any <a href="/dict/profanity/" class="dead-link">profanity</a> and I will probably be good. Though I do reserve the right to make you stop using it at any time for any reason.</p>
+</footer>
+
+</body>
+</html>

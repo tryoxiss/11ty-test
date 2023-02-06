@@ -24,6 +24,7 @@
     
     <main>
         <p>Bonfire is a working (and temporary) name for a standard to allow for community-divided federated instant messaging. In laymans terms, its federated discord.</p>
+        <p>Bonfire is a working (and temporary) name for a standard to allow for community-divided federated instant messaging. In laymans terms, its federated discord.</p>
 <blockquote class="callout callout--info">
     <!-- <svg src="/_shared-content/lucide/alert-triangle.svg" color="red"></svg> -->
     <div class="callout__header">
@@ -32,8 +33,22 @@
     </div>
     <p>it is not finished and is due for many, many revisions down the road. </p>
 </blockquote>
+<blockquote class="callout callout--warning">
+    <!-- <svg src="/_shared-content/lucide/alert-triangle.svg" color="red"></svg> -->
+    <div class="callout__header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path><path d="M14 2v6h6"></path><path d="m3 12.5 5 5"></path><path d="m8 12.5-5 5"></path></svg>
+        <p>Dependy Issue</p>
+    </div>
+    <p>This specification seems to refrence or cite 1 or more speicfications that appear to be missing. These issues must be resolved before 1.0. A list can be found below: </p>
+    <ul style="margin-top: -1rem;">
+        <li>Clean ID System</li>
+    </ul>
+</blockquote>
 <h2>Definitions</h2>
+<p>Let the keywords that follow be case insensitive unless otherwise specified.</p>
 <ul>
+<li>Let the keywords &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, and &quot;MAY&quot; (and lowercase equivalents) be defined as specified in <a href="https://www.rfc-editor.org/rfc/rfc2119">RFC:2119</a></li>
+<li>Let <code>incorrect</code> mean MUST NOT; as in, incorrect behaviour violates the standard.</li>
 <li>Let the keywords &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, and &quot;MAY&quot; (and lowercase equivalents) be defined as specified in <a href="https://www.rfc-editor.org/rfc/rfc2119">RFC:2119</a></li>
 <li>Let <code>incorrect</code> mean SHOULD NOT; as in, incorrect behaviour comes close to violating the standard.</li>
 <li>Let <code>i&lt;int&gt;</code> represent 2^int-1. Some examples (and the important ones) are as follows;
@@ -42,62 +57,117 @@
 <li><code>i8</code> equals <code>255</code></li>
 <li><code>i16</code> equals <code>65,535</code></li>
 <li><code>i32</code> equals <code>2,147,483,647</code></li>
-<li><code>i64</code> equals approxamtely <code>1.844674407×10¹⁹</code></li>
+<li><code>i64</code> equals approximately <code>1.844674407×10¹⁹</code></li>
 </ul>
 </li>
+<li>Let <code>JSON Object</code>, <code>Object</code>, or <code>Packet</code> represent one JSON object, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16.</li>
 <li>Let <code>XML Object</code> represent one XML tag, and any nested objects thereforth. Let this not exeed the maximum status characters of an i16.</li>
 <li>Let <code>packet</code> represent one XML object sent between a client-server, or server-server relationship.</li>
 <li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
+<li><s>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</s></li>
+<li>Let <code>GUID</code> and <code>UUID</code> represent a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">Universally Unique Identifier</a>.</li>
+<li>Let the character sets <code>reserved</code>, <code>escaped</code>, <code>delims</code>, <code>unwise</code>, <code>lowalpha</code>, <code>upalpha</code>, <code>alpha</code>, <code>digit</code>, <code>alphanum</code>, <code>mark</code> and <code>unreserved</code> are to be defined as in <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC:2396</a>. This is only when these keywords are in reference to a <strong>character set</strong>.</li>
+<li>Let <code>inalpha</code> represent the character set including <code>upalpha</code> and <code>lowalpha</code>, where no distinction is made between uppercase and lowercase. (&quot;A&quot; is the same as &quot;a&quot;).</li>
+<li>Let the character set <code>safe</code> be the culmination of <code>inalpha</code> and <code>digit</code> and the characters <code>_</code> and <code>-</code>.</li>
+<li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
 <li>Let <code>CID</code> and <code>cid</code> mean the <a href="https://github.com/tryoxiss/tryoxiss.github.io/blob/master/src//specs/cid/recent/">clean ID system</a>.</li>
 </ul>
+<h2>Design Philosophy</h2>
 <h2>Design Philosophy</h2>
 <p>*Some of the following definitions are from <a href="https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/">ariadne.space's post on ActivityPub's design falings</a>.</p>
 <ul>
 <li><strong>Simplicity</strong>: The standard and protocol should be simple to implement. It is much more important for the protocol and standard to be simple than the backend implementation.</li>
 <li><strong>Cleanliness</strong>: The standard must be clean and easily usable from a end-user perspective. It is more important for it to be clean and simple for end-users than the backend implementation.</li>
+<li><strong>Cleanliness</strong>: The standard must be clean and easily usable from a end-user perspective. It is more important for it to be clean and simple for end-users than the backend implementation.</li>
 <li><strong>Correctness</strong>: All packets and URI's must be verifiably correct or incorrect. It MUST NOT ever be unclear.</li>
 <li><strong>Safety</strong>: The standard and protocol is designed in a way that is safe, any unsafe implementations are considered incorrect.</li>
 <li><strong>Completeness</strong>: The standard and protocol must cover all reasonably expected situations.</li>
 <li><strong>Privacy</strong>: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages.</li>
+<li><strong>Privacy</strong>: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages.</li>
 <li><strong>Prevent Consolidation</strong>: We don't want this to end up like email, where you <em>can</em> self host and join a smaller provider, but good luck with all the limitations in place.</li>
 </ul>
+<p>Other, smaller goals are to make it extensible so at no point will there ever be breaking changes (No &quot;bonfire 2.0&quot;). While we cannot guarantee this, a finished 1.0 spec should be backwards compatible for at least the next 30 years, while still being able to add support for new features.</p>
+<h2>Conventions followed</h2>
+<ul>
+<li>Variables and XML Objects will be denoted in snake case. (<code>variable_name</code>)</li>
+<li>Variables in code which remain constant should be all capitalised. (<code>VARIABLE_NAME</code>)</li>
+</ul>
 <h2>Objects</h2>
+<p>Objects are just how we send stuff store it however you please, ideally SQL.</p>
 <h3>Accounts</h3>
-<p>An account is an object that represents a <code>Person</code> in nature. Its XML Object is as follows:</p>
-<pre><code class="language-xml">&lt;account&gt;
-    &lt;display_name&gt;I am an ACTOR&lt;/display_name&gt;
-    &lt;username&gt;actor&lt;/username&gt;
-    &lt;hash&gt;1234&lt;/hash&gt;
-    &lt;instance&gt;example.net&lt;/instance&gt;
+<p>An account is an object that represents a <code>person</code> in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a <code>visibility</code> field cannot have its visibility edited.</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: {
+        &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+        &quot;lang&quot;: &quot;en&quot;
+    },
+    
+    &quot;guid&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+    
+    &quot;display_name&quot;: &quot;Alice&quot;,
 
-    &lt;handle&gt;@actor#1234@example.net&lt;/handle&gt;
+    &quot;handle&quot;: { 
+        &quot;username&quot;: &quot;alice&quot;,
+        &quot;discriminator&quot;: &quot;0001&quot;,
+        &quot;instance&quot;: &quot;example.social&quot;
+    }, 
 
-    &lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;
+    &quot;icon&quot;: { 
+        &quot;full&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&quot;,
+        &quot;255&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&quot;,
+        &quot;90&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&quot;,
+        &quot;40&quot;: &quot;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&quot;
+    },
 
-    &lt;last_edited unit=&quot;s&quot;&gt;1673395864&lt;/last_edited&gt;
-    &lt;!-- UNIX Timestamp in secconds.  --&gt;
+    &quot;banner&quot;: { 
+        &quot;full&quot;: &quot;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&quot;
+    },
 
-    &lt;bio language=&quot;en&quot; encoding=&quot;UTF-8&quot;&gt;
-    Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!
-    &lt;/bio&gt;
+    &quot;colors&quot;: { 
+        &quot;primary&quot;: &quot;#512BD4&quot;,
+        &quot;username&quot;: &quot;#512BD4&quot;
+    },
 
-    &lt;icon size=&quot;full&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/icon&gt;
-    &lt;icon size=&quot;255x255&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&lt;/icon&gt;
-    &lt;icon size=&quot;90x90&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&lt;/icon&gt;
-    &lt;icon size=&quot;40x40&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&lt;/icon&gt;
+    &quot;status&quot;: { 
+        &quot;visibility&quot;: &quot;friends&quot;,
+        &quot;type&quot;: &quot;plain&quot;,
+        &quot;activity&quot;: &quot;online&quot;,
+        &quot;emoji&quot;: &quot;♥️&quot;, 
+        &quot;text&quot;: &quot;Avatar!&quot;
+    },
 
-    &lt;banner size=&quot;full&quot;&gt;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/banner&gt;
+    &quot;connections&quot;: { 
+        // asdasda
+    }, 
 
-    &lt;primary_color&gt;#512BD4&lt;/primary_color&gt;
-    &lt;username_color&gt;#512BD4&lt;/username_color&gt;
+    &quot;friends&quot;: [
+        {&quot;visibility&quot;: &quot;everyone&quot;},
+        {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+            &quot;nickname&quot;: &quot;your nick &lt;3&quot;,
+            &quot;note&quot;: &quot;your note on them&quot;, 
+            &quot;other info&quot;: &quot;sotre whatever custom fields you want!&quot;
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }
+    ],
 
-    &lt;status&gt;
-        &lt;!-- Valid Values: online, offline, away, idle, do not disturb --&gt;
-        &lt;type&gt;online&lt;/type&gt;
-        &lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;
-        &lt;text&gt;Being gay on example.net&lt;/text&gt;
-    &lt;/status&gt;
+    &quot;blocked&quot;: [{
+            &quot;guid&quot;: &quot;GUID1&quot;,
+            &quot;note&quot;: &quot;your note on them&quot;, 
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;
+        }],
 
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     &lt;friends&gt;
         &lt;user handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/user&gt;
     &lt;/friends&gt;
@@ -121,19 +191,53 @@
     &lt;links&gt;
         &lt;link rel=&quot;nofriend&quot; icon=&quot;mastodon&quot;&gt;@username@mastodon.social&lt;/link&gt; &lt;!-- UNVERIFIED accounts. They get verified by linking to thier bonfire account publicly onthe linked account.--&gt;
         &lt;link rel=&quot;me&quot; icon=&quot;peertube&quot;&gt;@username@joinpeertube.org&lt;/link&gt; &lt;!-- This is VERIFIED because it has rel=&quot;me&quot; --&gt;
+=======
+    &quot;hubs&quot;: [
+        {&quot;visibility&quot;: &quot;friend_and_mutual&quot;},
+        {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID1&quot;,
+        }, {
+            &quot;guid&quot;: &quot;GUID2&quot;
+        }
+    ],
 
+    &quot;pronouns&quot;: [&quot;she/they&quot;, &quot;she/her&quot;, &quot;they/them&quot;],
+    // the frist one is shown, then seperated by slashes and when hovered it will show the one at that index
+    // So if you have &quot;she/they&quot; and you hover &quot;she&quot; with the array above, it will show a tooltip saying &quot;she/her&quot;
+
+    &quot;links&quot;: [{ 
+            &quot;rel&quot;: &quot;nofriend&quot;, // UNVERIFIED
+            &quot;icon&quot;: &quot;mastodon&quot;,
+            &quot;link&quot;: &quot;@username@example.social&quot;, 
+            &quot;visibility&quot;: &quot;everyone&quot;
+        }, { 
+            &quot;rel&quot;: &quot;me&quot;, // VERIFIED
+            &quot;icon&quot;: &quot;peertube&quot;,
+            &quot;link&quot;: &quot;@username@joinpeertube.org&quot;,
+            &quot;visibility&quot;: &quot;everyone&quot;
+        }
+    ],
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; c355da9af4afcc7946ecd482be6100c14a8d4662
+
+    &quot;public_key&quot;: &quot;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&quot;,
         &lt;!-- The user can specify which icon to use, we recommend you use https://simpleicons.org for the icons.
              If no icon is specified and the network is unrecongnised, use the favicon instead --&gt;
     &lt;/links&gt;
 
-    &lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;
-    &lt;!-- This key is arbitrary, but it is a 128 Hex Public Key--&gt;
+    &quot;prefrences&quot;: {
+        &quot;visibility&quot;: &quot;private&quot;
 
-    &lt;prefrences scope=&quot;to_owner_only&quot;&gt;
-        ...
-    &lt;/prefrences&gt;
-&lt;/account&gt;
+        // maybe include ALL visabilities in &quot;prefrences&quot;?
+    }
+}
 </code></pre>
+<p>XML SHOULD work with the recommended database (MariaDB; recommended because you can easily self-host. All of its features are entirely free, open source, and handles large data loads well. You can pay for them to host it with addons like redundant data though). <a href="https://mariadb.com/kb/en/what-data-type-should-i-use-to-store-xml-natively-in-the-database/">^1</a>.</p>
+<p>For a users GUID, you generate a GUIDv1, and then the result of that that and the users inputted username on signup (this WILL NOT change when they change their username. Their GUID is their GUID for life unless reset*) will be fed in to create a GUIDv5. The users default tag is generated with the first 14 bytes from their guid, if the tag would be <code>0000</code>, or is above <code>#9999</code>, then they instead read the next 14 bits. If no string resulting in a non-zero tag is found, the tag is set to be <code>#0001</code>. if it goes above, until the end, then they are instead automatically assigned the tag <code>#9999</code>.</p>
+<p>When mentioning users, any of the following structures can be used, as long as one would bring it down to just one user in the current hub.</p>
 <p><em>We suggest you store this data minified in a deployed server, as it can get bulky with all the indents. The following is the same code minified: (you can just FEEL the savings)</em></p>
 <pre><code class="language-xml">&lt;account&gt;&lt;display_name&gt;I am an ACTOR&lt;/display_name&gt;&lt;username&gt;actor&lt;/username&gt;&lt;hash&gt;1234&lt;/hash&gt;&lt;instance&gt;example.net&lt;/instance&gt;&lt;handle&gt;@actor#1234@example.net&lt;/handle&gt;&lt;cid&gt;1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw&lt;/cid&gt;&lt;last_edited unit=&quot;s&quot;&gt;1673395864&lt;/last_edited&gt;&lt;bio language=&quot;en&quot; encoding=&quot;UTF-8&quot;&gt;Hey, its my bio for my account. It's pretty cool. It has mostly full **markdown** and :emoji: support!&lt;/bio&gt;&lt;icon size=&quot;full&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/icon&gt;&lt;icon size=&quot;255x255&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@255px.png&lt;/icon&gt;&lt;icon size=&quot;90x90&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@90px.png&lt;/icon&gt;&lt;icon size=&quot;40x40&quot;&gt;https://res.example.net/pfp/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001@40px.png&lt;/icon&gt;&lt;banner size=&quot;full&quot;&gt;https://res.example.net/bannar/1234:5678:9abc:defg:hijk:lmno:pqrs:tuvw:0001.png&lt;/banner&gt;&lt;primary_color&gt;#512BD4&lt;/primary_color&gt;&lt;username_color&gt;#512BD4&lt;/username_color&gt;&lt;status&gt;&lt;type&gt;online&lt;/type&gt;&lt;emoji&gt;:rainbow_flag:&lt;/emoji&gt;&lt;text&gt;Being gay on example.net&lt;/text&lt;/status&gt;&lt;friends&gt;&lt;friend handle=&quot;@khaim#0919@instance.tld&quot; cid=&quot;l012:l10a:9abc:a::nl:pqrs:92&quot; nickname=&quot;Khaim :heart:&quot;&gt;&lt;/friend&gt;&lt;/friends&gt;&lt;hubs&gt;&lt;hub cid=&quot;hub:012a:2918:asd1:jq:sad::example.net&quot;&gt;&lt;/hub&gt;&lt;/hubs&gt;&lt;links&gt;&lt;link rel=&quot;nofriend&quot; icon=&quot;mastodon&quot;&gt;@username@mastodon.social&lt;/link&gt;&lt;link rel=&quot;me&quot; icon=&quot;peertube&quot;&gt;@username@joinpeertube.org&lt;/link&gt;&lt;/links&gt;&lt;public_key&gt;999b9af08579802c4d1ca35070b179d610754abd2d601284819493a55e9ce760e1bc9b8adc6f9592311546f88f43237c65577ca7db95919945e63bfbb241b7b6&lt;/public_key&gt;&lt;prefrences scope=&quot;to_owner_only&quot;&gt;&lt;/prefrences&gt;&lt;/account&gt;
 </code></pre>
@@ -144,7 +248,32 @@
 @username@example.net
 @username#1234@example.net
 </code></pre>
+<p>an account suspended by the instance will add the <code>suspended</code> keyword to the <code>&lt;account&gt;</code> object, such as <code>&lt;account type=&quot;person&quot; suspended&gt;</code>.</p>
+<p>When an account is suspended, all mentions of them should display as <code>@suspended#0000</code>.</p>
+<p>Deleted accounts should instead be removed from the database entirely, and their mentions should be replaced with <code>@unknown#0000</code>. If they simply moved to another instance, their mentions should update accordingly.</p>
+<h3>Messages</h3>
+<p>A status object can represent a reaction, message, creation, or anything else that is not a <code>person</code> or <code>bot</code> in nature.</p>
+<p>Creation:</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: {
+            &quot;spec&quot;: &quot;https://tryoxiss.github.io/specs/bonfire/recent/&quot;,
+            &quot;lang&quot;: &quot;en&quot;,
+        },
+    &quot;request&quot;: &quot;CREATE&quot;,
+    &quot;type&quot;: &quot;message&quot;,
+    &quot;author&quot;: &quot;000000000-0000-5000-0000-000000000000&quot;,
+    &quot;adressed&quot;: [&quot;000000000-0000-5000-0000-000000000000&quot;, &quot;000000000-0000-5000-0000-000000000000&quot;], 
+    &quot;content&quot;: &quot;What does the message contain? Remember to escape doubble quotes with a backslash! \\! if the server recieves an invalid object, it will ignore it!&quot;,
+    &quot;time&quot;: &quot;1673475563&quot;,
+    &quot;signature&quot;: &quot;&quot;
+}
+</code></pre>
 <h2>Federation</h2>
+<p>Bonfire uses a protocol similar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
+<h2>URI Scheme</h2>
+<p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
+<p>Generally, it follows a <code>action:what:details</code> scheme, however when UUIDs are involved they are instead surrounded by forward slashes.</p>
+<pre><code>bonfire://invite/guid
 <p>Bonfire uses a protocol similar to <a href="https://diaspora.github.io/diaspora_federation/federation/magicsig.html">Diaspora*</a> protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire.</p>
 <h2>URI Scheme</h2>
 <p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
@@ -160,7 +289,7 @@ bonfire://view:@username#0000@instance.tld
 ( bonfire://view:@tryoxiss#8100@bonfire.example.net )
 ( bonfire://view:@khaim#0919@app.instance.tld )
 
-bonfire://view/cid#channel
+bonfire://view/guid#channel
 </code></pre>
 
     </main>
@@ -177,9 +306,10 @@ bonfire://view/cid#channel
     </ul>
 
     <ul>
-        <li><a href="/specs/milkshake/2.0/"><b>Color Theme</b></a></li>
-        <li><a href="/specs/milkshake/2.0/" class="dead-link">Milkshake 2.0 Theme</a> which is based on <a href="https://github.com/catppuccin/catppuccin">catppuccin</a> <a href="https://github.com/catppuccin/catppuccin/blob/main/LICENSE">
-        <svg xmlns="http://www.w3.org/2000/svg" class="text-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></a> and <a class="dead-link" href="/specs/milkshake/1.0/">Milkshake 1.0</a></li>
+        <li><b>Theme</b></li>
+        <li><a href="/specs/milkshake/2.0/" class="dead-link">Milkshake 2.0 Theme</a></li>
+        <li><a href="https://github.com/catppuccin/catppuccin">catppuccin</a></li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
     </ul>
 
     <ul>
@@ -187,13 +317,12 @@ bonfire://view/cid#channel
         <li><a href="/specs/bonfire/">Bonfire</a> Drafts, Project Codename</li>
     </ul>
 
-    
-
     <ul>
-        <li><a href="#" class="dead-link"><b>DEBUG</b></a></li>
+        <li><b>Developement</b></li>
         <li><a href="https://github.com/tryoxiss/tryoxiss.github.io">Source</a></li>
         <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/issues">Issues</a></li>
         <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/commit/master">Deployment Status</a></li>
+        <li><a href="/debug/">Build Info</a></li>
     </ul>
 
     <br>
