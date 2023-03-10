@@ -20,4 +20,4 @@ table_stat_1_4:
 table_attributes: "Bow, Longbow"
 ---
 
-The [english longbow](https://en.wikipedia.org/wiki/English_longbow) is a heavy long range bow designed for primarly castle archers and distanced shooting. Realistically, they are much more likely to be used in ranges of 70 to 370 meters, however this was changed for game balance. 
+The [english longbow](https://en.wikipedia.org/wiki/English_longbow) is a heavy long range bow designed for primarly castle archers and long ranges. Realistically, they are much more likely to be used in ranges of 70 to 370 meters, however this was changed for game balance. 

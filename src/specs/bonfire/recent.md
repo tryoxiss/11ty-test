@@ -79,7 +79,10 @@ All objects MUST have a data header which specifies the edition which is require
 ```yaml
 edition: 2022
 type: message
+operation: VIEW # Only sometimes needed.
 ```
+
+If an object fails the signature check, dosen't contain a heder or all needed data, or the user dosen't have permissions for that, you can either simply DROP the pakcet or send a an ERROR response.
 
 ### Accounts
 
@@ -98,6 +101,15 @@ type: profile
 profile: 
     guid: meow
     display_name: "String"
+
+    guid: 0000000000000000000000000000000000
+
+    # We reccommend you store the following avatar scales.
+    avatar_fullres: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d.png # If supported by your instance.
+    avatar_256: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d@256.png 
+    avatar_128: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d@128.png 
+    avatar_64: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d@64.png 
+    avatar_32: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d@64.png   # We highly advise against downscaling avatars lower than this.
 
     pronouns: ["she/they", "she/her", "they/them"]
     # the frist one is shown, then seperated by slashes and when hovered it will show the one at that index
@@ -166,27 +178,84 @@ Deleted accounts should instead be removed from the database entirely, and their
 A status object can represent a reaction, message, creation, or anything else that is not a `person` or `bot` in nature.
 
 Creation:
-```json
-{ 
-    "@context": {
-            "spec": "https://tryoxiss.github.io/specs/bonfire/recent/",
-            "lang": "en",
-        },
-    "request": "CREATE",
-    "type": "message",
-    "author": "000000000-0000-5000-0000-000000000000",
-    "adressed": ["000000000-0000-5000-0000-000000000000", "000000000-0000-5000-0000-000000000000"], 
-    "content": "What does the message contain? Remember to escape doubble quotes with a backslash! \\! if the server recieves an invalid object, it will ignore it!",
-    "time": "1673475563",
-    "signature": ""
-}
+```yaml
+edition: 2023
+type: message
+operation: CREATE
+
+language: en # Helps screenreaders pronounce the content.
+author: 0000000000000000000000000000000000
+adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
+time: 09-MAR-2023@23:03:01
+content: |
+this is the messages content. Some characters need to be escaped.
+
+signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
+```
+
+Editing:
+```yaml
+edition: 2023
+type: message
+operation: EDIT
+
+target: 0000000000000000000000000000000000   # What mwessage is being edited?
+adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
+time: 09-MAR-2023@23:03:55
+content: |
+this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence.
+
+signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
+```
+
+Removing (HIDING from view, not remvoing from servers):
+```yaml
+edition: 2023
+type: message
+operation: REMOVE
+
+target: 0000000000000000000000000000000000   # What mwessage is being edited?
+
+signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
+```
+
+Deleting (Removing from servers):
+```yaml
+edition: 2023
+type: message
+operation: DELETE
+
+target: 0000000000000000000000000000000000   # What mwessage is being edited?
+
+signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
+```
+
+### Reactions
+
+Reactions are little emoji counters below a message.
+
+```yaml
+edition: 2023
+type: message
+operation: CREATE # REMOVE removes YOUR reaction. DELETE clears all reactions of that type.
+
+target: 0000000000000000000000000000000000   # Message ID
+content: "emoji_shortcode" # No colons around them. If its not a valid emoji, simply drop the packet.
+
+signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
 
 ## Federation
 
-All packets must be encrypted end-to-end via RSA, with the exception of voice protocol packets, which can use AES with a key establed via RSA. This key must be diffrent for every voice session. If a voice session lasts longer than 6 hours, it must be rotated every 6 hours. 
+Federation occurs using the packet formats above. When a user wants data, they ask thier instance. Any data thier instance does not have, they ask the instance that will. The instnace that has it then forwards the data directly to the user. No data is stored redundently between instances this way. 
 
-Bonfire uses a protocol similar to [Diaspora*](https://diaspora.github.io/diaspora_federation/federation/magicsig.html) protocol. It is yet unfinished as its specifics are not relevent to the design elegance of Bonfire. 
+This also makes it possible to delete all messages directly. They MAY still be stored in someones cache, but that will likely be cleared out soon.
+
+## Encryption
+
+The encryption versions, standards, etc are defined by the edition. For this edition, and the forseeable future, we will be using AES with keys established over RSA for all communications. 
+
+If a client or service cannot perform said end to end encryption, we highly reccommend you display a warning stating such.
 
 ## Commands
 Bonfire has a lot of commands that must or should be built in and supported. Any action that is possible via the UI must be possible via a command. 
@@ -266,7 +335,7 @@ Examples:
 
 
 
-```
+```plaintext
 View a users profile: 
 bonfire://@username#0000@instance.tld  -- Can change if they change thier username
 bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82  - Cannot change

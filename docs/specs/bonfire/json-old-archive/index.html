@@ -57,7 +57,7 @@
 <li><code>i64</code> equals approximately <code>1.844674407×10¹⁹</code></li>
 </ul>
 </li>
-<li>Let <code>YAML</code>, or <code>Object</code> represent one YAML file (or &quot;file&quot; part of a stream), and any nested objects. Let this not exceed the maximum status characters of an i16.</li>
+<li>Let <code>JSON Object</code> or <code>Object</code> represent one JSON object, and any nested objects thereforth. Let this not exceed the maximum status characters of an i16.</li>
 <li>Let <code>packet</code> represent one JSON Object sent between a client-server, or server-server relationship.</li>
 <li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
 <li><s>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</s></li>
@@ -65,7 +65,6 @@
 <li>Let the character sets <code>reserved</code>, <code>escaped</code>, <code>delims</code>, <code>unwise</code>, <code>lowalpha</code>, <code>upalpha</code>, <code>alpha</code>, <code>digit</code>, <code>alphanum</code>, <code>mark</code> and <code>unreserved</code> are to be defined as in <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC:2396</a>. This is only when these keywords are in reference to a <strong>character set</strong>.</li>
 <li>Let <code>inalpha</code> represent the character set including <code>upalpha</code> and <code>lowalpha</code>, where no distinction is made between uppercase and lowercase. (&quot;A&quot; is the same as &quot;a&quot;).</li>
 <li>Let the character set <code>safe</code> be the culmination of <code>inalpha</code> and <code>digit</code> and the characters <code>_</code> and <code>-</code>.</li>
-<li>Let <strong>Edition</strong> mean the anual revision to the specification.</li>
 </ul>
 <h2>Design Philosophy</h2>
 <p>*Some of the following definitions are from <a href="https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/">ariadne.space's post on ActivityPub's design falings</a>.</p>
@@ -86,11 +85,6 @@
 </ul>
 <h2>Objects</h2>
 <p>Objects are just how we send stuff store it however you please, ideally SQL.</p>
-<p>Any paramaters with an @ before them specify meta data about the communication.</p>
-<p>All objects MUST have a data header which specifies the edition which is required to handle the communication properly, and the type of communication.</p>
-<pre><code>@edition:2022
-@type:message
-</code></pre>
 <h3>Accounts</h3>
 <p>An account is an object that represents a <code>person</code> in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a <code>visibility</code> field cannot have its visibility edited. You can store any information you want on the persons paramaters.</p>
 <pre><code class="language-json">{ 
@@ -214,11 +208,12 @@
 <p>an account suspended by the instance will add the <code>suspended</code> keyword to the <code>&lt;account&gt;</code> object, such as <code>&lt;account type=&quot;person&quot; suspended&gt;</code>.</p>
 <p>When an account is suspended, all mentions of them should display as <code>@suspended#0000</code>.</p>
 <p>Deleted accounts should instead be removed from the database entirely, and their mentions should be replaced with <code>@unknown#0000</code>. If they simply moved to another instance, their mentions should update accordingly.</p>
+<p>The tag <code>0000</code> is <em>always</em> reserved, but the following cases use it. Mentions defult to #0000 if no tag is specified. If no #0000 exists, but multiple non-zero tags exist, digits must be specified until they are differntiated.</p>
 <ul>
-<li>@<strong>suspended</strong> - A suspended user account.</li>
-<li>@<strong>unknown</strong> - An unknown user account.</li>
-<li>@<strong>everyone</strong> - Mentions everyone</li>
-<li>@<strong>someone</strong> - mentions a random person.</li>
+<li>@<strong>suspended</strong>#0000 - A suspended user account.</li>
+<li>@<strong>unknown</strong>#0000 - An unknown user account.</li>
+<li>@<strong>everyone</strong>#0000 - Mentions everyone</li>
+<li>@<strong>someone</strong>#0000 - mentions a random person.</li>
 </ul>
 <h3>Messages</h3>
 <p>A status object can represent a reaction, message, creation, or anything else that is not a <code>person</code> or <code>bot</code> in nature.</p>
