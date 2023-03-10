@@ -1,5 +1,6 @@
 ---
 title: DnD Remade Attributes
+layout: "dndr-framework.njk"
 ---
 
 Attributes are simple tag-based modifiers you can add to any item to modify how it works. If you are looking for stats, or these don't seem what your looking for, see [stats](../stats/).
@@ -15,8 +16,7 @@ Attributes are simple tag-based modifiers you can add to any item to modify how 
     - In game, 1 hex tile is 1x1m. 
     - It is designed to be played with either square *or* hex tiles. But hex is more fun fight me.
     <!-- - Convert from meters to tiles: `(tiles * 100) / 75` -->
-
--**Khaim**: yeah, but i also feel like the characters get to much hp to fast, like having them start out at 8 and at max only getting to like 50 would be better than starting at 10 and getting to 300
+- **Khaim**: yeah, but i also feel like the characters get to much hp to fast, like having them start out at 8 and at max only getting to like 50 would be better than starting at 10 and getting to 300
 - Levels run from 1 (defult) to 20 (max). Characters cannot exeed level 20, but should not *reach* level 20 in the first place. 
 
 Basic item design: 

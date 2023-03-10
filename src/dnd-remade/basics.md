@@ -1,5 +1,6 @@
 ---
 title: DnD Remade Framework
+layout: "dndr-framework.njk"
 ---
 
 This document defines the basic framework and definitions for the rest of the ruleset, which defines spells, mechanics, and more. This is more of a framework that the rest is built on. The other parts can be modified much more easily, but modifying this may break things as it is foundational. 
@@ -38,3 +39,5 @@ These additional raritys also exist for special pourposes, and all combine with 
 | <span class="blue-2">Unusual</span>  | Rarer versions of other items, that often have specia lcrafting uses. |
 
 <!-- | <span class="orange-2">Legendary</span>  | An incredibly rare item or artifcat with one-of-a-kind abbilities or craftsmanship. Often The lifes work of a master craftsperson  | -- between mythical and seccond highest-->
+
+The framework is also designed to be mostly or fully compatible with most if not all Dungeons and Dragons homebrew and pre-made campeigns. 

@@ -1,5 +1,6 @@
 ---
 title: DnD Remade Potions
+layout: "dndr-framework.njk"
 ---
 
 **Potions** can be bought and bewed. How effective they are is related to the **size** and **potency** of a potion. It's potency determines rarity, while its size determines the uses before it runs out. Consuming a potion returns the bottle it was in. 

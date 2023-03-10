@@ -15,75 +15,79 @@
     
     <header>
         <h1>{{ title }}</h1>
-
-        <p class="subtitle">
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>Updated Date Undefined
-        </p>
     </header>
-    
-    <nav role="related articles" class="glossary">
-
-    <details>
-        <summary>Basics</summary>
-        <ul>
-            <li><a href="../basics/">Framework Basics</a></li>
-            <li><a href="../attributes/">Attributes</a></li>
-            <li>delor</li>
-            <li>sit</li>
-            <li>amet</li>
-        </ul>
-    </details>
-
-    <details>
-        <summary>Getting Started</summary>
-        <ul>
-            <li><a href="../create-a-character/">Character Creation</a></li>
-            <li><a href="../basic-mechanics/">Basic Mechanics</a></li>
-            <li>sit</li>
-            <li>amet</li>
-        </ul>
-    </details>
-
-    <details>
-        <summary>Mechanics</summary>
-        <ul>
-            <li><a href="../basics/">Framework</a></li>
-            <li></li>
-            <li>delor</li>
-            <li>sit</li>
-            <li>amet</li>
-        </ul>
-    </details>
-
-    <details>
-        <summary>Items</summary>
-        <ul>
-            <li><a href="../potions/">Potions</a></li>
-            <li><a href="../tools/">Tools</a></li>
-            <li>delor</li>
-            <li>sit</li>
-            <li>amet</li>
-        </ul>
-
-    </details>
-
-    <details>
-        <summary>Homebrew</summary>
-        <ul>
-            <li><a href="../basics/">Framework</a></li>
-            <li></li>
-            <li>delor</li>
-            <li>sit</li>
-            <li>amet</li>
-        </ul>
-    </details>
-
-    </nav>
 
     <main>
         {{ content | safe }}
     </main>
+
+    {# FOR SOME REASON THIS ASIDE CAUSES MOBILE BUGS. FIX BEFORE MERGEING. #}
+    <aside role="Sidebar" class="sidebar postcard">
+    {% block sidebar %}
+
+    <p class="sidebar-header {{table_item_color}}">{{ table_header }}</p>
+
+    <p>{{ table_type }}</p>
+    <p>{{ table_description }}</p>
+
+    <span class="sidebar-text">{{ table_item_type }}</span>
+
+    <img src="{{ table_image }}" alt="{{ table_image_alt }}">
+
+    <ul>
+        <li>{{ table_stat_1 }}</li>
+        <ul>
+            <li>{{ table_stat_1_1 }}</li>
+            <li>{{ table_stat_1_2 }}</li>
+            <li>{{ table_stat_1_3 }}</li>
+            <li>{{ table_stat_1_4 }}</li>
+        </ul>
+
+        <li>{{ table_stat_2 }}</li>
+        <ul>
+            <li>{{ table_stat_2_1 }}</li>
+            <li>{{ table_stat_2_2 }}</li>
+            <li>{{ table_stat_2_3 }}</li>
+            <li>{{ table_stat_2_4 }}</li>
+        </ul>
+
+        <li>{{ table_stat_3 }}</li>
+        <ul>
+            <li>{{ table_stat_3_1 }}</li>
+            <li>{{ table_stat_3_2 }}</li>
+            <li>{{ table_stat_3_3 }}</li>
+            <li>{{ table_stat_3_4 }}</li>
+        </ul>
+
+        <li>{{ table_stat_4 }}</li>
+        <ul>
+            <li>{{ table_stat_4_1 }}</li>
+            <li>{{ table_stat_4_2 }}</li>
+            <li>{{ table_stat_4_3 }}</li>
+            <li>{{ table_stat_4_4 }}</li>
+        </ul>
+
+        <li>{{ table_stat_5 }}</li>
+        <ul>
+            <li>{{ table_stat_5_1 }}</li>
+            <li>{{ table_stat_5_2 }}</li>
+            <li>{{ table_stat_5_3 }}</li>
+            <li>{{ table_stat_5_4 }}</li>
+        </ul>
+
+        <li>{{ table_stat_6 }}</li>
+        <ul>
+            <li>{{ table_stat_6_1 }}</li>
+            <li>{{ table_stat_6_2 }}</li>
+            <li>{{ table_stat_6_3 }}</li>
+            <li>{{ table_stat_6_4 }}</li>
+        </ul>
+
+    </ul>
+
+    <p style="font-style: italic; margin-bottom: 0px;">{{ table_attributes }}</p>
+    {% endblock %}
+    </aside>
 
     {% include "footer.njk" %}
 </body>

@@ -1,5 +1,6 @@
 ---
 title: dnd remade character creation process
+layout: "dndr-framework.njk"
 ---
 
 <!-- <div class="tab-group">

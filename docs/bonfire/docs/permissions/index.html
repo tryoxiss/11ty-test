@@ -1,0 +1,251 @@
+<h2>Permissions</h2>
+<p>/// In this, all permissions are singular. But if its a global permission (not overriden) then it applies to multiple, ofc.
+/// Some of these may not be applicable everywhere, if they are not, they are set to <code>Null</code>, or the applicable value.
+/// In the following list, the comment displays:
+/// Defult Value (Hub defult and in DM's), Exceptions to the defult what and (where)</p>
+<table>
+<thead>
+<tr>
+<th>Permission Variable</th>
+<th>Defult Value</th>
+<th>Exceptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>view_channel</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>view_audit_log</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>view_message_history</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_channel</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_roles</td>
+<td>False</td>
+<td>Yes (DMs, Group Chat: Null)</td>
+</tr>
+<tr>
+<td>manage_emoji</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_webhooks</td>
+<td>False</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>manage_bots</td>
+<td>False, Yes (Profile: True)</td>
+<td></td>
+</tr>
+<tr>
+<td>manage_guild</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_alias</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_threads</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_messages</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_threads</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_events</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>edit_alias</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_kick</td>
+<td>False</td>
+<td>Yes (Group Chats: True)</td>
+</tr>
+<tr>
+<td>can_ban</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_mute</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_react</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_ping_all</td>
+<td>False</td>
+<td>Yes (Group Chats</td>
+</tr>
+<tr>
+<td>can_ping_here</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_ping_online</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_ping_random</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_ping_this</td>
+<td>False</td>
+<td>No (For roles: can ping this role, for users: can ping me without being a friend) Only Applicable To Roles</td>
+</tr>
+<tr>
+<td>can_ping_roles</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>can_move_members</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>force_voice_mute</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>force_voice_deafen</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>create_invite</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>send_messages</td>
+<td>True</td>
+<td>Yes (Info Channels: False)</td>
+</tr>
+<tr>
+<td>create_threads</td>
+<td>True</td>
+<td>Yes (Info Channels: False)</td>
+</tr>
+<tr>
+<td>embed_images</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>embed_links</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>use_external_emoji</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>use_commands</td>
+<td>True</td>
+<td>No   (You probably don't want this: Instead, configure the commands indevidually)</td>
+</tr>
+<tr>
+<td>voice_connect</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>voice_speak</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>voice_video</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>voice_activity</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>voice_video</td>
+<td>True</td>
+<td>No</td>
+</tr>
+<tr>
+<td>voice_priority</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>blind_messages</td>
+<td>False</td>
+<td>No</td>
+</tr>
+<tr>
+<td>manage_all</td>
+<td>False</td>
+<td>Yes (Hub Owner: True)</td>
+</tr>
+</tbody>
+</table>
+<h2>Permission Stacks</h2>
+<p>// Permission stack (Higher levels take priority):
+//
+// Administrator (manage_all) will ALWAYS override EVERYTHING ELSE
+// Roles (Higher overrides lower, except for manage_all. See more info below)
+// Channel Permissions
+// Defult hub permissions
+// Defult permissions</p>
+<p>// Roles stack:
+// Lets say we have someone with two roles:
+//
+// Can't Ping:
+//    - Defult
+//    - Can't ping anyone
+//
+// Trusted:
+//    - Defult
+//    - Can Ping All
+//
+// and someone has both, the can't ping anyone would override it. Any permissions left as defult (passthrough to default/hub), will &quot;shine through&quot;.</p>
