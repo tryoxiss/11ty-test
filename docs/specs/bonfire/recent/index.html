@@ -84,16 +84,61 @@
 <li>Variables and JSON Objects will be denoted in snake case. (<code>variable_name</code>)</li>
 <li>Variables in code which remain constant should be all capitalised. (<code>VARIABLE_NAME</code>)</li>
 </ul>
+<h2>Protocol</h2>
+<p>Establishing communications, using (our current name: OpenChatProtocol) and contuning communications, follows the following steps in order.</p>
+<ol>
+<li>Request desired public-key</li>
+<li>Complete TLS Handshake
+<ul>
+<li>I don't feel like writing out the steps right now.</li>
+</ul>
+</li>
+<li>establish edition
+<ul>
+<li>Send a CSV document with the versions you are willing to use. See Edition Agreement in Objects for details</li>
+<li>Confirm by sending a packet back</li>
+<li>If they do not align, repeat.</li>
+</ul>
+</li>
+<li>Main Loop
+<ul>
+<li>Server/Peer sends desired data</li>
+<li>Send back data</li>
+</ul>
+</li>
+<li>Close Channel</li>
+</ol>
 <h2>Objects</h2>
 <p>Objects are just how we send stuff store it however you please, ideally SQL.</p>
 <p>All objects MUST have a data header which specifies the edition which is required to handle the communication properly, and the type of communication.</p>
-<pre><code class="language-yaml">edition: 2022
+<pre><code class="language-yaml">edition: 2023   # Not necesary if you have agreed to talk over only one edition.
 type: message
 operation: VIEW # Only sometimes needed.
 </code></pre>
 <p>If an object fails the signature check, dosen't contain a heder or all needed data, or the user dosen't have permissions for that, you can either simply DROP the pakcet or send a an ERROR response.</p>
-<h3>Accounts</h3>
-<p>An account is an object that represents a <code>person</code> in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a <code>visibility</code> field cannot have its visibility edited. You can store any information you want on the persons paramaters.</p>
+<h3>Edition Agreement</h3>
+<p>Right after establishing secure channels, we send a CSV file containing all the editions we are willing to communicate using. We then compare, pick the most recent, and send confirmations.</p>
+<p>Send list:</p>
+<pre><code class="language-csv">editions
+2023
+2022-beta
+</code></pre>
+<p>Confirm Communications. We send this back for the version we have picked, if they both line up (which, they should if you did the above process correctly), we can confirm and continue using that edition.</p>
+<pre><code class="language-yaml">editon: 2023
+type: confirmation
+
+use_edition: [2023]
+</code></pre>
+<p>You can optionally specify what editions you want to use for each module.</p>
+<pre><code class="language-yaml">editon: 2023
+type: confirmation
+
+use_edition: [all: 2023, wiki: 2023, voice: 2022]
+</code></pre>
+<h3>Account</h3>
+<p>An account stores critical data about a profile such as login and encryption details. An account can have multiple profiles.</p>
+<h3>Profile</h3>
+<p>One account can have multiple profiles, and be switched between freely. The official client also allows you to set diffrent profiles to defult for certain people.</p>
 <p>(This document can be minfiied a lot, using [] and {} to elimatye spaces, or minifying spaces and removing comments. And in transit: likely will.)</p>
 <pre><code class="language-yaml">edition: 2023
 type: account
@@ -104,10 +149,8 @@ edition: 2023
 type: profile
 
 profile: 
-    guid: meow
-    display_name: &quot;String&quot;
-
     guid: 0000000000000000000000000000000000
+    display_name: &quot;String&quot;
 
     # We reccommend you store the following avatar scales.
     avatar_fullres: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d.png # If supported by your instance.
@@ -125,28 +168,30 @@ profile:
         rel: nofriend, # Unverified
         icon: mastodon,
         handle: &quot;@username@instance.tld&quot;,
+        link: https://instance.tld/@username,
         visibility: friends
     }
     - {
         rel: me, # Verified
         icon: peertube,
         handle: &quot;@username@instance.tld&quot;,
+        link: https://instance.tld/@username,
         visibility: everyone
     }
 
 lists: 
     friends: 
-        visibility: everyone
-        permissions: 
-            send_messages: true
-            see_personal_statuses: true
+        send_messages: true
+        see_personal_statuses: true
         
     
 
     blocked: 
-        visibility: everyone
-        permissions: 
-            send_messages: false
+        send_messages: false
+
+    best_friends: 
+        display_name: &quot;Best Friends&quot;
+        allow_important_messages: true
 
 user_data: 
 - { 
@@ -183,7 +228,7 @@ operation: CREATE
 language: en # Helps screenreaders pronounce the content.
 author: 0000000000000000000000000000000000
 adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
-time: 09-MAR-2023@23:03:01
+time: 09-04-2023@23:03:01
 content: |
 this is the messages content. Some characters need to be escaped.
 
@@ -196,18 +241,18 @@ operation: EDIT
 
 target: 0000000000000000000000000000000000   # What mwessage is being edited?
 adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
-time: 09-MAR-2023@23:03:55
+time: 09-04-2023@23:03:55
 content: |
 this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence.
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </code></pre>
-<p>Removing (HIDING from view, not remvoing from servers):</p>
+<p>Removing (HIDING from view, the server won't pass it on, NOT remvoing from servers):</p>
 <pre><code class="language-yaml">edition: 2023
 type: message
 operation: REMOVE
 
-target: 0000000000000000000000000000000000   # What mwessage is being edited?
+target: 0000000000000000000000000000000000   # What mwessage is being removed?
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </code></pre>
@@ -216,7 +261,7 @@ signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 type: message
 operation: DELETE
 
-target: 0000000000000000000000000000000000   # What mwessage is being edited?
+target: 0000000000000000000000000000000000   # What mwessage is being deleted?
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </code></pre>
@@ -231,6 +276,93 @@ content: &quot;emoji_shortcode&quot; # No colons around them. If its not a valid
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </code></pre>
+<h2>Formatting and Escapes</h2>
+<p>Various things need to be replaced for one reason or another. Most important, some characters need to be escaped.</p>
+<table>
+<thead>
+<tr>
+<th>Char</th>
+<th>Sequence</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;</code></td>
+<td><code>\u0022</code></td>
+<td>String Closer, would interfere with interchange.</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td><code>\u003c</code></td>
+<td>Would interfere with embedded objects and allow embedding of HTML.</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td><code>\u003e</code></td>
+<td>Would interfere with embedded objects and allow embedding of HTML.</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td><code>\u0026</code></td>
+<td>YAML Reserved Syntax</td>
+</tr>
+<tr>
+<td><code>:</code></td>
+<td><code>\u003a</code></td>
+<td>YAML Key Identifier</td>
+</tr>
+</tbody>
+</table>
+<p>Other objects, such as @mentions, #channel-mentions, etc must be wrapped in <code>&lt;&gt;</code>. This tells the program: &quot;Hey, stop what your doing. I have special instructions for you.&quot;</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Replacement</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@mention</code></td>
+<td><code>&lt;mention:&quot;guid&quot;&gt;</code></td>
+<td>Allows for refering account data directly, letting mentions get updated as people change usernames.</td>
+</tr>
+<tr>
+<td><code>#channel</code></td>
+<td><code>&lt;channel:&quot;guid&quot;&gt;</code></td>
+<td>Allows for refering channel data directly, letting mentions get updated as channel names change or get deleted.</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, in rich status and wiki channels you are able to use the following elements</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Pourpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;timer mode=&quot;since&quot; start=&quot;10-04-2023 17:57:32&quot;&gt;</code></td>
+<td>Often used in rich status to show the time since an action started.</td>
+</tr>
+<tr>
+<td><code>&lt;button text=&quot;text&quot; type=&quot;type&quot; action=&quot;steam://joingame/440/JOIN_SECRET&quot;&gt;</code></td>
+<td>Used for rich status, often for join game buttons.</td>
+</tr>
+<tr>
+<td><code>&lt;duration mode=&quot;time&quot; bar_start=&quot;0:00&quot; bar_end=&quot;2:06&quot; time_start=&quot;10-04-2023 17:57:32&quot;&gt;</code></td>
+<td>Used for match duration, health, round completion, etc.</td>
+</tr>
+<tr>
+<td><code>&lt;duration mode=&quot;number&quot; bar_start=&quot;0&quot; bar_end=&quot;300&quot; value=&quot;299&quot;&gt;</code></td>
+<td>Used for match duration, health, round completion, etc.</td>
+</tr>
+</tbody>
+</table>
 <h2>Federation</h2>
 <p>Federation occurs using the packet formats above. When a user wants data, they ask thier instance. Any data thier instance does not have, they ask the instance that will. The instnace that has it then forwards the data directly to the user. No data is stored redundently between instances this way.</p>
 <p>This also makes it possible to delete all messages directly. They MAY still be stored in someones cache, but that will likely be cleared out soon.</p>
@@ -295,6 +427,7 @@ signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </tbody>
 </table>
 <h2>Permissions</h2>
+<p>THIS IS OUTDATED. See the rust script for a full list of permissions</p>
 <table>
 <thead>
 <tr>
@@ -304,11 +437,11 @@ signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </thead>
 <tbody>
 <tr>
-<td>viewChannels</td>
+<td>view_channels</td>
 <td>Allow members to view channels by defult.</td>
 </tr>
 <tr>
-<td>manageChannels</td>
+<td>manage_channels</td>
 <td>Allow this group to create, edit, and delete channels.</td>
 </tr>
 <tr>

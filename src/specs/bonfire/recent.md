@@ -69,24 +69,71 @@ Other, smaller goals are to make it extensible so at no point will there ever be
 - Variables and JSON Objects will be denoted in snake case. (`variable_name`)
 - Variables in code which remain constant should be all capitalised. (`VARIABLE_NAME`)
 
+## Protocol
+
+Establishing communications, using (our current name: OpenChatProtocol) and contuning communications, follows the following steps in order.
+
+1. Request desired public-key
+2. Complete TLS Handshake
+    - I don't feel like writing out the steps right now.
+3. establish edition
+    - Send a CSV document with the versions you are willing to use. See Edition Agreement in Objects for details
+    - Confirm by sending a packet back
+    - If they do not align, repeat. 
+4. Main Loop
+    - Server/Peer sends desired data
+    - Send back data
+5. Close Channel
+
 ## Objects
 
 Objects are just how we send stuff store it however you please, ideally SQL. 
 
-
 All objects MUST have a data header which specifies the edition which is required to handle the communication properly, and the type of communication.
 
 ```yaml
-edition: 2022
+edition: 2023   # Not necesary if you have agreed to talk over only one edition.
 type: message
 operation: VIEW # Only sometimes needed.
 ```
 
 If an object fails the signature check, dosen't contain a heder or all needed data, or the user dosen't have permissions for that, you can either simply DROP the pakcet or send a an ERROR response.
 
-### Accounts
+### Edition Agreement
 
-An account is an object that represents a `person` in nature. Its XML Object is as follows. It also contains the defult values for privacy. Anything that does not have a `visibility` field cannot have its visibility edited. You can store any information you want on the persons paramaters. 
+Right after establishing secure channels, we send a CSV file containing all the editions we are willing to communicate using. We then compare, pick the most recent, and send confirmations.
+
+Send list:
+```csv
+editions
+2023
+2022-beta
+```
+
+Confirm Communications. We send this back for the version we have picked, if they both line up (which, they should if you did the above process correctly), we can confirm and continue using that edition. 
+```yaml
+editon: 2023
+type: confirmation
+
+use_edition: [2023]
+```
+
+You can optionally specify what editions you want to use for each module. 
+
+```yaml
+editon: 2023
+type: confirmation
+
+use_edition: [all: 2023, wiki: 2023, voice: 2022]
+```
+
+### Account
+
+An account stores critical data about a profile such as login and encryption details. An account can have multiple profiles.
+
+### Profile
+
+One account can have multiple profiles, and be switched between freely. The official client also allows you to set diffrent profiles to defult for certain people.
 
 (This document can be minfiied a lot, using [] and {} to elimatye spaces, or minifying spaces and removing comments. And in transit: likely will.)
 ```yaml
@@ -99,10 +146,8 @@ edition: 2023
 type: profile
 
 profile: 
-    guid: meow
-    display_name: "String"
-
     guid: 0000000000000000000000000000000000
+    display_name: "String"
 
     # We reccommend you store the following avatar scales.
     avatar_fullres: https://sub.domain.tld/file/960b70fb405047fd92425f1f3a4b341d.png # If supported by your instance.
@@ -120,28 +165,30 @@ profile:
         rel: nofriend, # Unverified
         icon: mastodon,
         handle: "@username@instance.tld",
+        link: https://instance.tld/@username,
         visibility: friends
     }
     - {
         rel: me, # Verified
         icon: peertube,
         handle: "@username@instance.tld",
+        link: https://instance.tld/@username,
         visibility: everyone
     }
 
 lists: 
     friends: 
-        visibility: everyone
-        permissions: 
-            send_messages: true
-            see_personal_statuses: true
+        send_messages: true
+        see_personal_statuses: true
         
     
 
     blocked: 
-        visibility: everyone
-        permissions: 
-            send_messages: false
+        send_messages: false
+
+    best_friends: 
+        display_name: "Best Friends"
+        allow_important_messages: true
 
 user_data: 
 - { 
@@ -186,7 +233,7 @@ operation: CREATE
 language: en # Helps screenreaders pronounce the content.
 author: 0000000000000000000000000000000000
 adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
-time: 09-MAR-2023@23:03:01
+time: 09-04-2023@23:03:01
 content: |
 this is the messages content. Some characters need to be escaped.
 
@@ -201,20 +248,20 @@ operation: EDIT
 
 target: 0000000000000000000000000000000000   # What mwessage is being edited?
 adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
-time: 09-MAR-2023@23:03:55
+time: 09-04-2023@23:03:55
 content: |
 this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence.
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
 
-Removing (HIDING from view, not remvoing from servers):
+Removing (HIDING from view, the server won't pass it on, NOT remvoing from servers):
 ```yaml
 edition: 2023
 type: message
 operation: REMOVE
 
-target: 0000000000000000000000000000000000   # What mwessage is being edited?
+target: 0000000000000000000000000000000000   # What mwessage is being removed?
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
@@ -225,7 +272,7 @@ edition: 2023
 type: message
 operation: DELETE
 
-target: 0000000000000000000000000000000000   # What mwessage is being edited?
+target: 0000000000000000000000000000000000   # What mwessage is being deleted?
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
@@ -244,6 +291,34 @@ content: "emoji_shortcode" # No colons around them. If its not a valid emoji, si
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
+
+## Formatting and Escapes
+
+Various things need to be replaced for one reason or another. Most important, some characters need to be escaped. 
+
+| Char | Sequence | Reason |
+| ---- | -------- | ------ |
+| `"`  | `\u0022` | String Closer, would interfere with interchange. |
+| `<`  | `\u003c` | Would interfere with embedded objects and allow embedding of HTML. |
+| `>`  | `\u003e` | Would interfere with embedded objects and allow embedding of HTML. |
+| `&`  | `\u0026` | YAML Reserved Syntax |
+| `:`  | `\u003a` | YAML Key Identifier |
+
+Other objects, such as @mentions, #channel-mentions, etc must be wrapped in `<>`. This tells the program: "Hey, stop what your doing. I have special instructions for you."
+
+| Type | Replacement | Reason |
+| ---- | -------- | ------ |
+| `@mention` | `<mention:"guid">` | Allows for refering account data directly, letting mentions get updated as people change usernames. |
+| `#channel`  | `<channel:"guid">` | Allows for refering channel data directly, letting mentions get updated as channel names change or get deleted. |
+
+Additionally, in rich status and wiki channels you are able to use the following elements
+
+| Element | Pourpose |
+| ---- | -------- |
+| `<timer mode="since" start="10-04-2023 17:57:32">` | Often used in rich status to show the time since an action started. |
+| `<button text="text" type="type" action="steam://joingame/440/JOIN_SECRET">` | Used for rich status, often for join game buttons. |
+| `<duration mode="time" bar_start="0:00" bar_end="2:06" time_start="10-04-2023 17:57:32">` | Used for match duration, health, round completion, etc. |
+| `<duration mode="number" bar_start="0" bar_end="300" value="299">` | Used for match duration, health, round completion, etc. |
 
 ## Federation
 
@@ -278,10 +353,12 @@ Therefore, every implenetation MUST have support for the following commands:
 
 ## Permissions
 
+THIS IS OUTDATED. See the rust script for a full list of permissions
+
 | Permission | Description |
 | ---------- | ----------- |
-| viewChannels | Allow members to view channels by defult. | 
-| manageChannels | Allow this group to create, edit, and delete channels. | 
+| view_channels | Allow members to view channels by defult. | 
+| manage_channels | Allow this group to create, edit, and delete channels. | 
 | manageRoles | Allow this group to manage all roles below them. | 
 | manageEmoji | Allow users in this group to manage hub emoji | 
 | viewAuditLog | Allow members to view a reccord of all changes to the hub |
@@ -332,8 +409,6 @@ The `bonfire://` URI scheme is motivated by the desire to have a clean inter-ins
 As a general rule, it follows the sceme `bonfire://guid` scheme. 
 
 Examples: 
-
-
 
 ```plaintext
 View a users profile: 
