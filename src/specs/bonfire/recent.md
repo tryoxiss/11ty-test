@@ -41,7 +41,7 @@ Let the keywords that follow be case insensitive unless otherwise specified.
     - `i32` equals `2,147,483,647`
     - `i64` equals approximately `1.844674407×10¹⁹`
 - Let `YAML`, or `Object` represent one YAML file (or "file" part of a stream), and any nested objects. Let this not exceed the maximum status characters of an i16. I validated my YAML with [This YAML validator](https://yamlchecker.com/)
-- Let `packet` represent one JSON Object sent between a client-server, or server-server relationship. 
+- Let `packet` represent one YAML Object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
 - ~~Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).~~
 - Let `GUID` and `UUID` represent a [Universally Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier). 
@@ -71,19 +71,57 @@ Other, smaller goals are to make it extensible so at no point will there ever be
 
 ## Protocol
 
+This section defines the way bonfire protocol communicates.
+
+
+### Ports and process
+
+The uri sceheme uses the ports `:9870` -- `:9879`. 
+
+- Port `:9870` is responseable for coordinating session-level things such as encryption, and automated content delivery such as "there is a new message in this channel", but contains no information about the message itself. 
+- Port `:9871` through `:9878` are reserved for sending text messages in multiple channels at a time, where a single port cannot recevie enough data simulataniously. 
+- Port `:9879` is reserved for voice and video communications. 
+
 Establishing communications, using (our current name: OpenChatProtocol) and contuning communications, follows the following steps in order.
 
-1. Request desired public-key
-2. Complete TLS Handshake
-    - I don't feel like writing out the steps right now.
-3. establish edition
+1. Complete TLS Handshake
+    - **CLIENT:** I would like an encerypted channel. Here are my TLS/SSL versions
+    - **SERVER:** Thanks for the request, I would like to use this version of TLS, now heres my certificate with my public key.
+    - **CLIENT:** Verifies certificate, extracts public key, and encrypts a new "pre-master key"
+    - **SERVER:** Server decrypts pre-master key
+    - **BOTH:** Computes a shared secret key, called a "shared secret"
+    - **CLIENT:** Sends verification message that basically says "Hey this is encrypted with our shared secret, decrypt it and let me know if its correct!"
+    - **CLIENT:** Sends verification message that basically says "Hey this is encrypted with our shared secret, decrypt it and let me know if its correct!"
+    - **BOTH:** Now use shared secret to encrypt communications for the remainder of the session.
+2. establish edition
     - Send a CSV document with the versions you are willing to use. See Edition Agreement in Objects for details
-    - Confirm by sending a packet back
-    - If they do not align, repeat. 
-4. Main Loop
+    - Server confirms they are able to use one of your versions, and says which ones they are able to use.
+    - Now the client uses whatever version they want that the server can use.
+3. Main Loop
     - Server/Peer sends desired data
     - Send back data
-5. Close Channel
+4. Close Channel
+
+### URI Scheme
+
+The `bonfire://` URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in **packets** instead. However, they can include links *to* actions like joining a hub or being an invite. 
+
+As a general rule, it follows the sceme `bonfire://guid` scheme. 
+
+Examples: 
+
+```plaintext
+View a users profile: 
+bonfire://@username@instance.tld  -- Can change if they change thier username
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82  - Cannot change
+
+View a channel: 
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
+
+View a specific message: 
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
+```
+
 
 ## Objects
 
@@ -99,33 +137,49 @@ operation: VIEW # Only sometimes needed.
 
 If an object fails the signature check, dosen't contain a heder or all needed data, or the user dosen't have permissions for that, you can either simply DROP the pakcet or send a an ERROR response.
 
-### Edition Agreement
+## Editions Agreement
+
+aa
+
+### Verify encryption is working.
+
+To ensure the server knows exactly what to expect, we send a near identical message every time. FOr the client and server, they are as follows. I know they are not very profesional, but they are fun and no end user ever sees them: but I hope they cheer up someone working on an implementation or someone carefully inspecting the packets!
+
+CLIENT: 
+```plaintext
+Hello server, this is a message to confirm that the quick brown fox jumps over
+ the lazy brown dog on your end too. If this is working, reply with my keyword
+  "{PICKRANDOM}" so I know it worked!
+
+--- BEGIN MESSAGE SIGNATURE ---
+
+--- END MESSAGE SIGNATURE ---
+```
+
+The pickrandom words list is generally every dictionary word in the dictionary for your clients language. It is mostly just a confirmation to make sure the server can actually decrpt it, and can support your languages character set. This message also uses an english panogram to ensure the connection is working.
+
+SERVER: 
+```plaintext
+Beep Boop, I am a server box. Server to User, please confirm this connection 
+works. And yes I can confirm, the fox is jumping over the {keyword}. Over.
+
+--- BEGIN MESSAGE SIGNATURE ---
+
+--- END MESSAGE SIGNATURE ---
+```
+
+### Veryify bonfire edition
 
 Right after establishing secure channels, we send a CSV file containing all the editions we are willing to communicate using. We then compare, pick the most recent, and send confirmations.
 
-Send list:
+(both) Send list:
 ```csv
 editions
 2023
 2022-beta
 ```
 
-Confirm Communications. We send this back for the version we have picked, if they both line up (which, they should if you did the above process correctly), we can confirm and continue using that edition. 
-```yaml
-editon: 2023
-type: confirmation
-
-use_edition: [2023]
-```
-
-You can optionally specify what editions you want to use for each module. 
-
-```yaml
-editon: 2023
-type: confirmation
-
-use_edition: [all: 2023, wiki: 2023, voice: 2022]
-```
+Generally we reccommend using the most recent shared version.
 
 ### Account
 
@@ -235,7 +289,7 @@ author: 0000000000000000000000000000000000
 adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
 time: 09-04-2023@23:03:01
 content: |
-this is the messages content. Some characters need to be escaped.
+"this is the messages content. Some characters need to be escaped."
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
@@ -247,10 +301,9 @@ type: message
 operation: EDIT
 
 target: 0000000000000000000000000000000000   # What mwessage is being edited?
-adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
 time: 09-04-2023@23:03:55
 content: |
-this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence.
+"this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence."
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 ```
@@ -303,6 +356,7 @@ Various things need to be replaced for one reason or another. Most important, so
 | `>`  | `\u003e` | Would interfere with embedded objects and allow embedding of HTML. |
 | `&`  | `\u0026` | YAML Reserved Syntax |
 | `:`  | `\u003a` | YAML Key Identifier |
+| `\`  | `\u005c` | so that `\` can be included in messages without triggering an escape sequnce. |
 
 Other objects, such as @mentions, #channel-mentions, etc must be wrapped in `<>`. This tells the program: "Hey, stop what your doing. I have special instructions for you."
 
@@ -401,23 +455,3 @@ THIS IS OUTDATED. See the rust script for a full list of permissions
 | moveMembers | Determine if you can move members between channels |
 | manageEvents | | 
 | manageAll | Override all permissions given with yes, for all channels. Doing this will make someone have all the same powers as the hub owner, except for deleting it. |
-
-## URI Scheme
-
-The `bonfire://` URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in **packets** instead. However, they can include links *to* actions like joining a hub or being an invite. 
-
-As a general rule, it follows the sceme `bonfire://guid` scheme. 
-
-Examples: 
-
-```plaintext
-View a users profile: 
-bonfire://@username#0000@instance.tld  -- Can change if they change thier username
-bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82  - Cannot change
-
-View a channel: 
-bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
-
-View a specific message: 
-bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
-```

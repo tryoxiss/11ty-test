@@ -58,7 +58,7 @@
 </ul>
 </li>
 <li>Let <code>YAML</code>, or <code>Object</code> represent one YAML file (or &quot;file&quot; part of a stream), and any nested objects. Let this not exceed the maximum status characters of an i16. I validated my YAML with <a href="https://yamlchecker.com/">This YAML validator</a></li>
-<li>Let <code>packet</code> represent one JSON Object sent between a client-server, or server-server relationship.</li>
+<li>Let <code>packet</code> represent one YAML Object sent between a client-server, or server-server relationship.</li>
 <li>Let <code>snake_case</code> and <code>snake case</code> mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.</li>
 <li><s>Let <code>CID</code> and mean any valid ID from the the <a href="/specs/cid/recent/">clean ID system</a>.</s></li>
 <li>Let <code>GUID</code> and <code>UUID</code> represent a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">Universally Unique Identifier</a>.</li>
@@ -85,19 +85,33 @@
 <li>Variables in code which remain constant should be all capitalised. (<code>VARIABLE_NAME</code>)</li>
 </ul>
 <h2>Protocol</h2>
+<p>This section defines the way bonfire protocol communicates.</p>
+<h3>Ports and process</h3>
+<p>The uri sceheme uses the ports <code>:9870</code> -- <code>:9879</code>.</p>
+<ul>
+<li>Port <code>:9870</code> is responseable for coordinating session-level things such as encryption, and automated content delivery such as &quot;there is a new message in this channel&quot;, but contains no information about the message itself.</li>
+<li>Port <code>:9871</code> through <code>:9878</code> are reserved for sending text messages in multiple channels at a time, where a single port cannot recevie enough data simulataniously.</li>
+<li>Port <code>:9879</code> is reserved for voice and video communications.</li>
+</ul>
 <p>Establishing communications, using (our current name: OpenChatProtocol) and contuning communications, follows the following steps in order.</p>
 <ol>
-<li>Request desired public-key</li>
 <li>Complete TLS Handshake
 <ul>
-<li>I don't feel like writing out the steps right now.</li>
+<li><strong>CLIENT:</strong> I would like an encerypted channel. Here are my TLS/SSL versions</li>
+<li><strong>SERVER:</strong> Thanks for the request, I would like to use this version of TLS, now heres my certificate with my public key.</li>
+<li><strong>CLIENT:</strong> Verifies certificate, extracts public key, and encrypts a new &quot;pre-master key&quot;</li>
+<li><strong>SERVER:</strong> Server decrypts pre-master key</li>
+<li><strong>BOTH:</strong> Computes a shared secret key, called a &quot;shared secret&quot;</li>
+<li><strong>CLIENT:</strong> Sends verification message that basically says &quot;Hey this is encrypted with our shared secret, decrypt it and let me know if its correct!&quot;</li>
+<li><strong>CLIENT:</strong> Sends verification message that basically says &quot;Hey this is encrypted with our shared secret, decrypt it and let me know if its correct!&quot;</li>
+<li><strong>BOTH:</strong> Now use shared secret to encrypt communications for the remainder of the session.</li>
 </ul>
 </li>
 <li>establish edition
 <ul>
 <li>Send a CSV document with the versions you are willing to use. See Edition Agreement in Objects for details</li>
-<li>Confirm by sending a packet back</li>
-<li>If they do not align, repeat.</li>
+<li>Server confirms they are able to use one of your versions, and says which ones they are able to use.</li>
+<li>Now the client uses whatever version they want that the server can use.</li>
 </ul>
 </li>
 <li>Main Loop
@@ -108,6 +122,20 @@
 </li>
 <li>Close Channel</li>
 </ol>
+<h3>URI Scheme</h3>
+<p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
+<p>As a general rule, it follows the sceme <code>bonfire://guid</code> scheme.</p>
+<p>Examples:</p>
+<pre><code class="language-plaintext">View a users profile: 
+bonfire://@username@instance.tld  -- Can change if they change thier username
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82  - Cannot change
+
+View a channel: 
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
+
+View a specific message: 
+bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
+</code></pre>
 <h2>Objects</h2>
 <p>Objects are just how we send stuff store it however you please, ideally SQL.</p>
 <p>All objects MUST have a data header which specifies the edition which is required to handle the communication properly, and the type of communication.</p>
@@ -116,25 +144,36 @@ type: message
 operation: VIEW # Only sometimes needed.
 </code></pre>
 <p>If an object fails the signature check, dosen't contain a heder or all needed data, or the user dosen't have permissions for that, you can either simply DROP the pakcet or send a an ERROR response.</p>
-<h3>Edition Agreement</h3>
+<h2>Editions Agreement</h2>
+<p>aa</p>
+<h3>Verify encryption is working.</h3>
+<p>To ensure the server knows exactly what to expect, we send a near identical message every time. FOr the client and server, they are as follows. I know they are not very profesional, but they are fun and no end user ever sees them: but I hope they cheer up someone working on an implementation or someone carefully inspecting the packets!</p>
+<p>CLIENT:</p>
+<pre><code class="language-plaintext">Hello server, this is a message to confirm that the quick brown fox jumps over
+ the lazy brown dog on your end too. If this is working, reply with my keyword
+  &quot;{PICKRANDOM}&quot; so I know it worked!
+
+--- BEGIN MESSAGE SIGNATURE ---
+
+--- END MESSAGE SIGNATURE ---
+</code></pre>
+<p>The pickrandom words list is generally every dictionary word in the dictionary for your clients language. It is mostly just a confirmation to make sure the server can actually decrpt it, and can support your languages character set. This message also uses an english panogram to ensure the connection is working.</p>
+<p>SERVER:</p>
+<pre><code class="language-plaintext">Beep Boop, I am a server box. Server to User, please confirm this connection 
+works. And yes I can confirm, the fox is jumping over the {keyword}. Over.
+
+--- BEGIN MESSAGE SIGNATURE ---
+
+--- END MESSAGE SIGNATURE ---
+</code></pre>
+<h3>Veryify bonfire edition</h3>
 <p>Right after establishing secure channels, we send a CSV file containing all the editions we are willing to communicate using. We then compare, pick the most recent, and send confirmations.</p>
-<p>Send list:</p>
+<p>(both) Send list:</p>
 <pre><code class="language-csv">editions
 2023
 2022-beta
 </code></pre>
-<p>Confirm Communications. We send this back for the version we have picked, if they both line up (which, they should if you did the above process correctly), we can confirm and continue using that edition.</p>
-<pre><code class="language-yaml">editon: 2023
-type: confirmation
-
-use_edition: [2023]
-</code></pre>
-<p>You can optionally specify what editions you want to use for each module.</p>
-<pre><code class="language-yaml">editon: 2023
-type: confirmation
-
-use_edition: [all: 2023, wiki: 2023, voice: 2022]
-</code></pre>
+<p>Generally we reccommend using the most recent shared version.</p>
 <h3>Account</h3>
 <p>An account stores critical data about a profile such as login and encryption details. An account can have multiple profiles.</p>
 <h3>Profile</h3>
@@ -230,7 +269,7 @@ author: 0000000000000000000000000000000000
 adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
 time: 09-04-2023@23:03:01
 content: |
-this is the messages content. Some characters need to be escaped.
+&quot;this is the messages content. Some characters need to be escaped.&quot;
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </code></pre>
@@ -240,10 +279,9 @@ type: message
 operation: EDIT
 
 target: 0000000000000000000000000000000000   # What mwessage is being edited?
-adressed: 0000000000000000000000000000000000 # ONE guid. If its a group chat or channel then it will handle more people receving it.
 time: 09-04-2023@23:03:55
 content: |
-this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence.
+&quot;this is the messages content. I have now edited it. It sends the new exact content, and the server deals with only storing the diffrence.&quot;
 
 signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </code></pre>
@@ -311,6 +349,11 @@ signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 <td><code>:</code></td>
 <td><code>\u003a</code></td>
 <td>YAML Key Identifier</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td><code>\u005c</code></td>
+<td>so that <code>\</code> can be included in messages without triggering an escape sequnce.</td>
 </tr>
 </tbody>
 </table>
@@ -614,20 +657,6 @@ signature: 2346ad27d7568ba9896f1b7da6b5991251debdf2
 </tr>
 </tbody>
 </table>
-<h2>URI Scheme</h2>
-<p>The <code>bonfire://</code> URI scheme is motivated by the desire to have a clean inter-instance and inter-client way to denote various locations. This does not need to denote actions as those are sent in <strong>packets</strong> instead. However, they can include links <em>to</em> actions like joining a hub or being an invite.</p>
-<p>As a general rule, it follows the sceme <code>bonfire://guid</code> scheme.</p>
-<p>Examples:</p>
-<pre><code class="language-plaintext">View a users profile: 
-bonfire://@username#0000@instance.tld  -- Can change if they change thier username
-bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82  - Cannot change
-
-View a channel: 
-bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
-
-View a specific message: 
-bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
-</code></pre>
 
     </main>
 
