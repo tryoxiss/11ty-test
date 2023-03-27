@@ -1,6 +1,7 @@
 --- 
 title: Title Two
 # eleventyExcludeFromCollections: true
+eleventyExcludeFromCollections: true # Reason: DRAFT
 
 date: 2022-01-10
 --- 
