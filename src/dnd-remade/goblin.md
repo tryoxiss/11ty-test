@@ -5,7 +5,7 @@ table_item_color: "green-2"
 table_header: Goblin
 table_type: Species
 
-table_description: Destroy the essence of your foes with a single hit
+table_description: Not a cat. 0/10.
 
 # table_image: "https://ih1.redbubble.net/image.478130836.2161/flat,1000x1000,075,f.u6.jpg"
 # table_image_alt: 
@@ -41,7 +41,7 @@ table_stat-6_2:
 table_stat-6_3:
 table_stat-6_4:
 
-table_attributes: "Honor Bound, Mythical"
+table_attributes: "Pleb, useless (not lesbian)"
 ---
 
 dsa
