@@ -3,6 +3,8 @@ author: tryoxiss
 title: Python Basics
 code_language: py
 
+eleventyExcludeFromCollections: true # Reason: DRAFT
+
 date: 2022-01-12
 ---
 
