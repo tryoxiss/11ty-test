@@ -2,6 +2,8 @@
 title: The ultimate guide to switching to linux
 author: Tryoxiss
 
+eleventyExcludeFromCollections: true # Reason: DRAFT
+
 date: 2022-01-13
 ---
 
