@@ -86,32 +86,7 @@ For ranged weapons, ammo can add or edit your main weapons stats. For example: u
 - Bow: 
     - Damage: 3d6 
 - Tin Feathered Arrow
-    - Damage: + 1d6
-
-Class Type Summary: 
-
-- Melee
-    + Can be quite tanky
-    - Can be quite agile
-    - No worry about ammo
-    - Quite Versitle
-    - Good close range
-    - Useless long range
-- Magic
-    - Very light class
-    - Can be quite agile
-    - Can be useful close and far range, but most useful mid-range
-    - Very Versitile
-    - Needs to worry about mana
-        - Mana can be recovered over time or at rest stops
-        - Restored with mana potions, which can be crafted or bought
-- Ranged
-    - Moderately armoured
-    - Good at stealth
-    - Ammo can get quite costly, especially when using guns
-    - Quite versitile
-    - Near useless close range
-    - Best long range
+    - Damage: 1d6
 
 So to calculate your damage, roll 4d6
 

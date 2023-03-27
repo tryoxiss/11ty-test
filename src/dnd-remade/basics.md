@@ -17,6 +17,10 @@ Dice will be defined as `d<sides>` in this document.
 | d6   | Commonly used for healing and health related actions | 
 | d4   | Aside from being worse to step on than a lego piece, is often used for very light weapons or potion effects. | 
 
+## Calculating Values
+
+Negative values are instead set to 0. So for example, a creature that deals 1d4-3 damage has an attack array of [0, 0, 0, 1] making it a very low threat. 
+
 ## Item Rarity
 
 The following table has a list of all raritys you are the main tier system. All open for change, in both name color and description. 
