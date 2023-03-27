@@ -32,7 +32,7 @@ Bonfire is a working (and temporary) name for a standard to allow for community-
 
 Let the keywords that follow be case insensitive unless otherwise specified. 
 
-- Let the keywords "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" (and lowercase equivalents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
+- Let the keywords **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** (and lowercase equivalents) be defined as specified in [RFC:2119](https://www.rfc-editor.org/rfc/rfc2119)
 - Let `incorrect` mean MUST NOT; as in, incorrect behaviour violates the standard.
 - Let `i<int>` represent 2^int-1. Some examples (and the important ones) are as follows;
     - `i6` equals `63`
@@ -43,8 +43,8 @@ Let the keywords that follow be case insensitive unless otherwise specified.
 - Let `YAML`, or `Object` represent one YAML file (or "file" part of a stream), and any nested objects. Let this not exceed the maximum status characters of an i16. I validated my YAML with [This YAML validator](https://yamlchecker.com/)
 - Let `packet` represent one YAML Object sent between a client-server, or server-server relationship. 
 - Let `snake_case` and `snake case` mean the naming scheme where multiple words are written in all lowercase and are seperated with underscores.
-- ~~Let `CID` and mean any valid ID from the the [clean ID system](/specs/cid/recent/).~~
 - Let `GUID` and `UUID` represent a [Universally Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier). 
+- Let `snowflake` represent one GUID. 
 - Let the character sets `reserved`, `escaped`, `delims`, `unwise`, `lowalpha`, `upalpha`, `alpha`, `digit`, `alphanum`, `mark` and `unreserved` are to be defined as in [RFC:2396](https://www.ietf.org/rfc/rfc2396.txt). This is only when these keywords are in reference to a **character set**.
 - Let `inalpha` represent the character set including `upalpha` and `lowalpha`, where no distinction is made between uppercase and lowercase. ("A" is the same as "a").
 - Let the character set `safe` be the culmination of `inalpha` and `digit` and the characters `_` and `-`. 
@@ -54,25 +54,19 @@ Let the keywords that follow be case insensitive unless otherwise specified.
 
 *Some of the following definitions are from [ariadne.space's post on ActivityPub's design falings](https://ariadne.space/2019/01/07/activitypub-the-worse-is-better-approach-to-federated-social-networking/).
 
-- **Simplicity**: The standard and protocol should be simple to implement. It is much more important for the protocol and standard to be simple than the backend implementation. 
+- **Simplicity**: The standard and protocol should be simple to implement.
 - **Cleanliness**: The standard must be clean and easily usable from a end-user perspective. It is more important for it to be clean and simple for end-users than the backend implementation. 
-- **Correctness**: All packets and URI's must be verifiably correct or incorrect. It MUST NOT ever be unclear. 
+- **Correctness**: All packets and URI's must be verifiably correct or incorrect. It is considered incorrect if it is ever unclear.
 - **Safety**: The standard and protocol is designed in a way that is safe, any unsafe implementations are considered incorrect. 
-- **Completeness**: The standard and protocol must cover all reasonably expected situations. 
-- **Privacy**: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages. 
+- **Completeness**: The standard and protocol must cover all expected situations, including future reivions.
+- **Privacy**: All content should be encrypted and sent through secure channels. It is considered incorrect to send unencrypted data with the exception of pre-written public HTML pages (which are only a should not). 
 - **Prevent Consolidation**: We don't want this to end up like email, where you *can* self host and join a smaller provider, but good luck with all the limitations in place.
 
 Other, smaller goals are to make it extensible so at no point will there ever be breaking changes (No "bonfire 2.0"). While we cannot guarantee this, a finished 1.0 spec should be backwards compatible for at least the next 30 years, while still being able to add support for new features. 
 
-## Conventions followed
-
-- Variables and JSON Objects will be denoted in snake case. (`variable_name`)
-- Variables in code which remain constant should be all capitalised. (`VARIABLE_NAME`)
-
 ## Protocol
 
 This section defines the way bonfire protocol communicates.
-
 
 ### Ports and process
 
@@ -125,21 +119,17 @@ bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
 
 ## Objects
 
-Objects are just how we send stuff store it however you please, ideally SQL. 
+Objects are just how we send data between clients. It can be stored in any format, or translated to other formats to allow for interoperability.
 
 All objects MUST have a data header which specifies the edition which is required to handle the communication properly, and the type of communication.
 
 ```yaml
 edition: 2023   # Not necesary if you have agreed to talk over only one edition.
 type: message
-operation: VIEW # Only sometimes needed.
+operation: GET  # Not technechally needed, as it is the default operation. 
 ```
 
 If an object fails the signature check, dosen't contain a heder or all needed data, or the user dosen't have permissions for that, you can either simply DROP the pakcet or send a an ERROR response.
-
-## Editions Agreement
-
-aa
 
 ### Verify encryption is working.
 
@@ -168,7 +158,7 @@ works. And yes I can confirm, the fox is jumping over the {keyword}. Over.
 --- END MESSAGE SIGNATURE ---
 ```
 
-### Veryify bonfire edition
+### Verify bonfire edition
 
 Right after establishing secure channels, we send a CSV file containing all the editions we are willing to communicate using. We then compare, pick the most recent, and send confirmations.
 
