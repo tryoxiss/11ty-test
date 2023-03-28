@@ -499,6 +499,11 @@ footer {
     margin-bottom: 2rem; 
 }
 
+footer .badges * { 
+    height: 2.5rem;
+    border-radius: 0px;
+}
+
 footer ul { 
     /* This is the exact amount that the bullets shift them over... just... don't question it... */
     margin-left: -2.96rem; 
