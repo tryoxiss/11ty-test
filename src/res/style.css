@@ -338,6 +338,17 @@ body {
     }
 }
 
+@media (max-width: 900px) { 
+    footer .badges * { 
+        max-width: max-content;
+    }
+    
+    footer .badges { 
+        display: flex;
+        max-width: max-content;
+    }
+}
+
 @media (min-width: 1080px) { 
     body { 
         grid-template-areas: 
