@@ -3,6 +3,7 @@
 module.exports = function 
 (eleventyConfig) { 
     eleventyConfig.addPassthroughCopy("./src/res/");
+    eleventyConfig.addPassthroughCopy("./src/res/**/*");
 
     // https://dev.to/giulia_chiola/add-html-classes-to-11ty-markdown-content-18ic {
     // const markdownIt = require('markdown-it')
