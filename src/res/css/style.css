@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,800;1,200;1,400;1,800&display=swap');
 @import url('http://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
 
-/* @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
 
 
 :root {
@@ -309,6 +309,9 @@ body {
     }
 }
 
+h1, h2, h3, h4, h5, h6, label { 
+    font-family: 'Mali', 'Nunito', sans-serif;
+}
 
 .sidebar { grid-area: side; }
 
@@ -933,10 +936,6 @@ img[class*='spoiler'] {
     filter: blur(15px); 
 }
 
-img { 
-    border-radius: var(--border-box-radius);
-}
-
 .spoiler:not(img[class*='spoiler']):hover { 
     color: var(--text-normal);
 } 
@@ -1337,7 +1336,7 @@ footer ul {
 }
 
 img { 
-    width: 100%;
+    max-width: 100%;
     border-radius: var(--border-subwindow-radius);
 }
 
@@ -1510,9 +1509,16 @@ footer b {
 /* *************** */
 
 .h2-subhead { 
+    color: var(--text-muted); 
+    font-size: 0.8rem;
+}
+
+/* h3 + * span { 
     text-transform: uppercase;
     color: var(--text-muted); 
-}
+    font-size: 0.8rem;
+    margin-bottom: -4px;
+} */
 
 .red-2 { 
     color: var(--red-2)
@@ -1548,7 +1554,6 @@ footer b {
 
 .muted { 
     color: var(--text-muted);
-    font-size: var(--font-small);
 }
 
 /* .postcard { 

@@ -116,6 +116,45 @@ View a specific message:
 bonfire://d1cp:e0fg:ms56:wf2a:ygkd:fveb:82
 ```
 
+### Response Codes
+
+Every response code has a 3-digit number (based off [https response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)), and a cleaner name. 
+
+#### Information Responses 
+
+information:information (100) - allows for returning of multiple status codes when appropriate. 
+information:returning_list (101)
+information:switching_protocols (102)
+information:processing (103)
+
+#### Success Responses
+
+success:success (200) - Success with no further information given. We advise you use a more descritive response code where possible.
+success:created (201)  - A resource was created in response. This can be a message, reaction, etc.
+success:accepted (202) - The request has been accepted and is queued for action.
+success:removed (203) - The requested content was removed. 
+success:deleted (204) - the requested content was deleted.
+
+#### Client Error Messages
+
+failure:bad_request (400) - The request is invalid with no further information 
+failure:unauthorised (401) - You are not logged in or we cannot verify you, preventing you from accessing this content. 
+failure:forbidden (402) - we have verified you, but you may not access this content
+failure:not_allowed (403) - you can access this, but you cannot do this action. For example, trying to delete someone elses message without manage messages.
+failure:not_found (404) - We cannot find the requested content. 
+failure:timeout (405) - indicates the server would like to end the session, often due to being idle. It can be restarted easily at request, and if often used for server restarts.
+failure:gone (406) - the content was removed
+failure:oversized_payload (407) - we refuse to process this request because the payload exeeded the servers byte limit, often 65,535 bytes for text packets and 2,147,483,647 bytes for images.
+failure:too_many_requests (408) - you are sending too many requests so we refuse to process these. Generally this is 7200 requests over the past 60 minutes (2 requests per seccond for 1 continuous hour)
+failure:better_authentication_needed (409) - you need to authenticate yourself by additional means to access this content. That may be 2 Factor Authentication, Proxy Authentication, or something else. More info should be provided after a `;` in the packet. Things like voice calls are peer to peer and therefore do not get ratelimited by this, if this happens the suggested behavour is to send it peer to peer to the destination and resend it to the server when you can.
+
+#### Server Error Messages
+
+failure:internal_server_error (500) - the server encountered a situation it didnt know how to handle with no additional information. 
+failure:not_implemented (501) - the request type you send has no currently handling in the server side. 
+failure:not_secure (502) - you send an unencrypted packet to the server which it refuses to process.
+failure:no_storage (503) - the server dosen't have the space to process that request
+failure:loop_request (504) - the request you sent put the server into an infanite loop and refuses to process it.
 
 ## Objects
 

@@ -11,7 +11,7 @@ Feel free to create your own classes and have fun, but we reccommend you start w
 
 ## Magic Classes
 
-These classes primarly focus on the magic system, using either mana or spell slots. They tend to be diverse and practical characters with many attributes that can help you!
+Use use mana or spell slots to cast thier own spells and powers.
 
 ### Wizzard
 <span class="blueviolet-2">Magic</span> <span class="blue-2">Researcher</span>
@@ -36,15 +36,37 @@ These classes primarly focus on the magic system, using either mana or spell slo
 
 Necormancers use spell-slots.
 
+## Devine Classes
+
+[Name WIP] These classes use *someone elses* power to cast spells for thier power, like warlocks (got power loaned to them), paladins and monks (harness thier gods power), etc.
+
+### Monk
+<span class="pink-2">Devine</span> <span class="red-2">Fighter</span>
+
+KHAIM: 
+Monks are masters of martial arts who use spiritual and physical power to complete their goals
+Sounds like a sprititual fighter
+so maybe magic fighter
+though monk is about a individuals journey of self so it wouldnt fit there very much
+
+### Cleric
+<span class="pink-2">Devine</span> <span class="green-2">Healer</span>
+
+### Paladin
+<span class="pink-2">Devine</span> <span class="blue-2">Tank</span>
+
+### Warlock
+<span class="pink-2">Devine</span> <span class="red-2">Fighter</span>
+
 ### Magician
-<span class="blueviolet-2">"Magic"</span> <span class="red-2">Fraudster</span>
+<span class="pink-2">Devine</span> <span class="red-2">Fraudster</span>
 
 ## Non-magic classes
 
 Generally less versitle, and generally weaker, but tend to be able to take advantage of enviornments more and are able to work even without mana!
 
 ### Archer
-<span class="yellow-2">Ranged</span> Something?
+<span class="yellow-2">Ranged</span> Something? <span class="yellow-2">(Dexterity)</span>
 
 ## Non-offical classes
 Untested, unbalanced so far, but fun none the less!
@@ -54,3 +76,4 @@ Untested, unbalanced so far, but fun none the less!
 
 ## Footnotes
 1. Sashaa helped me with these classes a lot! Thank you!
+2. Khaim... you made me add monk... and this does not fit into the categorisation very well...
