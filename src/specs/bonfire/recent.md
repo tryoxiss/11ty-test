@@ -2,7 +2,6 @@
 title: Bonfire Recent Draft
 tags: 
     - bonfire
-edition: "2023"
 ---
 
 Bonfire is a working (and temporary) name for a standard to allow for community-divided federated instant messaging. In laymans terms, its federated discord. 
