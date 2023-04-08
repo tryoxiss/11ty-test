@@ -70,7 +70,7 @@ pre[class*=language-] {
 }
 
 pre code, pre, code { 
-    color: var(--text-normal) !important; 
+    color: var(--main-fg) !important; 
 }
 
 /* Syntax hilighting */
@@ -204,7 +204,7 @@ div.code-toolbar > .toolbar > .toolbar-item > button {
     /* background-color: #140226; */
     color: var(--clr-black);
 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 
     /* THIS ONE IS THE **COPY** BUTTON */
 }
@@ -214,14 +214,12 @@ div.code-toolbar > .toolbar > .toolbar-item > button:hover {
     color: var(--clr-hero-100) */
 
     background: var(--links-color); 
-    color: var(--subwindow-bg); 
+    color: var(--main-child-bg); 
 
     transition-duration: 100ms;
 
     /* THIS ONE IS THE **COPY** BUTTON */
 }
-
-
 
 div.code-toolbar > .toolbar > .toolbar-item > a,div.code-toolbar > .toolbar > .toolbar-item > button,div.code-toolbar > .toolbar > .toolbar-item > span {
     color:#fff;
@@ -362,7 +360,7 @@ pre, pre code {
 }
 
 .code-toolbar { 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 
     border-radius: var(--border-subwindow-radius);
 }
@@ -372,7 +370,7 @@ pre, pre code {
 } */
 
 :not(pre) code { 
-    background-color: var(--subwindow-bg) !important;
+    background-color: var(--main-child-bg) !important;
     font-size: 0.9rem !important;
 
     padding: 0px 5px !important; 
@@ -384,7 +382,7 @@ pre code {
 
 code *::selection,
 code::selection { 
-    color: var(--subwindow-bg)
+    color: var(--main-child-bg)
 }
 
 code::selection { 

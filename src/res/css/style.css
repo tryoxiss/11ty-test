@@ -131,15 +131,15 @@
 
 @media (prefers-color-scheme: light) { 
     :root { 
-        --base-color: var(--latte-crust); 
+        --site-bg: var(--latte-crust); 
         --main-bg: var(--latte-mantle);
-        --subwindow-bg: var(--latte-base); /* e.g. spoilers, codeblocks */
+        --main-child-bg: var(--latte-base); /* e.g. spoilers, codeblocks */
 
-        --text-muted: var(--latte-subtext0); 
-        --text-normal: var(--latte-text); 
-        --text-strong: #000; 
+        --main-fg-weak: var(--latte-subtext0); 
+        --main-fg: var(--latte-text); 
+        --main-fg-strong: #000; 
 
-        --links-color: var(--latte-blue); 
+        --accent-fg: var(--latte-blue); 
 
 
         --red-2:        var(--latte-red); 
@@ -168,16 +168,16 @@
 
 @media (prefers-color-scheme: dark) { 
     :root { 
-        --base-color: var(--mocha-crust); 
+        --site-bg: var(--mocha-crust); 
         --main-bg: var(--mocha-base);
-        --subwindow-bg: var(--mocha-mantle); /* e.g. spoilers, codeblocks */
+        --main-child-bg: var(--mocha-mantle); /* e.g. spoilers, codeblocks */
         --border-color: var(--mocha-surface1); 
 
-        --text-muted: var(--mocha-subtext1); 
-        --text-normal: var(--mocha-text); 
-        --text-strong: var(--mocha-strong-text); 
+        --main-fg-weak: var(--mocha-subtext1); 
+        --main-fg: var(--mocha-text); 
+        --main-fg-strong: var(--mocha-strong-text); 
 
-        --links-color: var(--mocha-blue); 
+        --accent-fg: var(--mocha-blue); 
 
         --table-heading-color: var(--mocha-crust); 
         --table-hover-color: var(--mocha-crust); 
@@ -317,12 +317,12 @@ h1, h2, h3, h4, h5, h6, label {
 
 .glossary, .sidebar { 
     margin: 1rem;
-    color: var(--text-normal);
+    color: var(--main-fg);
 
     /* border: 1px solid var(--border-color);  */
     border-radius: var(--border-subwindow-radius);
 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
     padding: 0.5rem;
 
     height: max-content;
@@ -345,7 +345,7 @@ h1, h2, h3, h4, h5, h6, label {
 }
 
 .sidebar-header { 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
     margin: 0; 
     margin-top: 0.25rem;
     font-weight: bold;
@@ -360,7 +360,7 @@ h1, h2, h3, h4, h5, h6, label {
 }
 
 body { 
-    background-color: var(--base-color);
+    background-color: var(--site-bg);
 }
 html { 
     font-family: var(--font-family);
@@ -368,7 +368,7 @@ html {
 
 main { 
     background-color: var(--main-bg);
-    color: var(--text-normal);
+    color: var(--main-fg);
 
     margin: 1rem; 
     padding: 1.5rem; 
@@ -388,7 +388,7 @@ pre {
     padding: 0.5rem; 
     border-radius: 6px;
 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 }
 
 a { text-decoration: none;}
@@ -411,7 +411,7 @@ main {
 }
 
 .subtitle { 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
 }
 
 footer ul { 
@@ -456,7 +456,7 @@ a:hover {
 }
 
 footer a b { 
-    color: var(--text-strong); 
+    color: var(--main-fg-strong); 
 }
 
 footer { 
@@ -510,21 +510,21 @@ code {
 }
 
 h1, h2, h3, h4, h5, h6, strong, .h2, .h3, .h4, .h5, .h6 { 
-    color: var(--text-strong); 
+    color: var(--main-fg-strong); 
     font-weight: bold;
 }
 
 a { 
-    color: var(--links-color); 
+    color: var(--accent-fg); 
 }
 
 code { 
     font-family: var(--code-font);
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 }
 
 pre { 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 }
 
 /* main pre::before, 
@@ -558,7 +558,7 @@ main .has-window-buttons {
 
 main .canvas-holder,
 .has-window-buttons { 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
     border-radius: var(--border-subwindow-radius);
 
     width: 99%; 
@@ -619,7 +619,7 @@ div.code-toolbar > .toolbar > .toolbar-item > button {
     /* background-color: #140226; */
     color: var(--clr-black);
 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 
     /* THIS ONE IS THE **COPY** BUTTON */
 }
@@ -628,8 +628,8 @@ div.code-toolbar > .toolbar > .toolbar-item > button:hover {
     /* background-color: var(--clr-hero-700);
     color: var(--clr-hero-100) */
 
-    background: var(--links-color); 
-    color: var(--subwindow-bg); 
+    background: var(--accent-fg); 
+    color: var(--main-child-bg); 
 
     transition-duration: 100ms;
 
@@ -659,7 +659,7 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
 /* ******** */
 
 .postcard { 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
     border-radius: var(--border-subwindow-radius);
     padding: 0.8rem;
 
@@ -689,12 +689,12 @@ div.code-toolbar >.toolbar> .toolbar-item > button:focus, div.code-toolbar > .to
 } */
 
 s { 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
     opacity: .7; 
 }
 
 ::marker { 
-    color: var(--text-muted);
+    color: var(--main-fg-weak);
 }
 
 ol { 
@@ -900,7 +900,7 @@ input[type='checkbox']:not(.switch)::after {
 }
 
 .form-item-wrapper input + label { 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
     /* margin-left: 50%;  */
     top: 8px; 
     left: 15px;
@@ -937,7 +937,7 @@ img[class*='spoiler'] {
 }
 
 .spoiler:not(img[class*='spoiler']):hover { 
-    color: var(--text-normal);
+    color: var(--main-fg);
 } 
 
 .spoiler:hover { 
@@ -1021,7 +1021,7 @@ blockquote svg, .callout svg {
 }
 
 .callout > *:not(:nth-child(1)) { 
-    color: var(--text-normal);
+    color: var(--main-fg);
 }
 
 @media (max-width: 500px) { 
@@ -1133,7 +1133,7 @@ blockquote svg, .callout svg {
 }
 
 .callout > *:not(:nth-child(1)) { 
-    color: var(--text-normal);
+    color: var(--main-fg);
 }
 
 @media (max-width: 500px) { 
@@ -1214,7 +1214,7 @@ blockquote::before {
     content: open-quote; 
     position: absolute;
     font-size: 8rem; 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
 
     margin-top: -3rem; 
     margin-left: -2rem; 
@@ -1225,7 +1225,7 @@ blockquote::before {
 }
 
 details summary::after { 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
     margin-top: -0.25rem; 
     margin-left: 0.5rem; 
     font-weight: 400;
@@ -1281,7 +1281,7 @@ summary:hover {
 /*  */
 
 footer ul { 
-    color: var(--text-normal)
+    color: var(--main-fg)
 }
 
 .dead-link { 
@@ -1300,7 +1300,7 @@ footer ul {
 }
 
 .button { 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
 }
 
 .button { 
@@ -1395,7 +1395,7 @@ h3, .h3 {
     order: 1;
     display: none;
 
-    background-color: var(--subwindow-bg);
+    background-color: var(--main-child-bg);
     margin: 0.5em 0.25em; 
     border-radius: var(--border-subwindow-radius);
 }
@@ -1412,17 +1412,17 @@ h2 {
 }
 
 .tab-group input[type="radio"]:checked + label {
-    color: var(--text-strong);
-    background-color: var(--subwindow-bg);
+    color: var(--main-fg-strong);
+    background-color: var(--main-child-bg);
 
 }
 
 .tab-group input[type="radio"]:not(:checked) + label {
-    color: var(--text-muted);
+    color: var(--main-fg-weak);
 }
 
 .tab-group input[type="radio"] + label:hover {
-    color: var(--text-strong);
+    color: var(--main-fg-strong);
 } 
 
 .tab-group label { 
@@ -1455,7 +1455,7 @@ tr:nth-child(even) {
 
 tr:hover { 
     background-color: var(--table-hover-color); 
-    color: var(--text-strong); 
+    color: var(--main-fg-strong); 
 }
 
 p { 
@@ -1467,7 +1467,7 @@ p {
 }
 
 footer b { 
-    color: var(--text-strong); 
+    color: var(--main-fg-strong); 
 }
 
 .emoji { 
@@ -1509,7 +1509,7 @@ footer b {
 /* *************** */
 
 .h2-subhead { 
-    color: var(--text-muted); 
+    color: var(--main-fg-weak); 
     font-size: 0.8rem;
 }
 
@@ -1553,13 +1553,13 @@ footer b {
 }
 
 .muted { 
-    color: var(--text-muted);
+    color: var(--main-fg-weak);
 }
 
 /* ******** */
 
 .button::selection { 
-    background-color: var(--text-strong);
+    background-color: var(--main-fg-strong);
 }
 
 /* .postcard { 
@@ -1575,7 +1575,7 @@ footer b {
 } */
 
 .postcard strong { 
-    color: var(--text-strong);
+    color: var(--main-fg-strong);
 }
 
 .postcard ul ul { 
@@ -1586,21 +1586,21 @@ footer b {
     width: 16px; 
     height: 16px; 
 
-    fill: var(--text-muted);
+    fill: var(--main-fg-weak);
 }
 
 .path-from-home { 
     margin: 0.5rem;
-    color: var(--text-muted)
+    color: var(--main-fg-weak)
 }
 
 .path-from-home * { 
     border-bottom: 0px;
-    color: var(--text-muted);
+    color: var(--main-fg-weak);
 }
 
 .path-from-home svg { 
-    fill: var(--links-color); 
+    fill: var(--accent-fg); 
 
     width: 12px;
     height: 12px;
@@ -1619,7 +1619,7 @@ footer b {
 }
 
 .primary-nav * { 
-    color: var(--text-muted);
+    color: var(--main-fg-weak);
 }
 
 
@@ -1689,6 +1689,6 @@ ul {
 }
 
 .math-svg { 
-    stroke: var(--text-normal);
-    fill: var(--text-normal);
+    stroke: var(--main-fg);
+    fill: var(--main-fg);
 }
