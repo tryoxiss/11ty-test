@@ -5,6 +5,8 @@ layout: "dndr-framework.njk"
 
 This document defines the basic framework and definitions for the rest of the ruleset, which defines spells, mechanics, and more. This is more of a framework that the rest is built on. The other parts can be modified much more easily, but modifying this may break things as it is foundational. 
 
+All of the systems provided by Open Tabletop Engine, while interacting in many ways, can be replaced with your own systems fairly easily. Don't like the potion system? Make your own! Magic system dosen't fit in your world? Make or find one that does!
+
 ## Dice
 
 Dice will be defined as `d<sides>` in this document. 

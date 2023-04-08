@@ -1556,6 +1556,12 @@ footer b {
     color: var(--text-muted);
 }
 
+/* ******** */
+
+.button::selection { 
+    background-color: var(--text-strong);
+}
+
 /* .postcard { 
     background-color: var(--subwindow-bg);
     padding: 0.5rem;
