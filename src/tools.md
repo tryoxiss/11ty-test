@@ -15,9 +15,11 @@ layout: "base.njk"
 </div> -->
 <div class="tab-group">
 <input type="radio" id="specs" name="mytabs" checked="checked">
-<label for="specs">PC Specs</label>
+<label for="specs">Hardware</label>
 <div class="tab">
-<h3>PC Specs</h3>
+<h3>Hardware</h3>
+
+<h4>PC Specs</h4>
 <p>Okay I don't know much about hardware, but here is the list of my specs I got. Also, all prices are in $CAD, and the price on the quote WHEN I GOT THE PC, prices may fluctuate. If your curious, I got it at MemoryExpress, i'm not payed to promote them or anything they we're just really nice and provided a great service! </p>
 <table>
     <tr>
@@ -65,7 +67,7 @@ layout: "base.njk"
 <p>they also assembled it, that was 50$CAD</p>
 <p>I use linux, so I didn't get charged for a windows key because I asked them to not include one. If your curious my current distro is <a href="https://getfedora.org/en/workstation/">Fedora Workstation</a> 37</p>
 
-<p>My keyboard is the <a href="https://drop.com/buy/drop-ctrl-mechanical-keyboard?defaultSelectionIds=965751%2C965753">massdrop  CTRL</a>. It's a geat keyboard and works perfectly 99% of the time. Sometimes it has issues connecting to my PC when I restart it (windows linux and mac) but other than that its great!</p>
+<p>My keyboard is the <a href="https://drop.com/buy/drop-ctrl-mechanical-keyboard?defaultSelectionIds=972414%2C972408">massdrop  CTRL with Cherry MX brown switches</a>. It's a geat keyboard and works perfectly 99% of the time. Sometimes it has issues connecting to my PC when I restart it (windows linux and mac) but other than that its great!</p>
 
 <p>My mouse is the razer basalisk and it has failed like twice in the year or two that ive had it, I cannot reccommend it so I wont link it. Would not buy another razer product. </p>
 
@@ -147,11 +149,6 @@ layout: "base.njk"
         <td>Mozilla Firefox (for viewing docs, obviously) </td>
         <td><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
     </tr>
-    <tr>
-        <td>Keyboard</td>
-        <td>Massdrop CTRL </td>
-        <td><a href="https://drop.com/buy/drop-ctrl-mechanical-keyboard?defaultSelectionIds=965751%2C965753" target="_blank" rel="noreferrer noopener">200$</a></td>
-    </tr>
 </table> 
 </div>
 
@@ -180,11 +177,6 @@ layout: "base.njk"
         <td>Rich Text Editor</td>
         <td>LibreOffice Writer (the entire suite is great!)</td>
         <td><a href="https://www.libreoffice.org/discover/writer/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
-    </tr>
-    <tr>
-        <td>Keyboard</td>
-        <td>Massdrop CTRL </td>
-        <td><a href="https://drop.com/buy/drop-ctrl-mechanical-keyboard?defaultSelectionIds=965751%2C965753" target="_blank" rel="noreferrer noopener">200$</a></td>
     </tr>
 </table> 
 </div>
@@ -220,11 +212,6 @@ layout: "base.njk"
         <td>Mozilla Firefox</td>
         <td><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
     </tr>
-    <!-- <tr>
-        <td></td>
-        <td>Mozilla </td>
-        <td><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noreferrer noopener">Free (Open Source)</a></td>
-    </tr> -->
 </table> 
 </div>
 </div>
