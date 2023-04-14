@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Codestyle ★ tryoxiss</title>
+
+    <link rel="stylesheet" href="/res/css/style.css">
+    <link rel="stylesheet" href="/res/css/prism.css">
+
+    <link rel="icon" href="/res/ico/favicon.ico">
+
+</head>
+
+
+<body class="match-braces language-">
+    <script src="/res/js/prism.js"></script>
+
+    
+
+    <nav role="primary navigation" class="primary-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li style="margin-left: auto;"><a href="/about/">About</a></li>
+            <li><a href="/projects/">Our Stuff</a></li>
+            <li><a href="/links/">Our Links</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+        
+        <h1>Beautiful Codestyle</h1>
+
+        <p class="subtitle">
+            
+
+            
+            
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minute read 
+        </p>
+
+        
+
+        
+    </header>
+    
+    <nav role="related articles" class="glossary">
+        
+        
+    </nav>
+
+    <main>
+        
+        <p>The pourpose of this code style is to help keep cohesive, readable, beautioful, and maintainable code. By following this style all code will look as if one person wrote all of it, no matter how many contributers there are.</p>
+<p>This helps some things, such as &quot;style fights&quot;, where two or more people keep changing the style of a block of code to thier prefrence.</p>
+<p>This code style is very opinionated and specific, and aims to lead zero ambiguity when it comes to any case.</p>
+<h2>A. general styles</h2>
+<p>General rules that apply to all languages. Examples will be written in a combination of languages.</p>
+<ol>
+<li>We indent by 4 spaces, not a tab.</li>
+</ol>
+<h3>B. Variables</h3>
+<p>Variables are named in <code>snake_case</code> in all cases. Variable names should</p>
+<ol>
+<li><strong>Be descriptive</strong>: We're not stuck with 80 character terminal screens any more and have tools like autofill. Variable names should clear and tell you exactly what they are.
+<ol>
+<li>Single letter variable names are not allowed UNLESS:
+<ol>
+<li>It is an argument to a function that is explictly a coordinate handler.</li>
+<li>Said function deals with no more than one set of coordinates at a time</li>
+<li>Allowed coordinate variable names are <code>x</code>, <code>y</code>, <code>z</code>.</li>
+</ol>
+</li>
+<li>Pluralise lists and nothing else.
+<ol>
+<li>Lists contain multiple items, nothing else does. Therefore only list types should end with an s. This also allowed for things like <code>for post in posts</code>, as is explored in the next point.</li>
+</ol>
+</li>
+<li>No <code>i</code> in Range
+<ol>
+<li><code>for i in list[]</code> and simillar statements do not tell you what the list handles. If its an abstract concept and you only go one layer deep it can be acceptable, but its generally its prefered to do something like <code>for post in posts</code></li>
+</ol>
+</li>
+<li>If it deals with specific units, then specify what.
+<ul>
+<li><code>distance_meters</code> rather than distance.</li>
+<li><code>time_secconds</code> rather than time.</li>
+<li>If possible, use a dedicated class or structure like a TimeSpan.</li>
+</ul>
+</li>
+<li>As a general rule, don't abbreviate. Abbreviations make code harder to read and tell what something is refering to. Abbreviations are however allowed if they are used as a word, or can be easily and commonly understood <strong>and used</strong> Some examples are below:
+<ul>
+<li>Units like <code>cm</code> for centimeters</li>
+<li><code>GUID</code> for Glbally Unique Identifiers.</li>
+<li>Laser for &quot;light amplification by stimulated emission of radiation&quot;. If your suprised that is an abbriviation: GOOD. That is the kind of universality we need for it to be used.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>Be Short</strong>: while this may seem to contradict point 1, it actually dosen't. This point talks about not over-specifying variable names.</li>
+<li>Not include types</li>
+<li><strong>Semantics</strong> are important, they tell us things about the code we might not otherwise know. Here are a few examples.
+<ol>
+<li>be in <code>SCREAMING_SNAKE_CASE</code> if its constant</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>naming</li>
+<li>style</li>
+<li>semantics
+Conditionals</li>
+</ul>
+<h3>C. Functions</h3>
+<p>Functions</p>
+<ul>
+<li>naming</li>
+<li>pourpose</li>
+<li>design</li>
+</ul>
+<h2>D. language specifics</h2>
+<p>Curly braced</p>
+<p>Indented</p>
+<p>XML-like</p>
+<h2>E. meta</h2>
+<p>Amendments
+Authors
+Copyright</p>
+
+        
+    </main>
+
+    <nav role="table of contents" class="toc">dasd</nav>
+
+    
+<footer>
+    
+
+    <ul>
+        <li><a href="#" class="dead-link"><b>Credits</b></a></li>
+        <li><a href="https://www.11ty.dev/">11ty</a> (SSG)</li>
+        <li><a href="https://prismjs.com/">prism.js</a> (Syntax Hilighting)</li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><b>Theme</b></li>
+        <li><a href="/specs/milkshake/2.0/" class="dead-link">Milkshake 2.0 Theme</a></li>
+        <li><a href="https://github.com/catppuccin/catppuccin">catppuccin</a></li>
+        <li><a href="https://lucide.dev/">Lucide Icons</a></li>
+    </ul>
+
+    <ul>
+        <li><a href="/projects/" class="dead-link"><b>Our Stuff!</b></a></li>
+        <li><a href="/specs/bonfire/">Bonfire</a> Drafts, Project Codename</li>
+    </ul>
+
+    <ul>
+        <li><b>Developement</b></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io">Source</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/issues">Issues</a></li>
+        <li><a href="https://github.com/tryoxiss/tryoxiss.github.io/commit/master">Deployment Status</a></li>
+        <li><a href="/debug/">Build Info</a></li>
+    </ul>
+
+    <ul class="badges">
+        <li><img src="https://erkin.party/images/cheesy/trans_rights.gif" alt="A trans flag followed by the text 'trans rights NOW!, with a nonbinary flag in the bottom right corner." /></li>
+        <li><a href="/known-chrome-bugs/"><img src="/res/img/anything-but-chrome.png" alt="Best Experinced with ANYTHING but chrome." /></a></li>
+        <li><a href="https://ihavenoads.com/"><img src="https://ihavenoads.com/3.svg" width="45" height="56" alt="ad-free site"/></a></li>
+    </ul>
+
+    <br>
+    <p class="subtitle">Most content on this site is copyright &copy; tryoxiss 2022 or later. Feel free to use any of my content without asking though, just credit me and don't use it for any <a href="/dict/profanity/" class="dead-link">profanity</a> and I will probably be good. Though I do reserve the right to make you stop using it at any time for any reason.
+    <br><a href="/licence/">You can view my reuse details here.</a></p>
+</footer>
+
+</body>
+</html>
