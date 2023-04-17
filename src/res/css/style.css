@@ -1692,3 +1692,7 @@ ul {
     stroke: var(--main-fg);
     fill: var(--main-fg);
 }
+
+:is(ol, ul) :is(ol, ul) ul { 
+    list-style: disc;
+}

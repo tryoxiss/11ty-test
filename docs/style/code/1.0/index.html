@@ -39,7 +39,7 @@
             
             
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minute read 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minute read 
         </p>
 
         
@@ -57,12 +57,12 @@
         <p>The pourpose of this code style is to help keep cohesive, readable, beautioful, and maintainable code. By following this style all code will look as if one person wrote all of it, no matter how many contributers there are.</p>
 <p>This helps some things, such as &quot;style fights&quot;, where two or more people keep changing the style of a block of code to thier prefrence.</p>
 <p>This code style is very opinionated and specific, and aims to lead zero ambiguity when it comes to any case.</p>
-<h2>A. general styles</h2>
+<h2>General Styles</h2>
 <p>General rules that apply to all languages. Examples will be written in a combination of languages.</p>
 <ol>
 <li>We indent by 4 spaces, not a tab.</li>
 </ol>
-<h3>B. Variables</h3>
+<h3>A. Variables</h3>
 <p>Variables are named in <code>snake_case</code> in all cases. Variable names should</p>
 <ol>
 <li><strong>Be descriptive</strong>: We're not stuck with 80 character terminal screens any more and have tools like autofill. Variable names should clear and tell you exactly what they are.
@@ -97,7 +97,7 @@
 <li>Units like <code>cm</code> for centimeters</li>
 <li><code>GUID</code> for Glbally Unique Identifiers.</li>
 <li>Laser for &quot;light amplification by stimulated emission of radiation&quot;. If your suprised that is an abbriviation: GOOD. That is the kind of universality we need for it to be used.</li>
-<li>A full list of pre-approved abbriviations can be found in section B(5)</li>
+<li>A full list of pre-approved abbriviations can be found in section A(6)</li>
 </ul>
 </li>
 </ol>
@@ -109,13 +109,43 @@
 <li>be in <code>SCREAMING_SNAKE_CASE</code> if its constant</li>
 </ol>
 </li>
+<li><code>do</code>, <code>is</code>, etc.</li>
 <li>List of pre-approved abbriviations
 <ul>
 <li><code>guid</code></li>
 </ul>
 </li>
 </ol>
-<h3>C. Conditionals</h3>
+<h3>B. Conditionals</h3>
+<p><code>if</code> <code>else</code> is to be inline in braced languages. It already takes up 5 lines, which is more than enough.</p>
+<pre><code class="language-rust">if variable == true { 
+    // code
+} else { 
+    // code
+}
+</code></pre>
+<p>Single statements go inline. Otherwise, they get thier own block.</p>
+<pre><code class="language-py"># Inline
+if can_have_cookies == True: print(&quot;Cookies!&quot;)
+else: print(&quot;No cookies?&quot;)
+
+# One out of line
+if can_have_cookies == True: 
+    print(&quot;Cookies!&quot;)
+    cookies_remaining -= 1
+else: print(&quot;No cookies?&quot;)
+
+# Both out of line
+if can_have_cookies == True: 
+    print(&quot;Cookies!&quot;)
+    cookies_remaining -= 1
+else:
+    print(&quot;No cookies?&quot;)
+    cookies += 1
+</code></pre>
+<h3>C. Comments</h3>
+<p>Comments stop at the 80 character mark, if they need to be continused past that, add another consecutive comment on the next line.</p>
+<p>Multi-line comments are only used to house blocks of code unless that is the languages only way of commenting.</p>
 <h3>D. Functions</h3>
 <p>Functions</p>
 <ul>
@@ -123,11 +153,11 @@
 <li>pourpose</li>
 <li>design</li>
 </ul>
-<h2>E. Language Specifics</h2>
+<h2>Language Specifics</h2>
 <p>Curly braced</p>
 <p>Indented</p>
 <p>XML-like</p>
-<h2>F. meta</h2>
+<h2>Meta</h2>
 <p>Amendments
 Authors
 Copyright</p>

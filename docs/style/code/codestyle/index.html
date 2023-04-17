@@ -1,0 +1,77 @@
+<p>The pourpose of this code style is to help keep cohesive, readable, beautioful, and maintainable code. By following this style all code will look as if one person wrote all of it, no matter how many contributers there are.</p>
+<p>This helps some things, such as &quot;style fights&quot;, where two or more people keep changing the style of a block of code to thier prefrence.</p>
+<p>This code style is very opinionated and specific, and aims to lead zero ambiguity when it comes to any case.</p>
+<h2>A. general styles</h2>
+<p>General rules that apply to all languages. Examples will be written in a combination of languages.</p>
+<ol>
+<li>We indent by 4 spaces, not a tab.</li>
+</ol>
+<h3>B. Variables</h3>
+<p>Variables are named in <code>snake_case</code> in all cases. Variable names should</p>
+<ol>
+<li><strong>Be descriptive</strong>: We're not stuck with 80 character terminal screens any more and have tools like autofill. Variable names should clear and tell you exactly what they are.
+<ol>
+<li>Single letter variable names are not allowed UNLESS:
+<ol>
+<li>It is an argument to a function that is explictly a coordinate handler.</li>
+<li>Said function deals with no more than one set of coordinates at a time</li>
+<li>Allowed coordinate variable names are <code>x</code>, <code>y</code>, <code>z</code>.</li>
+<li>A one-way mathmatical formula, where you can accept <code>n</code> ad input. For example, <code>quick_sqrt(n)</code></li>
+</ol>
+</li>
+<li>Pluralise lists and nothing else.
+<ol>
+<li>Lists contain multiple items, nothing else does. Therefore only list types should end with an s. This also allowed for things like <code>for post in posts</code>, as is explored in the next point.</li>
+</ol>
+</li>
+<li>No <code>i</code> in Range
+<ol>
+<li><code>for i in list[]</code> and simillar statements do not tell you what the list handles. If its an abstract concept and you only go one layer deep it can be acceptable, but its generally its prefered to do something like <code>for post in posts</code></li>
+</ol>
+</li>
+<li>If it deals with specific units, then specify what.
+<ul>
+<li><code>distance_meters</code> rather than distance.</li>
+<li><code>time_secconds</code> rather than time.</li>
+<li>If possible, use a dedicated class or structure like a TimeSpan.</li>
+</ul>
+</li>
+<li>As a general rule, don't abbreviate. Abbreviations make code harder to read and tell what something is refering to. Abbreviations are however allowed if they are used as a word, or can be easily and commonly understood <strong>and used</strong> Some examples are below:
+<ul>
+<li>Units like <code>cm</code> for centimeters</li>
+<li><code>GUID</code> for Glbally Unique Identifiers.</li>
+<li>Laser for &quot;light amplification by stimulated emission of radiation&quot;. If your suprised that is an abbriviation: GOOD. That is the kind of universality we need for it to be used.</li>
+<li>A full list of pre-approved abbriviations can be found in section B(5)</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>Be Short</strong>: while this may seem to contradict point 1, it actually dosen't. This point talks about not over-specifying variable names.</li>
+<li>Not include types</li>
+<li><strong>Semantics</strong> are important, they tell us things about the code we might not otherwise know. Here are a few examples.
+<ol>
+<li>be in <code>SCREAMING_SNAKE_CASE</code> if its constant</li>
+</ol>
+</li>
+<li>List of pre-approved abbriviations
+<ul>
+<li><code>guid</code></li>
+</ul>
+</li>
+</ol>
+<h3>C. Conditionals</h3>
+<h3>D. Functions</h3>
+<p>Functions</p>
+<ul>
+<li>naming</li>
+<li>pourpose</li>
+<li>design</li>
+</ul>
+<h2>E. Language Specifics</h2>
+<p>Curly braced</p>
+<p>Indented</p>
+<p>XML-like</p>
+<h2>F. meta</h2>
+<p>Amendments
+Authors
+Copyright</p>
